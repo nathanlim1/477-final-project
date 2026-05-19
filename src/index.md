@@ -131,7 +131,7 @@ const allMetrics = housing.map((d) => annotateHousingRow(d));
 
 const metricOptions = new Map([
   ["zhvi", "Home value index"],
-  ["change", `Change since ${dateLabel(baselineDate)}`]
+  ["zori", "Rent index"]
 ]);
 ```
 
@@ -143,9 +143,9 @@ const dateIndex = view(rangeControl([0, dates.length - 1], {
   format: (i) => dateLabel(dates[i])
 }));
 
-const mapMetric = view(radioControl(["zhvi", "change"], {
+const mapMetric = view(radioControl(["zhvi", "zori"], {
   label: "Map layer",
-  value: "zhvi",
+  value: "zori",
   format: (value) => metricOptions.get(value)
 }));
 
@@ -198,15 +198,15 @@ renderComparisonTable(selectedRows, selectedPlace)
 
 ```js
 function metricValue(row, metric) {
-  return metric === "change" ? row.change : row.zhvi;
+  return metric === "zori" ? row.zori : row.zhvi;
 }
 
 function metricLabel(metric) {
-  return metric === "change" ? `change since ${dateLabel(baselineDate)}` : "home value index";
+  return metric === "zori" ? "rent index" : "home value index";
 }
 
 function metricFormat(metric) {
-  return metric === "change" ? (value) => percent(value) : compactMoney;
+  return metric === "zori" ? (value) => `${compactMoney(value)} / mo` : compactMoney;
 }
 
 function rewindGeometry(geometry) {
@@ -240,8 +240,8 @@ function rewindFeatureCollection(collection) {
 }
 
 function createColorScale(rows, metric) {
-  if (metric === "change") {
-    const extent = d3.extent(allMetrics, (d) => d.change);
+  if (metric === "zori") {
+    const extent = d3.extent(allMetrics, (d) => d.zori);
     return d3.scaleSequential(extent, d3.interpolateYlOrRd);
   }
 
@@ -338,9 +338,7 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     const [x, y] = projection([d.longitude, d.latitude]);
     return {...d, x, y};
   });
-  const values = metric === "change"
-    ? allMetrics.map((d) => d.change)
-    : allMetrics.map((d) => d.zhvi);
+  const values = allMetrics.map((d) => metricValue(d, metric)).filter((d) => d != null);
 
   svg
     .append("path")
@@ -367,7 +365,10 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .data(displayZctas.features)
     .join("path")
     .attr("d", path)
-    .attr("fill", (feature) => color(metricValue(rowsByPlace.get(feature.properties.place), metric)))
+    .attr("fill", (feature) => {
+      const value = metricValue(rowsByPlace.get(feature.properties.place), metric);
+      return value == null ? "#f5f7f6" : color(value);
+    })
     .attr("fill-opacity", 0.84)
     .attr("stroke", "#ffffff")
     .attr("stroke-width", 1.35)
@@ -390,7 +391,9 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .text((feature) => {
       const row = rowsByPlace.get(feature.properties.place);
       const rent = row.latestZori ? `\nLatest rent index: ${money(row.latestZori)} / mo` : "";
-      return `${row.place}\n${metricLabel(metric)}: ${metricFormat(metric)(metricValue(row, metric))}\nHome value index: ${money(row.zhvi)}\n${medianComparison(row, medianValue)}\nChange since ${dateLabel(baselineDate)}: ${percent(row.change)}${rent}\n${row.note}`;
+      const selectedMetric = metricValue(row, metric);
+      const selectedMetricText = selectedMetric == null ? "Not reported" : metricFormat(metric)(selectedMetric);
+      return `${row.place}\n${metricLabel(metric)}: ${selectedMetricText}\nHome value index: ${money(row.zhvi)}\n${medianComparison(row, medianValue)}\nChange since ${dateLabel(baselineDate)}: ${percent(row.change)}${rent}\n${row.note}`;
     });
 
   svg
@@ -535,7 +538,7 @@ function drawLegend(svg, color, values, metric, width, height) {
     .attr("font-size", 12)
     .attr("font-weight", 750)
     .attr("fill", "#263238")
-    .text(metric === "change" ? `Change since ${dateLabel(baselineDate)}` : "Zillow home value index");
+    .text(metric === "zori" ? "Zillow rent index" : "Zillow home value index");
 
   legend
     .append("rect")
@@ -587,8 +590,8 @@ function drawLegend(svg, color, values, metric, width, height) {
 }
 
 function drawMapNote(svg, metric, height) {
-  const note = metric === "change"
-    ? "ZCTA fills use direct Zillow ZIP growth values; unreported county areas are left neutral."
+  const note = metric === "zori"
+    ? "ZCTA fills use direct Zillow ZIP rent values; ZIPs without reported rent are left neutral."
     : "ZCTA fills use direct Zillow ZIP home values; unreported county areas are left neutral.";
 
   svg
