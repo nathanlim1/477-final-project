@@ -1,6 +1,6 @@
 # How does the presence of a college affect housing prices in a college town?
 
-<p class="lede">Examining San Luis Obispo, we can we can see that Cal Poly's growth has led to the college town's disproportionate housing prices--especially when looking at rent prices.</p>
+<p class="lede">Examining San Luis Obispo, we can see that Cal Poly's growth has led to the college town's disproportionate housing prices, especially when looking at rent prices.</p>
 
 ```js
 import * as aq from "npm:arquero";
@@ -26,6 +26,16 @@ function dateLabel(date) {
   return d3.utcFormat("%b %Y")(dateObject);
 }
 
+function displayPlaceName(value) {
+  const place = typeof value === "string" ? value : value?.city ?? value?.place ?? "";
+  return place.replace(/^\d{5}\s+/, "").replace(/^ZIP\s+/, "");
+}
+
+function mapPlaceLabel(value) {
+  const label = displayPlaceName(value).trim();
+  return /^\d{5}$/.test(label) ? "" : label;
+}
+
 function rangeControl([min, max], {label, step = 1, value = min, format = (d) => d}) {
   const input = html`<input type="range" min=${min} max=${max} step=${step} value=${value}>`;
   const output = html`<output>${format(value)}</output>`;
@@ -41,7 +51,7 @@ function rangeControl([min, max], {label, step = 1, value = min, format = (d) =>
 
   input.addEventListener("input", () => {
     output.textContent = format(input.valueAsNumber);
-    control.dispatchEvent(new Event("input", {bubbles: true}));
+    control.dispatchEvent(new globalThis.Event("input", {bubbles: true}));
   });
 
   return control;
@@ -65,14 +75,19 @@ function radioControl(options, {label, value, format = (d) => d}) {
     }
   });
 
-  control.addEventListener("change", () => control.dispatchEvent(new Event("input", {bubbles: true})));
+  control.addEventListener("change", () => control.dispatchEvent(new globalThis.Event("input", {bubbles: true})));
 
   return control;
 }
 
-function selectControl(options, {label, value}) {
-  const select = html`<select>${options.map((option) => html`<option value=${option} selected=${option === value}>${option}</option>`)}</select>`;
+function selectControl(options, {label, value, format = (d) => d}) {
+  const select = html`<select>${options.map((option) => html`<option value=${option} selected=${option === value}>${format(option)}</option>`)}</select>`;
   const control = html`<label class="control">${label}${select}</label>`;
+  const notify = () => {
+    globalThis.queueMicrotask(() => {
+      control.dispatchEvent(new globalThis.Event("input", {bubbles: true}));
+    });
+  };
 
   Object.defineProperty(control, "value", {
     get: () => select.value,
@@ -81,8 +96,8 @@ function selectControl(options, {label, value}) {
     }
   });
 
-  select.addEventListener("input", () => control.dispatchEvent(new Event("input", {bubbles: true})));
-  select.addEventListener("change", () => control.dispatchEvent(new Event("input", {bubbles: true})));
+  select.addEventListener("input", notify);
+  select.addEventListener("change", notify);
 
   return control;
 }
@@ -153,7 +168,8 @@ const selectedPlaceInput = selectControl(
   Array.from(new Set(housing.map((d) => d.place))).sort(d3.ascending),
   {
     label: "Compare ZIP market",
-    value: "93401 San Luis Obispo"
+    value: "93401 San Luis Obispo",
+    format: displayPlaceName
   }
 );
 const selectedPlace = view(selectedPlaceInput);
@@ -265,12 +281,12 @@ function renderSummary(rows, date, selectedPlace) {
       <strong>${dateLabel(date)}</strong>
     </div>
     <div class="stat">
-      <span>${selected.place} home value</span>
+      <span>${displayPlaceName(selected)} home value</span>
       <strong>${money(selected.zhvi)}</strong>
       <em>${percent(selected.change)} since ${dateLabel(baselineDate)}</em>
     </div>
     <div class="stat">
-      <span>${selected.place} local rank</span>
+      <span>${displayPlaceName(selected)} local rank</span>
       <strong>${selectedRank} of ${rows.length}</strong>
       <em>${selectedVsMedian >= 0 ? "+" : ""}${money(selectedVsMedian)} vs local median</em>
     </div>
@@ -281,7 +297,7 @@ function renderSummary(rows, date, selectedPlace) {
     </div>
     <div class="stat">
       <span>Fastest growth</span>
-      <strong>${topGrowth.place}</strong>
+      <strong>${displayPlaceName(topGrowth)}</strong>
       <em>${percent(topGrowth.change)} since ${dateLabel(baselineDate)}</em>
     </div>
   `;
@@ -289,18 +305,18 @@ function renderSummary(rows, date, selectedPlace) {
 
 function setSelectedPlace(input, place) {
   const select = input.querySelector?.("select");
-  const option = select && Array.from(select.options).find((option) => option.textContent === place);
+  const option = select && Array.from(select.options).find((option) => option.value === place);
 
   if (option) {
     select.value = option.value;
-    select.dispatchEvent(new Event("input", {bubbles: true}));
-    select.dispatchEvent(new Event("change", {bubbles: true}));
+    select.dispatchEvent(new globalThis.Event("input", {bubbles: true}));
+    select.dispatchEvent(new globalThis.Event("change", {bubbles: true}));
     return;
   }
 
   input.value = place;
-  input.dispatchEvent(new Event("input", {bubbles: true}));
-  input.dispatchEvent(new Event("change", {bubbles: true}));
+  input.dispatchEvent(new globalThis.Event("input", {bubbles: true}));
+  input.dispatchEvent(new globalThis.Event("change", {bubbles: true}));
 }
 
 function medianComparison(row, medianValue) {
@@ -345,9 +361,7 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .datum({type: "FeatureCollection", features: displayBase.features})
     .attr("d", path)
     .attr("fill", "#eef4f3")
-    .attr("stroke", "#ffffff")
-    .attr("stroke-width", 0.28)
-    .attr("stroke-opacity", 0.58);
+    .attr("stroke", "none");
 
   svg
     .append("path")
@@ -370,9 +384,7 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
       return value == null ? "#f5f7f6" : color(value);
     })
     .attr("fill-opacity", 0.84)
-    .attr("stroke", "#ffffff")
-    .attr("stroke-width", 1.35)
-    .attr("stroke-opacity", 0.96)
+    .attr("stroke", "none")
     .attr("tabindex", 0)
     .attr("role", "button")
     .attr("aria-label", (feature) => {
@@ -412,17 +424,45 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .attr("pointer-events", "none");
 
   const anchorGroup = svg.append("g").attr("class", "place-anchors");
+  const selectedAnchor = anchors.find((d) => d.place === selected.place);
+
+  if (selectedAnchor) {
+    const ripple = svg.append("g").attr("class", "selected-ripple");
+
+    ripple
+      .append("circle")
+      .attr("cx", selectedAnchor.x)
+      .attr("cy", selectedAnchor.y)
+      .attr("r", 3)
+      .attr("fill", "none")
+      .attr("stroke", "var(--selected)")
+      .attr("stroke-width", 1.4)
+      .attr("stroke-opacity", 0.52)
+      .call((circle) => {
+        circle.append("animate")
+          .attr("attributeName", "r")
+          .attr("values", "3;18")
+          .attr("dur", "1.05s")
+          .attr("repeatCount", "2");
+        circle.append("animate")
+          .attr("attributeName", "stroke-opacity")
+          .attr("values", "0.52;0")
+          .attr("dur", "1.05s")
+          .attr("repeatCount", "2");
+      });
+  }
 
   anchorGroup
     .selectAll("circle")
     .data(anchors)
     .join("circle")
+    .attr("class", "anchor-dot")
     .attr("cx", (d) => d.x)
     .attr("cy", (d) => d.y)
-    .attr("r", 4.25)
+    .attr("r", (d) => d.place === selected.place ? 3.2 : 2.6)
     .attr("fill", "#172026")
-    .attr("stroke", "#ffffff")
-    .attr("stroke-width", 1.4)
+    .attr("stroke", "rgba(255,255,255,0.72)")
+    .attr("stroke-width", 0.7)
     .append("title")
     .text((d) =>
       `${d.place}\nHome value index: ${money(d.zhvi)}\n${medianComparison(d, medianValue)}\nChange since ${dateLabel(baselineDate)}: ${percent(d.change)}`
@@ -430,13 +470,13 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
 
   anchorGroup
     .selectAll("text")
-    .data(anchors)
+    .data(anchors.filter((d) => mapPlaceLabel(d)))
     .join("text")
     .attr("class", "place-label")
     .attr("x", (d) => d.x + d.label_dx)
     .attr("y", (d) => d.y + d.label_dy)
     .attr("text-anchor", (d) => d.label_dx < 0 ? "end" : "start")
-    .text((d) => d.place);
+    .text((d) => mapPlaceLabel(d));
 
   const campusPoint = projection([campus.longitude, campus.latitude]);
   const campusGroup = svg.append("g").attr("class", "campus-marker").attr("transform", `translate(${campusPoint})`);
@@ -498,7 +538,7 @@ function drawSelectionBadge(svg, selected, medianValue, width) {
     .attr("font-size", 17)
     .attr("font-weight", 820)
     .attr("fill", "#172026")
-    .text(selected.place);
+    .text(displayPlaceName(selected));
 
   badge
     .append("text")
@@ -628,7 +668,7 @@ function renderTrend(date, selectedPlace) {
   const svg = d3.create("svg")
     .attr("viewBox", [0, 0, width, height])
     .attr("role", "img")
-    .attr("aria-label", `Line chart comparing ${selectedPlace} home value index to the local median.`)
+    .attr("aria-label", `Line chart comparing ${displayPlaceName(selectedPlace)} home value index to the local median.`)
     .style("width", "100%")
     .style("height", "auto");
 
@@ -636,7 +676,7 @@ function renderTrend(date, selectedPlace) {
     .attr("class", "panel-title")
     .attr("x", margin.left)
     .attr("y", 16)
-    .text(`${selectedPlace} vs local median`);
+    .text(`${displayPlaceName(selectedPlace)} vs local median`);
 
   svg.append("g")
     .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -700,7 +740,7 @@ function renderTrend(date, selectedPlace) {
     .attr("fill", "var(--campus)")
     .attr("font-weight", 750)
     .attr("font-size", 12)
-    .text(selectedPlace);
+    .text(displayPlaceName(selectedPlace));
 
   svg.append("text")
     .attr("x", width - margin.right - 116)
@@ -747,7 +787,7 @@ function renderComparisonTable(rows, selectedPlace) {
     if (row.place === selectedPlace) tr.className = "is-selected";
 
     [
-      row.place,
+      displayPlaceName(row),
       money(row.zhvi),
       medianComparison(row, medianValue),
       percent(row.change),
