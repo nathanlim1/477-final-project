@@ -1,0 +1,17 @@
+{
+  "name": "slo-housing-map",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "observable preview --host 127.0.0.1",
+    "build": "observable build"
+  },
+  "dependencies": {
+    "@observablehq/framework": "^1.13.3",
+    "arquero": "^8.0.3",
+    "d3": "^7.9.0",
+    "vega-lite": "^5.23.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,848 @@
+place,kind,latitude,longitude,zhvi,zori,date,label_dx,label_dy,note
+San Luis Obispo,city,35.2828,-120.6596,639452,,2016-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,647168,,2016-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,658024,,2016-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,662556,,2016-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,661324,,2016-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,661049,,2016-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,662734,,2016-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,665638,,2016-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,668411,,2016-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,674492,,2017-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,681450,,2017-02-28,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,685581,,2017-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,691378,,2017-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,696156,,2017-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,702112,,2017-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,706293,,2017-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,705391,,2017-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,702194,,2017-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,703892,,2017-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,703471,,2017-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,709499,,2017-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,714293,,2018-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,721021,2116,2018-02-28,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,726311,2105,2018-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,730998,2120,2018-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,736936,2106,2018-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,743379,2122,2018-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,743246,2127,2018-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,744507,2182,2018-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,740999,2213,2018-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,738599,2222,2018-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,733860,2195,2018-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,727791,2216,2018-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,726725,2242,2019-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,726112,2283,2019-02-28,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,731593,2256,2019-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,737825,2233,2019-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,744115,2235,2019-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,748738,2239,2019-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,749803,2238,2019-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,748460,2191,2019-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,747860,2185,2019-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,745934,2206,2019-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,742030,2293,2019-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,743531,2325,2019-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,743693,2341,2020-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,749680,2313,2020-02-29,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,758473,2291,2020-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,761630,2266,2020-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,760809,2243,2020-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,762929,2240,2020-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,763247,2248,2020-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,772057,2249,2020-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,782993,2231,2020-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,789304,2166,2020-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,797544,2251,2020-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,802427,2325,2020-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,801492,2432,2021-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,813368,2399,2021-02-28,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,826017,2425,2021-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,840372,2417,2021-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,856952,2425,2021-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,867478,2387,2021-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,867859,2427,2021-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,860183,2414,2021-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,860002,2464,2021-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,864709,2511,2021-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,868635,2536,2021-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,872818,2554,2021-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,892356,2542,2022-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,917577,2600,2022-02-28,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,946245,2638,2022-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,968636,2676,2022-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,984896,2697,2022-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,991058,2700,2022-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,984687,2726,2022-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,970203,2748,2022-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,957486,2770,2022-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,956271,2731,2022-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,952304,2693,2022-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,946936,2680,2022-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,945174,2736,2023-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,944772,2785,2023-02-28,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,953892,2840,2023-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,974614,2874,2023-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,990738,2936,2023-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1010287,2964,2023-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1019491,2967,2023-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1022137,2945,2023-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1020377,2958,2023-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1019987,2983,2023-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1013783,2996,2023-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1004575,3005,2023-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,998854,3048,2024-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1006252,3088,2024-02-29,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1028508,3093,2024-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1052406,3061,2024-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1057341,3058,2024-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1059465,3054,2024-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1063829,3052,2024-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1055087,3056,2024-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1045707,3085,2024-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1041549,3119,2024-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1043354,3134,2024-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1044632,3133,2024-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1043839,3183,2025-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1047753,3210,2025-02-28,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1062138,3243,2025-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1075763,3227,2025-04-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1083628,3239,2025-05-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1085550,3261,2025-06-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1088090,3262,2025-07-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1080147,3245,2025-08-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1078828,3208,2025-09-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1078881,3181,2025-10-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1075929,3226,2025-11-30,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1073226,3271,2025-12-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1069068,3359,2026-01-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1072493,3375,2026-02-28,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1088300,3393,2026-03-31,-44,-22,Primary college-town market around Cal Poly
+San Luis Obispo,city,35.2828,-120.6596,1097503,3352,2026-04-30,-44,-22,Primary college-town market around Cal Poly
+Pismo Beach,city,35.1428,-120.6413,627067,,2016-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,637607,,2016-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,649126,,2016-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,650137,,2016-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,651909,,2016-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,649272,,2016-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,656086,,2016-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,660905,,2016-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,665327,,2016-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,677401,,2017-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,689895,,2017-02-28,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,691132,,2017-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,700420,,2017-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,709380,,2017-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,717911,,2017-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,721817,,2017-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,723381,,2017-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,721966,,2017-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,720448,,2017-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,717849,,2017-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,724003,,2017-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,732750,,2018-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,733977,,2018-02-28,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,739444,,2018-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,743039,,2018-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,746329,,2018-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,749105,,2018-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,744913,,2018-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,743574,,2018-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,739791,,2018-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,740995,,2018-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,738694,,2018-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,731758,,2018-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,726999,,2019-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,723539,,2019-02-28,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,726889,,2019-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,733351,,2019-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,740080,,2019-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,745051,,2019-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,746780,,2019-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,746062,,2019-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,742572,,2019-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,740298,,2019-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,736359,,2019-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,737174,,2019-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,738564,,2020-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,747004,,2020-02-29,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,753028,,2020-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,755110,,2020-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,754191,,2020-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,753537,,2020-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,752093,,2020-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,755666,,2020-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,766526,,2020-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,777812,,2020-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,789948,,2020-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,798009,,2020-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,801562,,2021-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,812981,,2021-02-28,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,828487,,2021-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,851624,,2021-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,878643,,2021-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,897836,,2021-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,908967,,2021-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,909304,,2021-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,919490,,2021-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,932425,,2021-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,945898,,2021-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,951038,,2021-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,973453,,2022-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1006369,,2022-02-28,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1042943,,2022-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1073692,,2022-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1085342,,2022-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1086550,,2022-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1076390,,2022-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1055001,,2022-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1033429,,2022-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1027042,,2022-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1023652,,2022-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1014224,,2022-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1013466,,2023-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1013238,,2023-02-28,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1020867,,2023-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1039264,,2023-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1050555,,2023-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1071127,,2023-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1079545,,2023-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1078936,,2023-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1081256,,2023-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1075588,,2023-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1060161,,2023-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1047847,,2023-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1040560,,2024-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1049358,,2024-02-29,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1069652,,2024-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1087719,2632,2024-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1089091,2638,2024-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1088556,2691,2024-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1090946,2681,2024-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1082202,2704,2024-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1073406,2698,2024-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1065975,2725,2024-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1060747,2687,2024-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1057972,2731,2024-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1056265,,2025-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1058655,2754,2025-02-28,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1070414,2717,2025-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1083973,2756,2025-04-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1089304,2741,2025-05-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1088378,2825,2025-06-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1093365,2874,2025-07-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1085420,2886,2025-08-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1087989,,2025-09-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1095777,,2025-10-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1094502,3269,2025-11-30,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1090317,3025,2025-12-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1085457,2936,2026-01-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1087113,2929,2026-02-28,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1102293,2971,2026-03-31,34,6,Coastal comparison community south of SLO
+Pismo Beach,city,35.1428,-120.6413,1110581,2969,2026-04-30,34,6,Coastal comparison community south of SLO
+Arroyo Grande,city,35.1186,-120.5907,617431,,2016-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,627278,,2016-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,639115,,2016-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,646843,,2016-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,649158,,2016-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,648884,,2016-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,649136,,2016-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,650822,,2016-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,655223,,2016-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,662974,,2017-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,672035,,2017-02-28,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,675859,,2017-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,681108,,2017-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,684291,,2017-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,687422,,2017-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,688759,,2017-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,689047,,2017-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,688449,,2017-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,686096,,2017-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,685521,,2017-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,687585,,2017-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,690942,,2018-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,694906,,2018-02-28,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,701079,,2018-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,705097,,2018-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,709730,,2018-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,714858,,2018-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,718178,,2018-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,717635,,2018-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,714494,,2018-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,713458,,2018-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,707267,,2018-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,702592,,2018-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,699428,,2019-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,699139,,2019-02-28,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,704865,,2019-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,709341,,2019-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,712531,,2019-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,716412,,2019-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,719487,,2019-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,718681,,2019-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,718349,,2019-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,718914,,2019-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,716555,,2019-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,714431,,2019-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,713044,,2020-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,714875,,2020-02-29,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,719630,,2020-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,724125,,2020-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,723053,,2020-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,724708,,2020-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,723642,,2020-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,730663,,2020-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,741521,,2020-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,747994,,2020-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,756906,,2020-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,764787,,2020-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,767543,,2021-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,779219,,2021-02-28,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,790660,,2021-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,810092,,2021-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,828330,,2021-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,845204,,2021-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,852787,,2021-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,854294,,2021-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,858010,,2021-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,862413,,2021-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,865292,,2021-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,870815,,2021-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,891308,,2022-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,920335,,2022-02-28,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,949655,,2022-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,970158,,2022-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,979050,,2022-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,977591,,2022-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,968019,,2022-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,953484,,2022-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,938969,,2022-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,934217,,2022-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,928309,,2022-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,920046,,2022-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,914436,,2023-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,917699,,2023-02-28,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,929527,,2023-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,948689,,2023-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,964012,,2023-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,980644,,2023-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,992543,,2023-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,993976,,2023-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,996261,,2023-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,996703,,2023-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,992358,,2023-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,987903,,2023-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,983646,,2024-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,993579,,2024-02-29,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1011985,,2024-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1031012,,2024-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1032982,,2024-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1032637,,2024-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1037573,,2024-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1033271,,2024-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1025596,,2024-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1021311,,2024-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1021441,,2024-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1023115,,2024-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1021536,,2025-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1022841,,2025-02-28,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1026976,,2025-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1033710,,2025-04-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1040122,,2025-05-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1036235,,2025-06-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1036655,,2025-07-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1027440,,2025-08-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1024182,,2025-09-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1024124,,2025-10-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1020377,,2025-11-30,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1014812,2905,2025-12-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1013685,2875,2026-01-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1013711,2886,2026-02-28,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1025642,2834,2026-03-31,38,22,Nearby south county comparison community
+Arroyo Grande,city,35.1186,-120.5907,1031991,2886,2026-04-30,38,22,Nearby south county comparison community
+Morro Bay,city,35.3658,-120.8499,577359,,2016-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,589327,,2016-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,598233,,2016-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,604295,,2016-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,605854,,2016-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,608048,,2016-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,612797,,2016-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,622633,,2016-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,628233,,2016-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,636818,,2017-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,643553,,2017-02-28,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,648258,,2017-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,655738,,2017-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,663991,,2017-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,668018,,2017-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,671437,,2017-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,670143,,2017-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,670845,,2017-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,672102,,2017-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,673209,,2017-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,680401,,2017-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,682925,,2018-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,689404,,2018-02-28,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,691501,,2018-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,690955,,2018-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,693586,,2018-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,700739,,2018-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,701109,,2018-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,699362,,2018-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,695288,,2018-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,696283,,2018-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,692629,,2018-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,688863,,2018-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,688069,,2019-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,686985,,2019-02-28,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,692979,,2019-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,698516,,2019-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,706427,,2019-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,707215,,2019-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,707964,,2019-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,708960,,2019-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,708380,,2019-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,708426,,2019-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,708250,,2019-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,708822,,2019-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,709019,,2020-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,714540,,2020-02-29,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,719235,,2020-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,721163,,2020-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,723114,,2020-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,720710,,2020-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,723616,,2020-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,728741,,2020-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,742602,,2020-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,751314,,2020-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,758918,,2020-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,764659,,2020-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,766559,,2021-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,779146,,2021-02-28,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,795431,,2021-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,816942,,2021-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,836869,,2021-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,855492,,2021-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,861055,,2021-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,862570,,2021-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,862601,,2021-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,870442,,2021-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,878257,,2021-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,883945,,2021-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,905730,,2022-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,936006,,2022-02-28,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,964348,,2022-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,987587,,2022-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,994945,,2022-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,994933,,2022-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,979045,,2022-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,961156,,2022-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,943137,,2022-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,940735,,2022-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,933147,,2022-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,923778,,2022-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,924158,,2023-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,926809,,2023-02-28,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,936812,,2023-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,951312,,2023-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,965896,,2023-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,977451,,2023-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,983731,,2023-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,979910,,2023-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,979924,,2023-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,983074,,2023-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,976246,,2023-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,962750,,2023-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,955957,,2024-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,962004,,2024-02-29,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,974964,,2024-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,990758,,2024-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,988438,,2024-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,989962,,2024-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,985979,,2024-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,978272,,2024-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,966718,,2024-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,962157,,2024-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,961665,,2024-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,957757,,2024-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,951672,2365,2025-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,947857,2305,2025-02-28,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,951309,2258,2025-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,958507,2278,2025-04-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,961387,2289,2025-05-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,957824,2354,2025-06-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,953873,2401,2025-07-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,945272,2409,2025-08-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,941290,2420,2025-09-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,941060,2397,2025-10-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,940699,2410,2025-11-30,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,935168,2337,2025-12-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,933485,2304,2026-01-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,936143,2304,2026-02-28,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,947555,2335,2026-03-31,-36,-18,Nearby coastal comparison community
+Morro Bay,city,35.3658,-120.8499,956657,2507,2026-04-30,-36,-18,Nearby coastal comparison community
+Los Osos,cdp,35.3111,-120.8324,483897,,2016-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,490510,,2016-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,499918,,2016-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,506066,,2016-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,510562,,2016-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,513357,,2016-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,518271,,2016-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,521846,,2016-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,524652,,2016-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,530386,,2017-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,536302,,2017-02-28,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,541189,,2017-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,546357,,2017-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,551719,,2017-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,556567,,2017-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,559866,,2017-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,561063,,2017-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,562599,,2017-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,563654,,2017-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,564765,,2017-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,569954,,2017-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,573035,,2018-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,572622,,2018-02-28,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,575669,,2018-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,580013,,2018-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,582623,,2018-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,588239,,2018-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,588331,,2018-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,587028,,2018-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,585088,,2018-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,587613,,2018-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,584636,,2018-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,581277,,2018-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,582481,,2019-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,581222,,2019-02-28,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,583909,,2019-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,590551,,2019-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,595169,,2019-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,600166,,2019-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,603762,,2019-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,606438,,2019-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,608346,,2019-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,608953,,2019-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,607983,,2019-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,606440,,2019-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,608859,,2020-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,613542,,2020-02-29,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,619642,,2020-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,620439,,2020-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,617449,,2020-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,618043,,2020-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,616741,,2020-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,620610,,2020-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,630275,,2020-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,640134,,2020-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,646459,,2020-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,654236,,2020-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,660595,,2021-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,673706,,2021-02-28,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,686232,,2021-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,699813,,2021-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,712255,,2021-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,723724,,2021-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,729974,,2021-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,726013,,2021-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,727083,,2021-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,735249,,2021-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,738726,,2021-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,743251,,2021-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,760939,,2022-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,788032,,2022-02-28,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,810855,,2022-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,830412,,2022-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,842789,,2022-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,839924,,2022-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,831725,,2022-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,815153,,2022-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,802989,,2022-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,802286,,2022-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,798752,,2022-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,790726,,2022-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,782873,,2023-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,782747,,2023-02-28,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,789862,,2023-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,805419,,2023-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,815370,,2023-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,827187,,2023-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,836643,,2023-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,842244,,2023-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,841036,,2023-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,843332,,2023-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,835585,,2023-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,828351,,2023-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,826635,,2024-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,831967,,2024-02-29,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,842664,,2024-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,858934,,2024-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,863763,,2024-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,867396,,2024-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,869632,,2024-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,864610,,2024-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,857844,,2024-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,854776,,2024-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,852335,,2024-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,848876,,2024-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,844381,,2025-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,841870,,2025-02-28,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,849303,,2025-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,857923,,2025-04-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,862827,,2025-05-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,862906,,2025-06-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,864552,,2025-07-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,856750,,2025-08-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,855071,,2025-09-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,861413,,2025-10-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,861953,,2025-11-30,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,859611,,2025-12-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,854858,,2026-01-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,859412,,2026-02-28,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,866213,,2026-03-31,-42,18,Nearby coastal census-designated comparison community
+Los Osos,cdp,35.3111,-120.8324,874657,2721,2026-04-30,-42,18,Nearby coastal census-designated comparison community
+Atascadero,city,35.4894,-120.6707,446304,,2016-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,453712,,2016-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,463013,,2016-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,469542,,2016-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,472498,,2016-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,474133,,2016-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,476323,,2016-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,478874,,2016-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,481856,,2016-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,485527,,2017-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,486844,,2017-02-28,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,490365,,2017-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,494523,,2017-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,498507,,2017-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,502433,,2017-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,506606,,2017-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,508642,,2017-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,511496,,2017-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,512469,,2017-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,512790,,2017-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,516636,,2017-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,520275,,2018-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,522916,,2018-02-28,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,524662,,2018-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,525057,,2018-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,528374,,2018-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,533566,,2018-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,537708,,2018-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,537565,,2018-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,535420,,2018-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,533322,,2018-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,529530,,2018-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,524633,,2018-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,522366,,2019-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,522488,,2019-02-28,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,525633,,2019-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,529679,,2019-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,533050,,2019-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,537529,,2019-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,540532,,2019-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,540973,,2019-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,542449,,2019-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,543329,,2019-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,544150,,2019-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,543410,,2019-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,540676,,2020-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,541780,,2020-02-29,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,544986,,2020-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,548368,,2020-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,546967,,2020-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,547839,,2020-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,548920,,2020-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,554973,,2020-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,565765,,2020-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,572678,,2020-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,579695,,2020-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,586687,,2020-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,590533,,2021-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,599631,,2021-02-28,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,608740,,2021-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,621423,,2021-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,633926,,2021-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,646392,,2021-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,651857,,2021-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,652918,,2021-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,653818,,2021-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,655492,,2021-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,658460,,2021-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,662697,,2021-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,677928,,2022-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,700369,,2022-02-28,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,720225,,2022-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,736306,,2022-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,742169,,2022-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,745068,,2022-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,740824,,2022-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,732614,,2022-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,722714,,2022-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,715881,,2022-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,708415,,2022-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,699360,,2022-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,689899,,2023-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,689535,,2023-02-28,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,696593,,2023-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,707657,,2023-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,718501,,2023-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,728950,,2023-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,737668,,2023-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,744217,,2023-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,745541,,2023-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,745325,,2023-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,739290,2213,2023-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,735858,2230,2023-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,733402,2217,2024-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,736578,2256,2024-02-29,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,748884,2252,2024-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,760524,2301,2024-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,763603,2347,2024-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,766408,2381,2024-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,769448,2370,2024-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,764361,2337,2024-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,759576,2331,2024-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,755987,2360,2024-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,754268,2383,2024-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,753804,2396,2024-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,749255,2383,2025-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,750386,2359,2025-02-28,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,755508,2433,2025-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,762014,2431,2025-04-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,768349,2486,2025-05-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,771194,2442,2025-06-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,776496,2492,2025-07-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,774454,2498,2025-08-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,774691,2493,2025-09-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,779350,2475,2025-10-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,776576,2489,2025-11-30,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,772059,2504,2025-12-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,769178,2501,2026-01-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,768239,2464,2026-02-28,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,776086,2490,2026-03-31,34,-8,North county comparison community
+Atascadero,city,35.4894,-120.6707,782297,2461,2026-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,434730,,2016-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,440964,,2016-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,448185,,2016-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,453080,,2016-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,455683,,2016-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,456504,,2016-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,457374,,2016-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,459437,,2016-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,461855,,2016-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,468195,,2017-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,472090,,2017-02-28,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,476191,,2017-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,482008,,2017-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,485719,,2017-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,489595,,2017-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,493002,,2017-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,495780,,2017-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,497213,,2017-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,498806,,2017-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,498811,,2017-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,500777,,2017-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,503006,,2018-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,504343,,2018-02-28,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,505873,,2018-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,507710,,2018-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,511044,,2018-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,516774,,2018-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,520920,,2018-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,519251,,2018-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,518000,,2018-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,517903,,2018-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,515494,,2018-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,511138,,2018-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,509120,,2019-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,509366,,2019-02-28,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,510310,,2019-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,514170,,2019-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,516460,,2019-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,519008,,2019-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,521163,,2019-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,522045,,2019-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,523106,,2019-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,522616,,2019-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,522691,,2019-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,522310,,2019-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,524427,,2020-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,528176,,2020-02-29,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,533965,,2020-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,537229,,2020-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,537433,,2020-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,540206,,2020-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,542514,,2020-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,547665,,2020-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,556700,,2020-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,563024,,2020-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,569485,,2020-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,574988,,2020-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,578179,,2021-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,587326,,2021-02-28,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,599142,,2021-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,611605,,2021-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,624036,,2021-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,635725,,2021-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,641552,,2021-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,644363,,2021-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,646464,,2021-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,649270,,2021-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,653543,,2021-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,657928,,2021-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,671158,,2022-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,686784,,2022-02-28,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,704270,,2022-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,720702,,2022-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,729436,,2022-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,733258,,2022-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,728255,,2022-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,716800,,2022-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,707909,,2022-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,704176,,2022-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,698864,,2022-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,694047,,2022-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,686044,,2023-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,684986,,2023-02-28,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,690731,2176,2023-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,702463,2250,2023-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,712950,2322,2023-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,722816,2340,2023-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,727854,2344,2023-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,729849,2323,2023-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,730285,2287,2023-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,732421,2289,2023-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,725279,2300,2023-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,723812,2355,2023-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,721983,2400,2024-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,725380,2402,2024-02-29,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,736463,2426,2024-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,748597,2376,2024-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,755040,2414,2024-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,758470,2388,2024-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,763256,2436,2024-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,759420,2415,2024-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,757521,2428,2024-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,755947,2443,2024-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,756219,2482,2024-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,757115,2496,2024-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,754737,2485,2025-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,754920,2508,2025-02-28,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,757112,2509,2025-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,763390,2564,2025-04-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,767619,2566,2025-05-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,767936,2650,2025-06-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,769320,2641,2025-07-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,764660,2629,2025-08-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,762467,2562,2025-09-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,764781,2493,2025-10-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,763976,2440,2025-11-30,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,761668,2409,2025-12-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,761064,2413,2026-01-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,761961,2424,2026-02-28,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,769375,2459,2026-03-31,34,-8,North county comparison community
+Paso Robles,city,35.6266,-120.691,774653,2528,2026-04-30,34,-8,North county comparison community
