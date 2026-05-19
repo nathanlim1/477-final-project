@@ -210,7 +210,16 @@ renderComparisonTable(selectedRows, selectedPlace)
 
 </div>
 
-<p class="source-note">Sources: Zillow Research ZIP-level ZHVI and ZORI public CSVs through 2026-04-30; Census TIGERweb 2020 ZIP Code Tabulation Area geometry; Census TIGERweb block group geometry for the San Luis Obispo County outline; California State Auditor report 2024-111 for Cal Poly on-campus housing presence. ZIP values are mapped to Census ZCTAs, which are generalized Census representations of USPS ZIP Code service areas.</p>
+<section class="dataset-integrity">
+  <h2>Dataset & Data Integrity</h2>
+
+This project combines housing, geography, and campus-housing context for San Luis Obispo County. Housing prices come from [Zillow Research's public housing data](https://www.zillow.com/research/data/), specifically ZIP-level Zillow Home Value Index (ZHVI) and Zillow Observed Rent Index (ZORI) CSV files through April 2026. Zillow defines ZHVI as a typical home-value measure and ZORI as a smoothed observed market rent measure, which makes the two series appropriate for comparing home values, rents, and price-to-rent relationships across local ZIP markets.
+
+The map geometry comes from the U.S. Census Bureau's [2020 TIGER/Line files](https://www.census.gov/geographies/mapping-files/2020/geo/tiger-line-file.html) and TIGERweb geography services. The ZIP areas are Census ZIP Code Tabulation Areas (ZCTAs), which are generalized Census representations of ZIP Code service areas rather than exact USPS delivery boundaries. For integrity, the visualization keeps ZIP markets with missing rent data neutral instead of inventing values, compares each selected ZIP to the median of the available local markets for the same month, and labels the map as ZCTA-based so the geographic limitation is visible.
+
+Campus context comes from the California State Auditor's [Report 2024-111 on California college housing needs](https://www.auditor.ca.gov/wp-content/uploads/2025/10/2024-111-Report.pdf), which reports that Cal Poly San Luis Obispo housed about 38 percent of enrolled students in academic year 2024-25. This figure is used as contextual evidence about on-campus housing pressure, not as proof that Cal Poly alone caused housing-price changes. Overall, the dataset is strong for showing local patterns and comparisons, but the project avoids making a direct causal claim because housing prices are also affected by income, supply, interest rates, commuting patterns, and broader market conditions.
+
+</section>
 
 ```js
 function metricValue(row, metric) {
