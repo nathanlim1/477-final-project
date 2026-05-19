@@ -1,6 +1,6 @@
-# San Luis Obispo Housing Around Cal Poly
+# How does the presence of a college affect housing prices in a college town?
 
-<p class="lede">A focused college-town map for San Luis Obispo: use the timeline to see how nearby housing markets changed around Cal Poly, with city and CDP boundaries replacing the earlier bubble-size encoding.</p>
+<p class="lede">Examining San Luis Obispo, we can we can see that Cal Poly's growth has led to the college town's disproportionate housing prices--especially when looking at rent prices.</p>
 
 ```js
 import * as aq from "npm:arquero";
@@ -90,8 +90,8 @@ function selectControl(options, {label, value}) {
 
 ```js
 const base = await FileAttachment("data/slo-bg.geojson").json();
-const placeBoundaries = await FileAttachment("data/slo-places.geojson").json();
-const housingRows = await FileAttachment("data/slo-housing.csv").csv({typed: true});
+const zctaBoundaries = await FileAttachment("data/slo-zctas.geojson").json();
+const housingRows = await FileAttachment("data/slo-zip-housing.csv").csv({typed: true});
 const campusRows = await FileAttachment("data/campus-housing.csv").csv({typed: true});
 ```
 
@@ -152,8 +152,8 @@ const mapMetric = view(radioControl(["zhvi", "change"], {
 const selectedPlaceInput = selectControl(
   Array.from(new Set(housing.map((d) => d.place))).sort(d3.ascending),
   {
-    label: "Compare place",
-    value: "San Luis Obispo"
+    label: "Compare ZIP market",
+    value: "93401 San Luis Obispo"
   }
 );
 const selectedPlace = view(selectedPlaceInput);
@@ -194,7 +194,7 @@ renderComparisonTable(selectedRows, selectedPlace)
 
 </div>
 
-<p class="source-note">Sources: Zillow Research city ZHVI and ZORI public CSVs through 2026-04-30; Census TIGERweb block group geometry for San Luis Obispo County; Census TIGERweb incorporated place and census-designated place boundaries; California State Auditor report 2024-111 for Cal Poly on-campus housing presence. The county-wide surface is an inverse-distance interpolation from the Zillow city/CDP points, while city/CDP outlines show the actual Census boundaries available for the local markets.</p>
+<p class="source-note">Sources: Zillow Research ZIP-level ZHVI and ZORI public CSVs through 2026-04-30; Census TIGERweb 2020 ZIP Code Tabulation Area geometry; Census TIGERweb block group geometry for the San Luis Obispo County outline; California State Auditor report 2024-111 for Cal Poly on-campus housing presence. ZIP values are mapped to Census ZCTAs, which are generalized Census representations of USPS ZIP Code service areas.</p>
 
 ```js
 function metricValue(row, metric) {
@@ -249,28 +249,8 @@ function createColorScale(rows, metric) {
   return d3.scaleSequential(extent, d3.interpolateYlGnBu);
 }
 
-function estimateSurfaceValue(point, anchors, metric) {
-  const power = 2.15;
-  let weighted = 0;
-  let totalWeight = 0;
-
-  for (const anchor of anchors) {
-    const dx = point[0] - anchor.x;
-    const dy = point[1] - anchor.y;
-    const distance = Math.hypot(dx, dy);
-
-    if (distance < 4) return metricValue(anchor, metric);
-
-    const weight = 1 / Math.pow(distance, power);
-    weighted += metricValue(anchor, metric) * weight;
-    totalWeight += weight;
-  }
-
-  return weighted / totalWeight;
-}
-
 function renderSummary(rows, date, selectedPlace) {
-  const selected = rows.find((d) => d.place === selectedPlace) ?? rows.find((d) => d.place === "San Luis Obispo");
+  const selected = rows.find((d) => d.place === selectedPlace) ?? rows.find((d) => d.place === "93401 San Luis Obispo");
   const ranked = [...rows].sort((a, b) => b.zhvi - a.zhvi);
   const growthRanked = [...rows].sort((a, b) => b.change - a.change);
   const medianValue = d3.median(rows, (d) => d.zhvi);
@@ -332,18 +312,15 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
   const width = 980;
   const height = 700;
   const displayBase = rewindFeatureCollection(base);
-  const displayPlaces = rewindFeatureCollection(placeBoundaries);
+  const displayZctas = rewindFeatureCollection(zctaBoundaries);
   const rowsByPlace = new Map(rows.map((d) => [d.place, d]));
   const medianValue = d3.median(rows, (d) => d.zhvi);
-  const selected = rowsByPlace.get(selectedPlace) ?? rows.find((d) => d.place === "San Luis Obispo");
+  const selected = rowsByPlace.get(selectedPlace) ?? rows.find((d) => d.place === "93401 San Luis Obispo");
   const svg = d3
     .create("svg")
     .attr("viewBox", [0, 0, width, height])
     .attr("role", "img")
-    .attr(
-      "aria-label",
-      `San Luis Obispo County map showing ${metricLabel(metric)} around Cal Poly.`
-    )
+    .attr("aria-label", `San Luis Obispo County ZCTA map showing ${metricLabel(metric)} around Cal Poly.`)
     .style("display", "block")
     .style("width", "100%")
     .style("height", "auto");
@@ -366,19 +343,12 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     : allMetrics.map((d) => d.zhvi);
 
   svg
-    .append("g")
-    .attr("class", "county-surface")
-    .selectAll("path")
-    .data(displayBase.features)
-    .join("path")
+    .append("path")
+    .datum({type: "FeatureCollection", features: displayBase.features})
     .attr("d", path)
-    .attr("fill", (feature) => {
-      const point = path.centroid(feature);
-      return color(estimateSurfaceValue(point, anchors, metric));
-    })
-    .attr("fill-opacity", 0.52)
+    .attr("fill", "#eef4f3")
     .attr("stroke", "#ffffff")
-    .attr("stroke-width", 0.32)
+    .attr("stroke-width", 0.28)
     .attr("stroke-opacity", 0.58);
 
   svg
@@ -392,9 +362,9 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
 
   svg
     .append("g")
-    .attr("class", "place-boundaries")
+    .attr("class", "zcta-boundaries")
     .selectAll("path")
-    .data(displayPlaces.features)
+    .data(displayZctas.features)
     .join("path")
     .attr("d", path)
     .attr("fill", (feature) => color(metricValue(rowsByPlace.get(feature.properties.place), metric)))
@@ -427,7 +397,7 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .append("g")
     .attr("class", "selected-boundary")
     .selectAll("path")
-    .data(displayPlaces.features.filter((feature) => feature.properties.place === selected.place))
+    .data(displayZctas.features.filter((feature) => feature.properties.place === selected.place))
     .join("path")
     .attr("d", path)
     .attr("fill", "none")
@@ -613,13 +583,13 @@ function drawLegend(svg, color, values, metric, width, height) {
     .attr("fill", "#263238")
     .attr("font-size", 12)
     .attr("font-weight", 700)
-    .text("City/CDP Zillow point");
+    .text("Zillow ZIP centroid");
 }
 
 function drawMapNote(svg, metric, height) {
   const note = metric === "change"
-    ? "Boundary fill is exact by city/CDP; county surface estimates growth between markets."
-    : "Boundary fill is exact by city/CDP; county surface estimates home values between markets.";
+    ? "ZCTA fills use direct Zillow ZIP growth values; unreported county areas are left neutral."
+    : "ZCTA fills use direct Zillow ZIP home values; unreported county areas are left neutral.";
 
   svg
     .append("text")
@@ -638,7 +608,7 @@ function renderTrend(date, selectedPlace) {
     (rows) => ({
       date: rows[0].date,
       dateObject: new Date(`${rows[0].date}T00:00:00Z`),
-      selected: rows.find((d) => d.place === selectedPlace)?.zhvi ?? rows.find((d) => d.place === "San Luis Obispo").zhvi,
+      selected: rows.find((d) => d.place === selectedPlace)?.zhvi ?? rows.find((d) => d.place === "93401 San Luis Obispo").zhvi,
       median: d3.median(rows, (d) => d.zhvi)
     }),
     (d) => d.date
