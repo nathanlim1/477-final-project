@@ -114,7 +114,7 @@ const campusRows = await FileAttachment("data/campus-housing.csv").csv({typed: t
 const housingTable = aq
   .from(housingRows)
   .derive({
-    valueRentRatio: (d) => d.zori ? d.zhvi / (d.zori * 12) : null
+    valueRentRatio: (d) => d.blendedRent ? d.zhvi / (d.blendedRent * 12) : null
   })
   .orderby("place", "date");
 
@@ -138,7 +138,8 @@ function annotateHousingRow(row) {
   return {
     ...row,
     change: baseline ? row.zhvi / baseline.zhvi - 1 : 0,
-    latestZori: latestByPlace.get(row.place)?.zori ?? null
+    latestRent: latestByPlace.get(row.place)?.blendedRent ?? null,
+    latestRentSource: latestByPlace.get(row.place)?.rentSource ?? null
   };
 }
 
@@ -146,7 +147,7 @@ const allMetrics = housing.map((d) => annotateHousingRow(d));
 
 const metricOptions = new Map([
   ["zhvi", "Home value index"],
-  ["zori", "Rent index"]
+  ["zori", "Blended rent index"]
 ]);
 ```
 
@@ -210,15 +211,15 @@ renderComparisonTable(selectedRows, selectedPlace)
 
 </div>
 
-<p class="source-note">Sources: Zillow Research ZIP-level ZHVI and ZORI public CSVs through 2026-04-30; Census TIGERweb 2020 ZIP Code Tabulation Area geometry; Census TIGERweb block group geometry for the San Luis Obispo County outline; California State Auditor report 2024-111 for Cal Poly on-campus housing presence. ZIP values are mapped to Census ZCTAs, which are generalized Census representations of USPS ZIP Code service areas.</p>
+<p class="source-note">Sources: Zillow Research ZIP-level ZHVI and ZORI public CSVs through 2026-04-30; HUD Small Area Fair Market Rent workbooks, FY2011-FY2026; Census TIGERweb 2020 ZIP Code Tabulation Area geometry; Census TIGERweb block group geometry for the San Luis Obispo County outline; California State Auditor report 2024-111 for Cal Poly on-campus housing presence. Rent uses the average of HUD 1BR, 2BR, 3BR, and 4BR SAFMR values by fiscal year, averaged with Zillow ZORI where ZIP-level ZORI is present. ZIP values are mapped to Census ZCTAs, which are generalized Census representations of USPS ZIP Code service areas.</p>
 
 ```js
 function metricValue(row, metric) {
-  return metric === "zori" ? row.zori : row.zhvi;
+  return metric === "zori" ? row.blendedRent : row.zhvi;
 }
 
 function metricLabel(metric) {
-  return metric === "zori" ? "rent index" : "home value index";
+  return metric === "zori" ? "blended rent index" : "home value index";
 }
 
 function metricFormat(metric) {
@@ -257,7 +258,7 @@ function rewindFeatureCollection(collection) {
 
 function createColorScale(rows, metric) {
   if (metric === "zori") {
-    const extent = d3.extent(allMetrics, (d) => d.zori);
+    const extent = d3.extent(allMetrics, (d) => d.blendedRent);
     return d3.scaleSequential(extent, d3.interpolateYlOrRd);
   }
 
@@ -270,7 +271,7 @@ function renderSummary(rows, date, selectedPlace) {
   const ranked = [...rows].sort((a, b) => b.zhvi - a.zhvi);
   const growthRanked = [...rows].sort((a, b) => b.change - a.change);
   const medianValue = d3.median(rows, (d) => d.zhvi);
-  const latestRent = latestByPlace.get(selected.place)?.zori;
+  const latestRent = latestByPlace.get(selected.place)?.blendedRent;
   const selectedRank = ranked.findIndex((d) => d.place === selected.place) + 1;
   const selectedVsMedian = selected.zhvi - medianValue;
   const topGrowth = growthRanked[0];
@@ -291,9 +292,9 @@ function renderSummary(rows, date, selectedPlace) {
       <em>${selectedVsMedian >= 0 ? "+" : ""}${money(selectedVsMedian)} vs local median</em>
     </div>
     <div class="stat">
-      <span>Latest rent index</span>
+      <span>Latest blended rent</span>
       <strong>${latestRent ? `${money(latestRent)} / mo` : "Not reported"}</strong>
-      <em>${latestRent ? `${d3.format(".1f")(latestByPlace.get(selected.place).valueRentRatio)}x value-to-annual-rent` : "Zillow rent index unavailable"}</em>
+      <em>${latestRent ? `${d3.format(".1f")(latestByPlace.get(selected.place).valueRentRatio)}x value-to-annual-rent` : "Rent index unavailable"}</em>
     </div>
     <div class="stat">
       <span>Fastest growth</span>
@@ -402,10 +403,12 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .append("title")
     .text((feature) => {
       const row = rowsByPlace.get(feature.properties.place);
-      const rent = row.latestZori ? `\nLatest rent index: ${money(row.latestZori)} / mo` : "";
+      const rent = row.latestRent ? `\nLatest blended rent: ${money(row.latestRent)} / mo (${row.latestRentSource})` : "";
+      const zori = row.zori ? `\nZillow ZORI: ${money(row.zori)} / mo` : "";
+      const hud = row.hudSafmr ? `\nHUD SAFMR average: ${money(row.hudSafmr)} / mo, FY${row.hudFiscalYear}` : "";
       const selectedMetric = metricValue(row, metric);
       const selectedMetricText = selectedMetric == null ? "Not reported" : metricFormat(metric)(selectedMetric);
-      return `${row.place}\n${metricLabel(metric)}: ${selectedMetricText}\nHome value index: ${money(row.zhvi)}\n${medianComparison(row, medianValue)}\nChange since ${dateLabel(baselineDate)}: ${percent(row.change)}${rent}\n${row.note}`;
+      return `${row.place}\n${metricLabel(metric)}: ${selectedMetricText}\nHome value index: ${money(row.zhvi)}\n${medianComparison(row, medianValue)}\nChange since ${dateLabel(baselineDate)}: ${percent(row.change)}${rent}${zori}${hud}\n${row.note}`;
     });
 
   svg
@@ -578,7 +581,7 @@ function drawLegend(svg, color, values, metric, width, height) {
     .attr("font-size", 12)
     .attr("font-weight", 750)
     .attr("fill", "#263238")
-    .text(metric === "zori" ? "Zillow rent index" : "Zillow home value index");
+    .text(metric === "zori" ? "Blended monthly rent" : "Zillow home value index");
 
   legend
     .append("rect")
@@ -631,7 +634,7 @@ function drawLegend(svg, color, values, metric, width, height) {
 
 function drawMapNote(svg, metric, height) {
   const note = metric === "zori"
-    ? "ZCTA fills use direct Zillow ZIP rent values; ZIPs without reported rent are left neutral."
+    ? "ZCTA fills use blended ZIP rent: HUD 1-4BR SAFMR average, averaged with Zillow ZORI where present."
     : "ZCTA fills use direct Zillow ZIP home values; unreported county areas are left neutral.";
 
   svg
@@ -791,7 +794,7 @@ function renderComparisonTable(rows, selectedPlace) {
       money(row.zhvi),
       medianComparison(row, medianValue),
       percent(row.change),
-      row.latestZori ? `${money(row.latestZori)} / mo` : "Not reported"
+      row.latestRent ? `${money(row.latestRent)} / mo` : "Not reported"
     ].forEach((value) => {
       const td = document.createElement("td");
       td.textContent = value;
