@@ -177,6 +177,29 @@ function selectControl(options, {label, value, format = (d) => d}) {
 
   return control;
 }
+
+function mapControlStrip({countySelect, mapMetricInput, selectedPlaceInput, showCountyControls}) {
+  const strip = html`<div class="control-strip">
+    ${countySelect}
+    ${showCountyControls ? mapMetricInput : ""}
+    ${showCountyControls ? selectedPlaceInput : ""}
+  </div>`;
+  const notify = () => strip.dispatchEvent(new globalThis.Event("input", {bubbles: true}));
+
+  if (showCountyControls) {
+    mapMetricInput.addEventListener("input", notify);
+    selectedPlaceInput.addEventListener("input", notify);
+  }
+
+  Object.defineProperty(strip, "value", {
+    get: () => ({
+      mapMetric: showCountyControls ? mapMetricInput.value : "zhvi",
+      selectedPlace: showCountyControls ? selectedPlaceInput.value : selectedPlaceInput.value
+    })
+  });
+
+  return strip;
+}
 ```
 
 ```js
@@ -209,19 +232,52 @@ function readSearchParams() {
   };
 }
 
+const mapScopeControl = html`<div style="display: none;"></div>`;
+mapScopeControl.value = readSearchParams();
+
+function updateMapScope(nextScope) {
+  mapScopeControl.value = nextScope;
+  mapScopeControl.dispatchEvent(new globalThis.Event("input", {bubbles: true}));
+}
+
 function navigateCountyScope({county, view}) {
+  if (typeof window === "undefined") return;
+  const nextScope = {
+    county: normalizeCountyFips(county),
+    view: view === "state" ? "state" : "county"
+  };
   const url = new URL(window.location.href);
-  url.searchParams.set("county", normalizeCountyFips(county));
+  url.searchParams.set("county", nextScope.county);
   if (view === "state") url.searchParams.set("view", "state");
   else url.searchParams.delete("view");
-  window.location.assign(`${url.pathname}${url.search}`);
+  const nextPath = `${url.pathname}${url.search}`;
+  const animateChange = () => {
+    updateMapScope(nextScope);
+    window.history.pushState(nextScope, "", nextPath);
+  };
+
+  document.documentElement.dataset.mapTransition = view === "state" ? "zoom-out" : "zoom-in";
+  if (document.startViewTransition) {
+    const transition = document.startViewTransition(animateChange);
+    transition.finished.finally(() => {
+      delete document.documentElement.dataset.mapTransition;
+    });
+  } else {
+    animateChange();
+    delete document.documentElement.dataset.mapTransition;
+  }
 }
 
 function openCounty(fips) {
   if (indexedCountyFips.has(fips)) navigateCountyScope({county: fips, view: "county"});
 }
 
-const mapScope = readSearchParams();
+if (typeof window !== "undefined" && !window.__collegeHousingMapPopstate) {
+  window.__collegeHousingMapPopstate = true;
+  window.addEventListener("popstate", () => updateMapScope(readSearchParams()));
+}
+
+const mapScope = view(mapScopeControl);
 
 function optionalNumber(value) {
   if (value == null || value === "") return null;
@@ -281,10 +337,6 @@ const countySelect = selectControl(
 countySelect.addEventListener("change", () => {
   navigateCountyScope({county: countySelect.value, view: "county"});
 });
-```
-
-```js
-view(countySelect)
 ```
 
 ```js
@@ -387,21 +439,11 @@ const metricOptions = new Map([
 ```
 
 ```js
-const dateIndex = view(rangeControl([0, dates.length - 1], {
-  label: "Timeline",
-  step: 1,
-  value: dates.length - 1,
-  format: (i) => dateLabel(dates[i])
-}));
-
-const mapMetric = mapScope.view === "county"
-  ? view(radioControl(["zhvi", "zori"], {
-      label: "Map layer",
-      value: "zori",
-      format: (value) => metricOptions.get(value)
-    }))
-  : "zhvi";
-
+const mapMetricInput = radioControl(["zhvi", "zori"], {
+  label: "Map layer",
+  value: "zori",
+  format: (value) => metricOptions.get(value)
+});
 const selectedPlaceInput = selectControl(
   countyBundle?.meta?.places?.length
     ? countyBundle.meta.places
@@ -412,13 +454,28 @@ const selectedPlaceInput = selectControl(
     format: displayPlaceName
   }
 );
-const selectedPlace = mapScope.view === "county"
-  ? view(selectedPlaceInput)
-  : (countyBundle?.meta?.defaultPlace ?? selectedPlaceInput.value);
 
 if (mapScope.view === "county" && countyBundle?.meta?.defaultPlace) {
   selectedPlaceInput.value = countyBundle.meta.defaultPlace;
 }
+
+const controlValues = view(mapControlStrip({
+  countySelect,
+  mapMetricInput,
+  selectedPlaceInput,
+  showCountyControls: mapScope.view === "county"
+}));
+const mapMetric = controlValues.mapMetric;
+const selectedPlace = mapScope.view === "county"
+  ? controlValues.selectedPlace
+  : (countyBundle?.meta?.defaultPlace ?? selectedPlaceInput.value);
+
+const dateIndex = view(rangeControl([0, dates.length - 1], {
+  label: "Timeline",
+  step: 1,
+  value: dates.length - 1,
+  format: (i) => dateLabel(dates[i])
+}));
 ```
 
 ```js
@@ -701,10 +758,12 @@ function renderStateMap({activeCountyFips, countySelect, mapMetric, selectedDate
 
   campusMarker
     .append("path")
-    .attr("d", "M0,-7 L7,6 L-7,6 Z")
+    .attr("class", "campus-icon")
+    .attr("d", "M-7,-2 L0,-7 L7,-2 Z M-5,-1 H5 V6 H-5 Z M-2,6 V1 H2 V6")
     .attr("fill", "var(--campus)")
     .attr("stroke", "#ffffff")
     .attr("stroke-width", 1.2)
+    .attr("stroke-linejoin", "round")
     .append("title")
     .text((d) => `${d.name}\n${d.note}`);
 
@@ -730,14 +789,14 @@ function drawStateHeader(svg, width, height, activeCountyFips) {
     .attr("font-size", 12)
     .attr("font-weight", 650)
     .attr("fill", "#4a5a61")
-    .text("Click a county to open its ZIP-level housing map. Triangle markers show major university anchors.");
+    .text("Click a county to open its ZIP-level housing map. Campus icons show major university anchors.");
 
   drawZoomButton(svg, {
-    x: 32,
+    x: 384,
     y: height - 78,
     label: "Zoom in",
     ariaLabel: "Zoom in to the selected county",
-    icon: "in",
+    icon: "plus",
     onClick: () => navigateCountyScope({county: activeCountyFips, view: "county"})
   });
 }
@@ -940,60 +999,56 @@ function drawZoomButton(svg, {x, y, label, ariaLabel, icon, onClick}) {
     .attr("stroke", "#9fb9b7")
     .attr("filter", "url(#zoom-button-shadow)");
 
-  const iconGroup = button.append("g").attr("transform", "translate(20, 20)");
-  iconGroup
-    .append("circle")
-    .attr("r", 8)
-    .attr("fill", "none")
-    .attr("stroke", "var(--campus)")
-    .attr("stroke-width", 2);
-  iconGroup
-    .append("line")
-    .attr("x1", 6)
-    .attr("y1", 6)
-    .attr("x2", 13)
-    .attr("y2", 13)
-    .attr("stroke", "var(--campus)")
-    .attr("stroke-width", 2)
-    .attr("stroke-linecap", "round");
-  iconGroup
-    .append("line")
-    .attr("x1", -4)
-    .attr("y1", 0)
-    .attr("x2", 4)
-    .attr("y2", 0)
-    .attr("stroke", "var(--campus)")
-    .attr("stroke-width", 2)
-    .attr("stroke-linecap", "round");
+  const iconGroup = button.append("g").attr("transform", "translate(22, 22)");
 
-  if (icon === "in") {
+  if (icon === "california") {
+    iconGroup
+      .append("path")
+      .attr("d", "M-8,-13 L2,-12 L5,-8 L3,-4 L8,1 L6,7 L10,13 L5,14 L0,8 L-4,5 L-5,0 L-10,-5 Z")
+      .attr("fill", "none")
+      .attr("stroke", "var(--campus)")
+      .attr("stroke-width", 2)
+      .attr("stroke-linejoin", "round");
+  } else {
+    iconGroup
+      .append("line")
+      .attr("x1", -9)
+      .attr("y1", 0)
+      .attr("x2", 9)
+      .attr("y2", 0)
+      .attr("stroke", "var(--campus)")
+      .attr("stroke-width", 3)
+      .attr("stroke-linecap", "round");
+  }
+
+  if (icon === "plus") {
     iconGroup
       .append("line")
       .attr("x1", 0)
-      .attr("y1", -4)
+      .attr("y1", -9)
       .attr("x2", 0)
-      .attr("y2", 4)
+      .attr("y2", 9)
       .attr("stroke", "var(--campus)")
-      .attr("stroke-width", 2)
+      .attr("stroke-width", 3)
       .attr("stroke-linecap", "round");
   }
 
   button.append("title").text(label);
 }
 
-function drawZoomOutButton(svg, activeCountyFips, height) {
+function drawZoomOutButton(svg, activeCountyFips, height, x = 384) {
   drawZoomButton(svg, {
-    x: 32,
+    x,
     y: height - 78,
-    label: "Zoom out",
-    ariaLabel: "Zoom out to campus counties",
-    icon: "out",
+    label: "California map",
+    ariaLabel: "Return to the California map",
+    icon: "california",
     onClick: () => navigateCountyScope({county: activeCountyFips, view: "state"})
   });
 }
 
-function drawCampusMarkers(svg, projection, campuses) {
-  const campusLayer = svg.append("g").attr("class", "campus-markers");
+function drawCampusMarkers(root, projection, campuses) {
+  const campusLayer = root.append("g").attr("class", "campus-markers");
 
   for (const campus of campuses) {
     const campusPoint = projection([campus.longitude, campus.latitude]);
@@ -1004,17 +1059,13 @@ function drawCampusMarkers(svg, projection, campuses) {
       .attr("transform", `translate(${campusPoint})`);
 
     campusGroup
-      .append("circle")
-      .attr("r", 22)
-      .attr("fill", "var(--campus)")
-      .attr("opacity", 0.12);
-
-    campusGroup
       .append("path")
-      .attr("d", "M0,-11 L10,8 L-10,8 Z")
+      .attr("class", "campus-icon")
+      .attr("d", "M-9,-2 L0,-8 L9,-2 Z M-7,-1 H7 V7 H-7 Z M-3,7 V1 H3 V7")
       .attr("fill", "var(--campus)")
       .attr("stroke", "#ffffff")
-      .attr("stroke-width", 1.8)
+      .attr("stroke-width", 1.35)
+      .attr("stroke-linejoin", "round")
       .append("title")
       .text(
         `${campus.name}\n${campus.housing_status}${
@@ -1025,10 +1076,91 @@ function drawCampusMarkers(svg, projection, campuses) {
     campusGroup
       .append("text")
       .attr("class", "campus-label")
-      .attr("x", 15)
-      .attr("y", -16)
+      .attr("x", 12)
+      .attr("y", -11)
       .text(campus.short_label);
   }
+}
+
+function installCountyMapZoom(svg, contentGroup, selectedAnchor, width, height) {
+  const focus = selectedAnchor ?? {x: width / 2, y: height / 2};
+  const zoomLevels = [1, 1.45, 1.9, 2.35];
+  const zoomControlsX = 384;
+  let zoomIndex = 0;
+  let currentTransform = d3.zoomIdentity;
+
+  function clampTransform(transform) {
+    const k = transform.k;
+    const extraX = width * 0.12;
+    const extraY = height * 0.12;
+    const minX = width - width * k - extraX;
+    const maxX = extraX;
+    const minY = height - height * k - extraY;
+    const maxY = extraY;
+    return d3.zoomIdentity
+      .translate(Math.max(minX, Math.min(maxX, transform.x)), Math.max(minY, Math.min(maxY, transform.y)))
+      .scale(k);
+  }
+
+  const zoom = d3
+    .zoom()
+    .scaleExtent([1, zoomLevels.at(-1)])
+    .filter((event) => {
+      const target = event.target;
+      const isZoomControl = target?.closest && target.closest(".map-zoom-control");
+      const isPanStart = event.type === "mousedown" || event.type === "touchstart";
+      return event.type !== "wheel" && !isZoomControl && (!isPanStart || currentTransform.k > 1);
+    })
+    .on("zoom", (event) => {
+      currentTransform = clampTransform(event.transform);
+      contentGroup.attr("transform", currentTransform);
+    });
+
+  svg
+    .classed("is-zoomable", true)
+    .call(zoom)
+    .on("dblclick.zoom", null)
+    .on("wheel.map-pan", (event) => {
+      if (currentTransform.k <= 1 || event.target?.closest?.(".map-zoom-control")) return;
+      event.preventDefault();
+      const dx = event.deltaX || (event.shiftKey ? event.deltaY : 0);
+      const dy = event.shiftKey ? 0 : event.deltaY;
+      const next = clampTransform(
+        d3.zoomIdentity
+          .translate(currentTransform.x - dx, currentTransform.y - dy)
+          .scale(currentTransform.k)
+      );
+      svg.call(zoom.transform, next);
+    });
+
+  function zoomToIndex(nextIndex) {
+    zoomIndex = Math.max(0, Math.min(zoomLevels.length - 1, nextIndex));
+    const scale = zoomLevels[zoomIndex];
+    const next = clampTransform(
+      scale === 1
+        ? d3.zoomIdentity
+        : d3.zoomIdentity.translate(width / 2 - focus.x * scale, height / 2 - focus.y * scale).scale(scale)
+    );
+    svg.transition().duration(320).ease(d3.easeCubicOut).call(zoom.transform, next);
+  }
+
+  drawZoomButton(svg, {
+    x: zoomControlsX,
+    y: height - 186,
+    label: "Zoom in",
+    ariaLabel: "Zoom in on ZIP areas",
+    icon: "plus",
+    onClick: () => zoomToIndex(zoomIndex + 1)
+  });
+
+  drawZoomButton(svg, {
+    x: zoomControlsX,
+    y: height - 132,
+    label: "Zoom out",
+    ariaLabel: "Zoom out from ZIP areas",
+    icon: "minus",
+    onClick: () => zoomToIndex(zoomIndex - 1)
+  });
 }
 
 function renderCountyMap({
@@ -1070,10 +1202,9 @@ function renderCountyMap({
     .attr("height", height)
     .attr("fill", "var(--map-water)");
 
-  drawZoomOutButton(svg, activeCountyFips, height);
-
   const projection = d3.geoMercator().fitExtent([[28, 38], [width - 280, height - 124]], displayBase);
   const path = d3.geoPath(projection);
+  const contentGroup = svg.append("g").attr("class", "county-map-content");
   const color = createColorScale(allMetrics, metric);
   const anchors = rows
     .map((d) => {
@@ -1086,14 +1217,14 @@ function renderCountyMap({
   const mapLabels = layoutMapLabels(anchors, selected, highlightedPlaces, metric);
   const labeledPlaces = new Set(mapLabels.map((label) => label.place));
 
-  svg
+  contentGroup
     .append("path")
     .datum({type: "FeatureCollection", features: displayBase.features})
     .attr("d", path)
     .attr("fill", "#eef4f3")
     .attr("stroke", "none");
 
-  svg
+  contentGroup
     .append("path")
     .datum({type: "FeatureCollection", features: displayBase.features})
     .attr("d", path)
@@ -1102,7 +1233,7 @@ function renderCountyMap({
     .attr("stroke-width", 1.1)
     .attr("stroke-opacity", 0.8);
 
-  svg
+  contentGroup
     .append("g")
     .attr("class", "zcta-boundaries")
     .selectAll("path")
@@ -1165,7 +1296,7 @@ function renderCountyMap({
       return `${row.place}\n${metricLabel(metric)}: ${selectedMetricText}\nHome value index: ${money(row.zhvi)}\n${medianComparison(row, medianValue)}\nChange since ${dateLabel(baselineDate)}: ${percent(row.change)}${rent}${zori}${hud}\n${row.note}`;
     });
 
-  svg
+  contentGroup
     .append("g")
     .attr("class", "selected-boundary")
     .selectAll("path")
@@ -1180,11 +1311,11 @@ function renderCountyMap({
     .attr("stroke-opacity", 0.94)
     .attr("pointer-events", "none");
 
-  const anchorGroup = svg.append("g").attr("class", "place-anchors");
+  const anchorGroup = contentGroup.append("g").attr("class", "place-anchors");
   const selectedAnchor = anchors.find((d) => d.place === selected.place);
 
   if (selectedAnchor) {
-    const ripple = svg.append("g").attr("class", "selected-ripple");
+    const ripple = contentGroup.append("g").attr("class", "selected-ripple");
 
     ripple
       .append("circle")
@@ -1240,11 +1371,13 @@ function renderCountyMap({
     .attr("text-anchor", (d) => d.labelAnchor)
     .text((d) => d.label);
 
-  if (campuses.length) drawCampusMarkers(svg, projection, campuses);
+  if (campuses.length) drawCampusMarkers(contentGroup, projection, campuses);
 
   drawLegend(svg, color, values, metric, width, height, campuses);
   drawMapNote(svg, metric, height, county?.shortName ?? "this county");
   drawSelectionBadge(svg, selected, medianValue, width);
+  installCountyMapZoom(svg, contentGroup, selectedAnchor, width, height);
+  drawZoomOutButton(svg, activeCountyFips, height);
 
   return svg.node();
 }
@@ -1338,11 +1471,13 @@ function drawLegend(svg, color, values, metric, width, height, campuses = []) {
   const key = svg.append("g").attr("class", "symbol-key").attr("transform", `translate(${width - 230}, ${height - 72})`);
 
   key.append("path")
-    .attr("d", "M0,-9 L8,7 L-8,7 Z")
+    .attr("class", "campus-icon")
+    .attr("d", "M-7,-2 L0,-7 L7,-2 Z M-5,-1 H5 V6 H-5 Z M-2,6 V1 H2 V6")
     .attr("transform", "translate(8, 12)")
     .attr("fill", "var(--campus)")
     .attr("stroke", "#ffffff")
-    .attr("stroke-width", 1.8);
+    .attr("stroke-width", 1.25)
+    .attr("stroke-linejoin", "round");
 
   key.append("text")
     .attr("x", 24)
