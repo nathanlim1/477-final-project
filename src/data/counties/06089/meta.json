@@ -1,0 +1,27 @@
+{
+  "fips": "06089",
+  "name": "Shasta County",
+  "defaultPlace": "96001 Redding",
+  "places": [
+    "96001 Redding",
+    "96002 Redding",
+    "96003 Redding",
+    "96007 Anderson",
+    "96008 Bella Vista",
+    "96013 Burney",
+    "96016 Hat Creek",
+    "96019 Shasta Lake",
+    "96028 Fall River Mills",
+    "96047 Igo",
+    "96051 Lakehead",
+    "96062 Millville",
+    "96065 Montgomery Creek",
+    "96069 Oak Run",
+    "96071 Old Station",
+    "96073 Palo Cedro",
+    "96084 nan",
+    "96087 Shasta",
+    "96088 Shingletown",
+    "96096 nan"
+  ]
+}

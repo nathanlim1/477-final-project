@@ -1,0 +1,13 @@
+{
+  "fips": "06043",
+  "name": "Mariposa County",
+  "defaultPlace": "93623 Fish Camp",
+  "places": [
+    "93623 Fish Camp",
+    "95306 Catheys Valley",
+    "95311 Coulterville",
+    "95338 Mariposa",
+    "95345 Midpines",
+    "95389 Yosemite National Park"
+  ]
+}

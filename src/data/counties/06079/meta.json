@@ -1,0 +1,26 @@
+{
+  "fips": "06079",
+  "name": "San Luis Obispo County",
+  "defaultPlace": "93401 San Luis Obispo",
+  "places": [
+    "93401 San Luis Obispo",
+    "93402 Los Osos",
+    "93405 San Luis Obispo",
+    "93420 Arroyo Grande",
+    "93422 Atascadero",
+    "93424 Avila Beach",
+    "93428 Cambria",
+    "93430 Cayucos",
+    "93432 Creston",
+    "93433 Grover Beach",
+    "93442 Morro Bay",
+    "93444 Nipomo",
+    "93445 Oceano",
+    "93446 Paso Robles",
+    "93449 Pismo Beach",
+    "93452 San Simeon",
+    "93453 Creston",
+    "93461 Shandon",
+    "93465 Templeton"
+  ]
+}

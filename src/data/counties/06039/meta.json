@@ -1,0 +1,19 @@
+{
+  "fips": "06039",
+  "name": "Madera County",
+  "defaultPlace": "93601 Ahwahnee",
+  "places": [
+    "93601 Ahwahnee",
+    "93604 Bass Lake",
+    "93610 Chowchilla",
+    "93614 Coarsegold",
+    "93626 Friant",
+    "93636 Madera",
+    "93637 Madera",
+    "93638 Madera",
+    "93643 North Fork",
+    "93644 Oakhurst",
+    "93653 Raymond",
+    "93669 Bass Lake"
+  ]
+}

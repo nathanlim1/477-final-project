@@ -1,0 +1,28 @@
+{
+  "fips": "06083",
+  "name": "Santa Barbara County",
+  "defaultPlace": "93013 Carpinteria",
+  "places": [
+    "93013 Carpinteria",
+    "93067 Summerland",
+    "93101 Santa Barbara",
+    "93103 Santa Barbara",
+    "93105 Santa Barbara",
+    "93108 Montecito",
+    "93109 Santa Barbara",
+    "93110 Santa Barbara",
+    "93111 Santa Barbara",
+    "93117 Goleta",
+    "93254 New Cuyama",
+    "93427 Buellton",
+    "93434 Guadalupe",
+    "93436 Lompoc",
+    "93440 Los Alamos",
+    "93441 Los Olivos",
+    "93454 Santa Maria",
+    "93455 Santa Maria",
+    "93458 Santa Maria",
+    "93460 Santa Ynez",
+    "93463 Solvang"
+  ]
+}

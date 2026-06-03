@@ -1,0 +1,30 @@
+county_fips,name,short_label,latitude,longitude,housing_status,housed_share,note
+06001,University of California Berkeley,UC Berkeley,37.8719,-122.2585,On-campus housing present,0.35,Large public university in Berkeley; on-campus housing share is illustrative for context.
+06007,California State University Chico,CSU Chico,39.7286,-121.8467,On-campus housing present,0.28,CSU Chico anchors the Butte County college-town market around Chico.
+06013,Saint Mary's College of California,St. Mary's,37.8420,-122.1168,On-campus housing present,0.42,Private college in Moraga within Contra Costa County.
+06019,California State University Fresno,Fresno State,36.8133,-119.7480,On-campus housing present,0.22,Major CSU campus in Fresno.
+06023,California State Polytechnic University Humboldt,Cal Poly Humboldt,40.8756,-124.0797,On-campus housing present,0.30,Humboldt County's primary university campus in Arcata.
+06029,California State University Bakersfield,CSU Bakersfield,35.3496,-119.1041,On-campus housing present,0.18,CSU campus serving the southern San Joaquin Valley.
+06037,University of California Los Angeles,UCLA,34.0689,-118.4452,On-campus housing present,0.30,Major UCLA campus in West Los Angeles.
+06037,University of Southern California,USC,34.0220,-118.2851,On-campus housing present,0.32,USC campus south of downtown Los Angeles.
+06037,Loyola Marymount University,LMU,33.9692,-118.4173,On-campus housing present,0.45,LMU campus in Westchester within Los Angeles County.
+06047,University of California Merced,UC Merced,37.3660,-120.4240,On-campus housing present,0.40,UC Merced anchors Merced County's college-town housing market.
+06053,California State University Monterey Bay,CSU Monterey Bay,36.6534,-121.7960,On-campus housing present,0.25,CSUMB campus at the former Fort Ord site.
+06059,University of California Irvine,UC Irvine,33.6405,-117.8443,On-campus housing present,0.33,UC Irvine in central Orange County.
+06065,University of California Riverside,UCR,33.9737,-117.3281,On-campus housing present,0.31,UCR campus in Riverside.
+06067,California State University Sacramento,Sac State,38.5594,-121.4247,On-campus housing present,0.12,State capital region university with limited on-campus beds relative to enrollment.
+06071,California State University San Bernardino,CSUSB,34.1828,-117.3238,On-campus housing present,0.15,CSUSB serves the Inland Empire from San Bernardino.
+06073,University of California San Diego,UC San Diego,32.8801,-117.2340,On-campus housing present,0.28,La Jolla campus anchoring San Diego County's research university market.
+06073,San Diego State University,SDSU,32.7757,-117.0719,On-campus housing present,0.20,Major CSU campus near central San Diego.
+06075,San Francisco State University,SF State,37.7219,-122.4782,On-campus housing present,0.14,SF State in San Francisco with high off-campus housing demand.
+06077,University of the Pacific,UOP,37.9806,-121.3116,On-campus housing present,0.38,Private university in Stockton.
+06079,California Polytechnic State University San Luis Obispo,Cal Poly,35.3050,-120.6625,On-campus housing present,0.38,California State Auditor report 2024-111 reports Cal Poly housed about 38 percent of enrolled students.
+06083,University of California Santa Barbara,UCSB,34.4140,-119.8489,On-campus housing present,0.30,UCSB in Isla Vista shapes Santa Barbara County rents.
+06085,Stanford University,Stanford,37.4275,-122.1697,On-campus housing present,0.52,Stanford anchors high-cost housing pressure in Santa Clara County.
+06085,San Jose State University,SJSU,37.3352,-121.8811,On-campus housing present,0.10,Downtown San Jose CSU campus with substantial commuter enrollment.
+06087,University of California Santa Cruz,UC Santa Cruz,36.9914,-122.0609,On-campus housing present,0.29,UCSC campus in the Santa Cruz Mountains foothills.
+06095,California State University Maritime Academy,Cal Maritime,38.0699,-122.2297,On-campus housing present,0.55,Cal Maritime in Vallejo with substantial on-campus residential capacity.
+06097,Sonoma State University,Sonoma State,38.3397,-122.6769,On-campus housing present,0.25,Sonoma County's public university in Rohnert Park.
+06099,California State University Stanislaus,Stan State,37.5255,-120.9943,On-campus housing present,0.12,Turlock campus serving the northern San Joaquin Valley.
+06111,California State University Channel Islands,CSUCI,34.1639,-119.0436,On-campus housing present,0.22,CSUCI in Camarillo within Ventura County.
+06113,University of California Davis,UC Davis,38.5382,-121.7618,On-campus housing present,0.28,UC Davis is a major driver of Yolo County college-town housing demand.

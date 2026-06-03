@@ -1,0 +1,11 @@
+{
+  "fips": "06049",
+  "name": "Modoc County",
+  "defaultPlace": "96054 Lookout",
+  "places": [
+    "96054 Lookout",
+    "96101 Alturas",
+    "96104 Cedarville",
+    "96134 nan"
+  ]
+}

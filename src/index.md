@@ -1,6 +1,6 @@
 # How does the presence of a college affect housing prices in a college town?
 
-<p class="lede">Examining San Luis Obispo, we can see that Cal Poly's growth has led to the college town's disproportionate housing prices, especially when looking at rent prices.</p>
+<p class="lede">Explore California's large-college counties: zoom out to compare the statewide campus-county pattern, then click into a county for the same ZIP-level housing map used in San Luis Obispo, with major university anchors such as Cal Poly, UCLA, USC, UC Berkeley, and UC Davis.</p>
 
 ```js
 import * as aq from "npm:arquero";
@@ -28,12 +28,87 @@ function dateLabel(date) {
 
 function displayPlaceName(value) {
   const place = typeof value === "string" ? value : value?.city ?? value?.place ?? "";
-  return place.replace(/^\d{5}\s+/, "").replace(/^ZIP\s+/, "");
+  const match = place.match(/^(\d{5})\s+(.+)$/);
+  if (match) return `${match[2]} ${match[1]}`;
+  return place.replace(/^ZIP\s+/, "");
 }
 
 function mapPlaceLabel(value) {
-  const label = displayPlaceName(value).trim();
+  const place = typeof value === "string" ? value : value?.city ?? value?.place ?? "";
+  const label = place.replace(/^\d{5}\s+/, "").replace(/^ZIP\s+/, "").trim();
   return /^\d{5}$/.test(label) ? "" : label;
+}
+
+function localMetricValue(row, metric) {
+  return metric === "zori" ? row.blendedRent : row.zhvi;
+}
+
+function significantMetricCutoff(rows, metric) {
+  const values = rows.map((row) => localMetricValue(row, metric)).filter((value) => value != null);
+  const mean = d3.mean(values);
+  const deviation = d3.deviation(values);
+  return mean == null || deviation == null ? Infinity : mean + deviation * 2;
+}
+
+function highAboveMeanPlaces(rows, metric) {
+  const cutoff = significantMetricCutoff(rows, metric);
+  return new Set(rows.filter((row) => localMetricValue(row, metric) >= cutoff).map((row) => row.place));
+}
+
+function layoutMapLabels(anchors, selected, highlightedPlaces, metric) {
+  const selectedPlace = selected?.place;
+  const chosen = [];
+  const usedLabels = new Set();
+  const boxes = [];
+  const offsets = [
+    [12, -10],
+    [12, 16],
+    [-12, -10],
+    [-12, 16],
+    [0, -20],
+    [0, 24],
+    [18, 0],
+    [-18, 0]
+  ];
+  const overlaps = (box) =>
+    boxes.some((existing) =>
+      box.x0 < existing.x1 && box.x1 > existing.x0 && box.y0 < existing.y1 && box.y1 > existing.y0
+    );
+  const add = (anchor, force = false) => {
+    const label = mapPlaceLabel(anchor);
+    if (!label || (usedLabels.has(label) && anchor.place !== selectedPlace)) return;
+    let placed = null;
+    for (const [dx, dy] of offsets) {
+      const anchorEnd = dx < 0;
+      const width = Math.max(28, label.length * 5.8);
+      const x = anchor.x + dx;
+      const y = anchor.y + dy;
+      const box = anchorEnd
+        ? {x0: x - width, x1: x, y0: y - 11, y1: y + 3}
+        : {x0: x, x1: x + width, y0: y - 11, y1: y + 3};
+      if (force || !overlaps(box)) {
+        placed = {...anchor, label, labelX: x, labelY: y, labelAnchor: anchorEnd ? "end" : "start"};
+        boxes.push(box);
+        break;
+      }
+    }
+    if (!placed) return;
+    chosen.push(placed);
+    usedLabels.add(label);
+  };
+
+  const selectedAnchor = anchors.find((anchor) => anchor.place === selectedPlace);
+  if (selectedAnchor) add(selectedAnchor, true);
+
+  const highlighted = anchors
+    .filter((anchor) => highlightedPlaces.has(anchor.place) && anchor.place !== selectedPlace)
+    .sort((a, b) => d3.descending(localMetricValue(a, metric), localMetricValue(b, metric)));
+
+  for (const anchor of highlighted) {
+    add(anchor);
+  }
+
+  return chosen;
 }
 
 function rangeControl([min, max], {label, step = 1, value = min, format = (d) => d}) {
@@ -92,7 +167,8 @@ function selectControl(options, {label, value, format = (d) => d}) {
   Object.defineProperty(control, "value", {
     get: () => select.value,
     set: (nextValue) => {
-      select.value = nextValue;
+      if (select.value !== nextValue) select.value = nextValue;
+      notify();
     }
   });
 
@@ -104,28 +180,187 @@ function selectControl(options, {label, value, format = (d) => d}) {
 ```
 
 ```js
-const base = await FileAttachment("data/slo-bg.geojson").json();
-const zctaBoundaries = await FileAttachment("data/slo-zctas.geojson").json();
-const housingRows = await FileAttachment("data/slo-zip-housing.csv").csv({typed: true});
-const campusRows = await FileAttachment("data/campus-housing.csv").csv({typed: true});
+const caCounties = await FileAttachment("data/ca-counties.geojson").json();
+const countyIndex = await FileAttachment("data/ca-county-index.json").json();
+const countyHousingRows = await FileAttachment("data/ca-county-housing.csv").csv({typed: true});
+const allCampuses = (await FileAttachment("data/ca-campuses.csv").csv({typed: true})).map((row) => ({
+  ...row,
+  county_fips: String(row.county_fips).padStart(5, "0"),
+  housed_share: row.housed_share == null || row.housed_share === "" ? null : Number(row.housed_share)
+}));
+const countyByFips = new Map(countyIndex.counties.map((county) => [county.fips, county]));
+const indexedCountyFips = new Set(countyIndex.counties.map((county) => county.fips));
+
+function normalizeCountyFips(fips) {
+  return String(fips ?? "").padStart(5, "0");
+}
+
+function readSearchParams() {
+  const defaultCounty = countyIndex.defaultFips ?? "06079";
+  if (typeof window === "undefined") {
+    return {view: "county", county: defaultCounty};
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const county = normalizeCountyFips(params.get("county") ?? defaultCounty);
+  return {
+    view: params.get("view") === "state" ? "state" : "county",
+    county: indexedCountyFips.has(county) ? county : defaultCounty
+  };
+}
+
+function navigateCountyScope({county, view}) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("county", normalizeCountyFips(county));
+  if (view === "state") url.searchParams.set("view", "state");
+  else url.searchParams.delete("view");
+  window.location.assign(`${url.pathname}${url.search}`);
+}
+
+function openCounty(fips) {
+  if (indexedCountyFips.has(fips)) navigateCountyScope({county: fips, view: "county"});
+}
+
+const mapScope = readSearchParams();
+
+function optionalNumber(value) {
+  if (value == null || value === "") return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function normalizeHousingRows(rows) {
+  return rows.map((row) => {
+    const zori = optionalNumber(row.zori);
+    const hudSafmr = optionalNumber(row.hudSafmr);
+    const blendedRent = optionalNumber(row.blendedRent) ?? zori ?? hudSafmr;
+    return {
+      ...row,
+      zhvi: optionalNumber(row.zhvi),
+      zori,
+      hudSafmr,
+      blendedRent,
+      hudFiscalYear: row.hudFiscalYear === "" ? null : row.hudFiscalYear,
+      rentSource: row.rentSource || (zori != null ? "Zillow ZORI" : hudSafmr != null ? "HUD SAFMR" : "")
+    };
+  });
+}
+
+async function loadCountyBundleFromFetch(fips) {
+  const basePath = `/_file/data/counties/${fips}`;
+  const responses = await Promise.all([
+    fetch(`${basePath}/bg.geojson`),
+    fetch(`${basePath}/zctas.geojson`),
+    fetch(`${basePath}/zip-housing.csv`),
+    fetch(`${basePath}/meta.json`)
+  ]);
+
+  if (responses.some((response) => !response.ok)) {
+    throw new Error(`County bundle for ${fips} is not available yet. Run npm run data:counties.`);
+  }
+
+  const [base, zctaBoundaries, housingCsv, meta] = await Promise.all(responses.map((response) => response.text()));
+  return {
+    base: JSON.parse(base),
+    zctaBoundaries: JSON.parse(zctaBoundaries),
+    housingRows: normalizeHousingRows(d3.csvParse(housingCsv)),
+    meta: JSON.parse(meta),
+    campuses: allCampuses.filter((campus) => campus.county_fips === fips)
+  };
+}
+
+const countySelect = selectControl(
+  countyIndex.counties.map((county) => county.fips),
+  {
+    label: "County",
+    value: mapScope.county,
+    format: (fips) => countyByFips.get(fips)?.shortName ?? fips
+  }
+);
+
+countySelect.addEventListener("change", () => {
+  navigateCountyScope({county: countySelect.value, view: "county"});
+});
 ```
 
 ```js
-const housingTable = aq
-  .from(housingRows)
-  .derive({
-    valueRentRatio: (d) => d.blendedRent ? d.zhvi / (d.blendedRent * 12) : null
-  })
-  .orderby("place", "date");
+view(countySelect)
+```
+
+```js
+const activeCountyFips = mapScope.county;
+const activeCounty = countyByFips.get(activeCountyFips);
+
+const sloBundle = {
+  base: await FileAttachment("data/slo-bg.geojson").json(),
+  zctaBoundaries: await FileAttachment("data/slo-zctas.geojson").json(),
+  housingRows: normalizeHousingRows(await FileAttachment("data/slo-zip-housing.csv").csv({typed: true})),
+  meta: {
+    fips: "06079",
+    name: "San Luis Obispo County",
+    defaultPlace: "93401 San Luis Obispo"
+  },
+  campuses: allCampuses.filter((campus) => campus.county_fips === "06079")
+};
+
+let countyBundle = sloBundle;
+
+if (activeCountyFips !== "06079") {
+  try {
+    countyBundle = await loadCountyBundleFromFetch(activeCountyFips);
+  } catch (error) {
+    console.error(`Failed to load county bundle for ${activeCountyFips}`, error);
+    countyBundle = null;
+  }
+}
+
+const base = countyBundle?.base ?? null;
+const zctaBoundaries = countyBundle?.zctaBoundaries ?? null;
+const housingRows = countyBundle?.housingRows ?? [];
+const campuses = countyBundle?.campuses ?? [];
+```
+
+```js
+const housingTable = housingRows.length
+  ? aq
+      .from(housingRows)
+      .derive({
+        valueRentRatio: (d) => d.blendedRent ? d.zhvi / (d.blendedRent * 12) : null
+      })
+      .orderby("place", "date")
+  : aq
+      .from([
+        {
+          place: "",
+          date: "2016-04-30",
+          zhvi: 0,
+          blendedRent: null,
+          zori: null,
+          hudSafmr: null,
+          rentSource: "",
+          hudFiscalYear: null
+        }
+      ])
+      .filter(() => false);
 
 const housing = housingTable.objects().map((d) => ({
   ...d,
   date: d.date instanceof Date ? d.date.toISOString().slice(0, 10) : d.date
 }));
-const campus = campusRows[0];
-const dates = Array.from(new Set(housing.map((d) => d.date))).sort();
+const dates = housing.length
+  ? Array.from(new Set(housing.map((d) => d.date))).sort()
+  : ["2016-04-30"];
 const baselineDate = dates[0];
 const latestDate = dates.at(-1);
+const countyHousingByFips = d3.group(countyHousingRows, (d) => String(d.fips).padStart(5, "0"));
+
+function countyMetricValue(county, metric, date = latestDate) {
+  if (metric === "zori") return county.latestRent ?? null;
+  const series = countyHousingByFips.get(county.fips) ?? [];
+  const row = series.find((entry) => entry.date === date) ?? series.at(-1);
+  return row?.zhvi ?? county.latestZhvi ?? null;
+}
+
 const baselineByPlace = new Map(
   housing.filter((d) => d.date === baselineDate).map((d) => [d.place, d])
 );
@@ -159,21 +394,31 @@ const dateIndex = view(rangeControl([0, dates.length - 1], {
   format: (i) => dateLabel(dates[i])
 }));
 
-const mapMetric = view(radioControl(["zhvi", "zori"], {
-  label: "Map layer",
-  value: "zori",
-  format: (value) => metricOptions.get(value)
-}));
+const mapMetric = mapScope.view === "county"
+  ? view(radioControl(["zhvi", "zori"], {
+      label: "Map layer",
+      value: "zori",
+      format: (value) => metricOptions.get(value)
+    }))
+  : "zhvi";
 
 const selectedPlaceInput = selectControl(
-  Array.from(new Set(housing.map((d) => d.place))).sort(d3.ascending),
+  countyBundle?.meta?.places?.length
+    ? countyBundle.meta.places
+    : Array.from(new Set(housing.map((d) => d.place))).sort(d3.ascending),
   {
     label: "Compare ZIP market",
-    value: "93401 San Luis Obispo",
+    value: countyBundle?.meta?.defaultPlace ?? "93401 San Luis Obispo",
     format: displayPlaceName
   }
 );
-const selectedPlace = view(selectedPlaceInput);
+const selectedPlace = mapScope.view === "county"
+  ? view(selectedPlaceInput)
+  : (countyBundle?.meta?.defaultPlace ?? selectedPlaceInput.value);
+
+if (mapScope.view === "county" && countyBundle?.meta?.defaultPlace) {
+  selectedPlaceInput.value = countyBundle.meta.defaultPlace;
+}
 ```
 
 ```js
@@ -186,7 +431,9 @@ const selectedRows = housing
 <div class="summary-grid">
 
 ```js
-renderSummary(selectedRows, selectedDate, selectedPlace)
+mapScope.view === "county" && countyBundle
+  ? renderSummary(selectedRows, selectedDate, selectedPlace, activeCounty, countyBundle.meta?.defaultPlace)
+  : renderStateSummary(countyIndex, mapMetric, mapScope, selectedDate)
 ```
 
 </div>
@@ -194,7 +441,20 @@ renderSummary(selectedRows, selectedDate, selectedPlace)
 <div class="map-frame">
 
 ```js
-renderMap(selectedRows, mapMetric, selectedPlace, selectedPlaceInput)
+renderMapFrame({
+  mapScope,
+  activeCountyFips,
+  countySelect,
+  selectedRows,
+  mapMetric,
+  selectedPlace,
+  selectedPlaceInput,
+  caCounties,
+  countyIndex,
+  allCampuses,
+  activeCounty,
+  countyBundle
+})
 ```
 
 </div>
@@ -202,11 +462,11 @@ renderMap(selectedRows, mapMetric, selectedPlace, selectedPlaceInput)
 <div class="details-grid">
 
 ```js
-renderTrend(selectedDate, selectedPlace)
+mapScope.view === "county" && countyBundle && selectedRows.length ? renderTrend(selectedDate, selectedPlace) : html`<section class="detail-panel"><h2>County timeline</h2><p>Select a county from the map to compare ZIP-level home values over time.</p></section>`
 ```
 
 ```js
-renderComparisonTable(selectedRows, selectedPlace)
+mapScope.view === "county" && countyBundle && selectedRows.length ? renderComparisonTable(selectedRows, selectedPlace) : html`<section class="detail-panel"><h2>Community comparison</h2><p>Select a county from the map to compare ZIP markets within that county.</p></section>`
 ```
 
 </div>
@@ -214,7 +474,7 @@ renderComparisonTable(selectedRows, selectedPlace)
 <section class="dataset-integrity">
   <h2>Dataset & Data Integrity</h2>
 
-This project combines housing, geography, and campus-housing context for San Luis Obispo County. Housing prices come from [Zillow Research's public housing data](https://www.zillow.com/research/data/), specifically ZIP-level Zillow Home Value Index (ZHVI) and Zillow Observed Rent Index (ZORI) CSV files through April 2026. Zillow defines ZHVI as a typical home-value measure and ZORI as a smoothed observed market rent measure, which makes the two series appropriate for comparing home values, rents, and price-to-rent relationships across local ZIP markets.
+This project combines housing, geography, and campus-housing context across California counties with large college anchors, with a detailed ZIP/ZCTA view available in each in-scope county that has local market data. Housing prices come from [Zillow Research's public housing data](https://www.zillow.com/research/data/), specifically ZIP-level Zillow Home Value Index (ZHVI) and Zillow Observed Rent Index (ZORI) CSV files through April 2026. Zillow defines ZHVI as a typical home-value measure and ZORI as a smoothed observed market rent measure, which makes the two series appropriate for comparing home values, rents, and price-to-rent relationships across local ZIP markets.
 
 The map geometry comes from the U.S. Census Bureau's [2020 TIGER/Line files](https://www.census.gov/geographies/mapping-files/2020/geo/tiger-line-file.html) and TIGERweb geography services. The ZIP areas are Census ZIP Code Tabulation Areas (ZCTAs), which are generalized Census representations of ZIP Code service areas rather than exact USPS delivery boundaries. For integrity, the visualization keeps ZIP markets with missing rent data neutral instead of inventing values, compares each selected ZIP to the median of the available local markets for the same month, and labels the map as ZCTA-based so the geographic limitation is visible.
 
@@ -226,6 +486,7 @@ Campus context comes from the California State Auditor's [Report 2024-111 on Cal
 
 ```js
 function metricValue(row, metric) {
+  if (!row) return null;
   return metric === "zori" ? row.blendedRent : row.zhvi;
 }
 
@@ -267,18 +528,312 @@ function rewindFeatureCollection(collection) {
   };
 }
 
-function createColorScale(rows, metric) {
+function createColorScale(metrics, metric) {
+  const fallback = () => "#dce9e7";
   if (metric === "zori") {
-    const extent = d3.extent(allMetrics, (d) => d.blendedRent);
+    const extent = d3.extent(metrics, (d) => d.blendedRent);
+    if (extent.some((value) => value == null)) return fallback;
     return d3.scaleSequential(extent, d3.interpolateYlOrRd);
   }
 
-  const extent = d3.extent(allMetrics, (d) => d.zhvi);
+  const extent = d3.extent(metrics, (d) => d.zhvi);
+  if (extent.some((value) => value == null)) return fallback;
   return d3.scaleSequential(extent, d3.interpolateYlGnBu);
 }
 
-function renderSummary(rows, date, selectedPlace) {
-  const selected = rows.find((d) => d.place === selectedPlace) ?? rows.find((d) => d.place === "93401 San Luis Obispo");
+function renderMapFrame({
+  mapScope,
+  activeCountyFips,
+  countySelect,
+  selectedRows,
+  mapMetric,
+  selectedPlace,
+  selectedPlaceInput,
+  caCounties,
+  countyIndex,
+  allCampuses,
+  activeCounty,
+  countyBundle
+}) {
+  if (mapScope.view === "state") {
+    return renderStateMap({
+      activeCountyFips,
+      countySelect,
+      mapMetric,
+      selectedDate,
+      caCounties,
+      countyIndex,
+      allCampuses
+    });
+  }
+
+  if (!countyBundle) {
+    return html`<div class="map-empty">Loading county housing data…</div>`;
+  }
+
+  if (!selectedRows.length) {
+    return html`<div class="map-empty">No ZIP housing rows are available for this county and month.</div>`;
+  }
+
+  return renderCountyMap({
+    rows: selectedRows,
+    metric: mapMetric,
+    selectedPlace,
+    selectedPlaceInput,
+    activeCountyFips,
+    county: activeCounty,
+    campuses: countyBundle.campuses,
+    allMetrics,
+    defaultPlace: countyBundle.meta?.defaultPlace,
+    base: countyBundle.base,
+    zctaBoundaries: countyBundle.zctaBoundaries
+  });
+}
+
+function renderStateMap({activeCountyFips, countySelect, mapMetric, selectedDate, caCounties, countyIndex, allCampuses}) {
+  const width = 980;
+  const height = 700;
+  const counties = rewindFeatureCollection(caCounties);
+  const indexByFips = new Map(countyIndex.counties.map((county) => [county.fips, county]));
+  const activeCounties = {
+    ...counties,
+    features: counties.features.filter((feature) => indexByFips.has(feature.properties.GEOID))
+  };
+  const svg = d3
+    .create("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("role", "img")
+    .attr("aria-label", "California county map. Click a county to open its ZIP-level housing map.")
+    .style("display", "block")
+    .style("width", "100%")
+    .style("height", "auto");
+
+  svg
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "var(--map-water)");
+
+  const projection = d3.geoMercator().fitExtent([[48, 100], [width - 48, height - 106]], counties);
+  const path = d3.geoPath(projection);
+  const metricRows = countyIndex.counties
+    .map((county) => ({...county, value: countyMetricValue(county, mapMetric, selectedDate)}))
+    .filter((county) => county.value != null);
+  const color = d3.scaleSequential(
+    d3.extent(metricRows, (d) => d.value),
+    mapMetric === "zori" ? d3.interpolateYlOrRd : d3.interpolateYlGnBu
+  );
+
+  svg
+    .append("g")
+    .attr("class", "state-county-outlines")
+    .selectAll("path")
+    .data(counties.features)
+    .join("path")
+    .attr("d", path)
+    .attr("fill", "#edf4f3")
+    .attr("stroke", "#c8d7d6")
+    .attr("stroke-width", 0.72)
+    .attr("stroke-linejoin", "round");
+
+  svg
+    .append("g")
+    .attr("class", "state-counties")
+    .selectAll("path")
+    .data(activeCounties.features)
+    .join("path")
+    .attr("class", (feature) => feature.properties.GEOID === activeCountyFips ? "state-county is-current" : "state-county")
+    .attr("d", path)
+    .attr("fill", (feature) => {
+      const county = indexByFips.get(feature.properties.GEOID);
+      const value = county ? countyMetricValue(county, mapMetric, selectedDate) : null;
+      return value == null ? "#8ca5a2" : color(value);
+    })
+    .attr("fill-opacity", 0.96)
+    .attr("stroke", (feature) => feature.properties.GEOID === activeCountyFips ? "#10201f" : "#ffffff")
+    .attr("stroke-width", (feature) => feature.properties.GEOID === activeCountyFips ? 1.7 : 0.85)
+    .attr("stroke-linejoin", "round")
+    .attr("cursor", "pointer")
+    .attr("tabindex", 0)
+    .attr("role", "button")
+    .on("mouseenter", function () {
+      d3.select(this).attr("fill-opacity", 1).attr("stroke", "#10201f").attr("stroke-width", 1.5);
+    })
+    .on("mouseleave", function (_event, feature) {
+      d3.select(this)
+        .attr("fill-opacity", 0.96)
+        .attr("stroke", feature.properties.GEOID === activeCountyFips ? "#10201f" : "#ffffff")
+        .attr("stroke-width", feature.properties.GEOID === activeCountyFips ? 1.7 : 0.85);
+    })
+    .on("click", function (_event, feature) {
+      d3.select(this).attr("fill-opacity", 1).attr("stroke", "var(--selected)").attr("stroke-width", 2);
+      openCounty(feature.properties.GEOID);
+    })
+    .on("keydown", (event, feature) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openCounty(feature.properties.GEOID);
+      }
+    })
+    .append("title")
+    .text((feature) => {
+      const county = indexByFips.get(feature.properties.GEOID);
+      if (!county) return feature.properties.NAME;
+      const value = countyMetricValue(county, mapMetric, selectedDate);
+      const valueText = value == null ? "Not reported" : metricFormat(mapMetric)(value);
+      const campusText = county.campusLabel ? `\nCampus anchors: ${county.campusLabel}` : "";
+      return `${county.name}\n${metricOptions.get(mapMetric)}: ${valueText}\nZIP markets: ${county.zipCount}${campusText}\nClick to open county map`;
+    });
+
+  const campusPoints = allCampuses
+    .map((campus) => {
+      const point = projection([campus.longitude, campus.latitude]);
+      return point ? {...campus, x: point[0], y: point[1]} : null;
+    })
+    .filter(Boolean);
+
+  const campusLayer = svg.append("g").attr("class", "state-campuses");
+  const campusMarker = campusLayer
+    .selectAll("g")
+    .data(campusPoints)
+    .join("g")
+    .attr("transform", (d) => `translate(${d.x},${d.y})`);
+
+  campusMarker
+    .append("path")
+    .attr("d", "M0,-7 L7,6 L-7,6 Z")
+    .attr("fill", "var(--campus)")
+    .attr("stroke", "#ffffff")
+    .attr("stroke-width", 1.2)
+    .append("title")
+    .text((d) => `${d.name}\n${d.note}`);
+
+  drawStateLegend(svg, color, metricRows.map((d) => d.value), mapMetric, width, height);
+  drawStateHeader(svg, width, height, activeCountyFips);
+  return svg.node();
+}
+
+function drawStateHeader(svg, width, height, activeCountyFips) {
+  svg
+    .append("text")
+    .attr("x", 32)
+    .attr("y", 34)
+    .attr("font-size", 18)
+    .attr("font-weight", 780)
+    .attr("fill", "#172026")
+    .text("California campus counties");
+
+  svg
+    .append("text")
+    .attr("x", 32)
+    .attr("y", 56)
+    .attr("font-size", 12)
+    .attr("font-weight", 650)
+    .attr("fill", "#4a5a61")
+    .text("Click a county to open its ZIP-level housing map. Triangle markers show major university anchors.");
+
+  drawZoomButton(svg, {
+    x: 32,
+    y: height - 78,
+    label: "Zoom in",
+    ariaLabel: "Zoom in to the selected county",
+    icon: "in",
+    onClick: () => navigateCountyScope({county: activeCountyFips, view: "county"})
+  });
+}
+
+function drawStateLegend(svg, color, values, metric, width, height) {
+  if (!values.length) return;
+  const legendWidth = 260;
+  const legendHeight = 10;
+  const legend = svg.append("g").attr("class", "legend").attr("transform", `translate(96, ${height - 68})`);
+  const scale = d3.scaleLinear().domain(d3.extent(values)).range([0, legendWidth]);
+  const axis = d3.axisBottom(scale).ticks(4).tickSize(4).tickFormat(metricFormat(metric));
+  const gradientId = `state-gradient-${metric}`;
+  const defs = svg.append("defs");
+  const gradient = defs
+    .append("linearGradient")
+    .attr("id", gradientId)
+    .attr("x1", "0%")
+    .attr("x2", "100%");
+
+  d3.range(0, 1.01, 0.1).forEach((t) => {
+    gradient
+      .append("stop")
+      .attr("offset", `${t * 100}%`)
+      .attr("stop-color", color(d3.quantile(values, t)));
+  });
+
+  legend
+    .append("text")
+    .attr("x", 0)
+    .attr("y", -12)
+    .attr("font-size", 12)
+    .attr("font-weight", 750)
+    .attr("fill", "#263238")
+    .text("Latest county home value index");
+
+  legend
+    .append("rect")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+    .attr("rx", 2)
+    .attr("fill", `url(#${gradientId})`);
+
+  legend
+    .append("g")
+    .attr("transform", `translate(0, ${legendHeight})`)
+    .call(axis)
+    .call((g) => g.select(".domain").remove())
+    .call((g) => g.selectAll("line").attr("stroke", "#6a7478"))
+    .call((g) => g.selectAll("text").attr("fill", "#394348").attr("font-size", 11));
+}
+
+function renderStateSummary(countyIndex, metric, mapScope, date) {
+  const ranked = [...countyIndex.counties]
+    .filter((county) => countyMetricValue(county, metric, date) != null)
+    .sort((a, b) => countyMetricValue(b, metric, date) - countyMetricValue(a, metric, date));
+  const selected = countyByFips.get(mapScope.county) ?? ranked[0];
+  const top = ranked[0];
+
+  return html`
+    <div class="stat">
+      <span>View</span>
+      <strong>Campus counties</strong>
+      <em>Click a county to open its ZIP map</em>
+    </div>
+    <div class="stat">
+      <span>Highest county home value</span>
+      <strong>${top?.shortName ?? "—"}</strong>
+      <em>${top ? metricFormat(metric)(countyMetricValue(top, metric, date)) : "Not reported"}</em>
+    </div>
+    <div class="stat">
+      <span>Selected county</span>
+      <strong>${selected?.shortName ?? "—"}</strong>
+      <em>${selected?.campusLabel || "No mapped campus anchor"}</em>
+    </div>
+    <div class="stat">
+      <span>Counties with ZIP detail</span>
+      <strong>${countyIndex.counties.filter((county) => county.zipCount > 0).length}</strong>
+      <em>large-college counties in scope</em>
+    </div>
+    <div class="stat">
+      <span>Campus anchors mapped</span>
+      <strong>${new Set(allCampuses.map((campus) => campus.county_fips)).size}</strong>
+      <em>counties with a major university marker</em>
+    </div>
+  `;
+}
+
+function renderSummary(rows, date, selectedPlace, county, defaultPlace) {
+  if (!rows.length) {
+    return html`<div class="stat"><span>County</span><strong>${county?.shortName ?? "County"}</strong><em>Loading ZIP markets…</em></div>`;
+  }
+
+  const selected =
+    rows.find((d) => d.place === selectedPlace) ??
+    rows.find((d) => d.place === defaultPlace) ??
+    rows[0];
   const ranked = [...rows].sort((a, b) => b.zhvi - a.zhvi);
   const growthRanked = [...rows].sort((a, b) => b.change - a.change);
   const medianValue = d3.median(rows, (d) => d.zhvi);
@@ -288,6 +843,11 @@ function renderSummary(rows, date, selectedPlace) {
   const topGrowth = growthRanked[0];
 
   return html`
+    <div class="stat">
+      <span>County</span>
+      <strong>${county?.shortName ?? "County"}</strong>
+      <em>${county?.campusLabel || "ZIP-level Zillow markets"}</em>
+    </div>
     <div class="stat">
       <span>Selected month</span>
       <strong>${dateLabel(date)}</strong>
@@ -332,23 +892,174 @@ function setSelectedPlace(input, place) {
 }
 
 function medianComparison(row, medianValue) {
+  if (!row || medianValue == null) return "Median unavailable";
   const difference = row.zhvi - medianValue;
   return `${difference >= 0 ? "+" : ""}${money(difference)} vs local median`;
 }
 
-function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
+function drawZoomButton(svg, {x, y, label, ariaLabel, icon, onClick}) {
+  const defs = svg.select("defs").empty() ? svg.append("defs") : svg.select("defs");
+  if (defs.select("#zoom-button-shadow").empty()) {
+    defs
+      .append("filter")
+      .attr("id", "zoom-button-shadow")
+      .attr("x", "-20%")
+      .attr("y", "-30%")
+      .attr("width", "140%")
+      .attr("height", "180%")
+      .append("feDropShadow")
+      .attr("dx", 0)
+      .attr("dy", 2)
+      .attr("stdDeviation", 2.2)
+      .attr("flood-color", "#172026")
+      .attr("flood-opacity", 0.16);
+  }
+
+  const button = svg
+    .append("g")
+    .attr("class", "map-zoom-control")
+    .attr("transform", `translate(${x}, ${y})`)
+    .attr("role", "button")
+    .attr("tabindex", 0)
+    .attr("aria-label", ariaLabel)
+    .style("cursor", "pointer")
+    .on("click", onClick)
+    .on("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onClick();
+      }
+    });
+
+  button
+    .append("rect")
+    .attr("width", 44)
+    .attr("height", 44)
+    .attr("rx", 10)
+    .attr("fill", "rgba(255, 255, 255, 0.96)")
+    .attr("stroke", "#9fb9b7")
+    .attr("filter", "url(#zoom-button-shadow)");
+
+  const iconGroup = button.append("g").attr("transform", "translate(20, 20)");
+  iconGroup
+    .append("circle")
+    .attr("r", 8)
+    .attr("fill", "none")
+    .attr("stroke", "var(--campus)")
+    .attr("stroke-width", 2);
+  iconGroup
+    .append("line")
+    .attr("x1", 6)
+    .attr("y1", 6)
+    .attr("x2", 13)
+    .attr("y2", 13)
+    .attr("stroke", "var(--campus)")
+    .attr("stroke-width", 2)
+    .attr("stroke-linecap", "round");
+  iconGroup
+    .append("line")
+    .attr("x1", -4)
+    .attr("y1", 0)
+    .attr("x2", 4)
+    .attr("y2", 0)
+    .attr("stroke", "var(--campus)")
+    .attr("stroke-width", 2)
+    .attr("stroke-linecap", "round");
+
+  if (icon === "in") {
+    iconGroup
+      .append("line")
+      .attr("x1", 0)
+      .attr("y1", -4)
+      .attr("x2", 0)
+      .attr("y2", 4)
+      .attr("stroke", "var(--campus)")
+      .attr("stroke-width", 2)
+      .attr("stroke-linecap", "round");
+  }
+
+  button.append("title").text(label);
+}
+
+function drawZoomOutButton(svg, activeCountyFips, height) {
+  drawZoomButton(svg, {
+    x: 32,
+    y: height - 78,
+    label: "Zoom out",
+    ariaLabel: "Zoom out to campus counties",
+    icon: "out",
+    onClick: () => navigateCountyScope({county: activeCountyFips, view: "state"})
+  });
+}
+
+function drawCampusMarkers(svg, projection, campuses) {
+  const campusLayer = svg.append("g").attr("class", "campus-markers");
+
+  for (const campus of campuses) {
+    const campusPoint = projection([campus.longitude, campus.latitude]);
+    if (!campusPoint) continue;
+    const campusGroup = campusLayer
+      .append("g")
+      .attr("class", "campus-marker")
+      .attr("transform", `translate(${campusPoint})`);
+
+    campusGroup
+      .append("circle")
+      .attr("r", 22)
+      .attr("fill", "var(--campus)")
+      .attr("opacity", 0.12);
+
+    campusGroup
+      .append("path")
+      .attr("d", "M0,-11 L10,8 L-10,8 Z")
+      .attr("fill", "var(--campus)")
+      .attr("stroke", "#ffffff")
+      .attr("stroke-width", 1.8)
+      .append("title")
+      .text(
+        `${campus.name}\n${campus.housing_status}${
+          campus.housed_share == null ? "" : `\nAbout ${percent(campus.housed_share)} of enrolled students housed on campus`
+        }\n${campus.note}`
+      );
+
+    campusGroup
+      .append("text")
+      .attr("class", "campus-label")
+      .attr("x", 15)
+      .attr("y", -16)
+      .text(campus.short_label);
+  }
+}
+
+function renderCountyMap({
+  rows,
+  metric,
+  selectedPlace,
+  selectedPlaceInput,
+  activeCountyFips,
+  county,
+  campuses,
+  allMetrics,
+  defaultPlace,
+  base: countyBase,
+  zctaBoundaries: countyZctas
+}) {
   const width = 980;
   const height = 700;
-  const displayBase = rewindFeatureCollection(base);
-  const displayZctas = rewindFeatureCollection(zctaBoundaries);
+  const displayBase = rewindFeatureCollection(countyBase);
+  const displayZctas = rewindFeatureCollection(countyZctas);
   const rowsByPlace = new Map(rows.map((d) => [d.place, d]));
   const medianValue = d3.median(rows, (d) => d.zhvi);
-  const selected = rowsByPlace.get(selectedPlace) ?? rows.find((d) => d.place === "93401 San Luis Obispo");
+  const selected =
+    rowsByPlace.get(selectedPlace) ?? rows.find((d) => d.place === defaultPlace) ?? rows[0];
   const svg = d3
     .create("svg")
     .attr("viewBox", [0, 0, width, height])
     .attr("role", "img")
-    .attr("aria-label", `San Luis Obispo County ZCTA map showing ${metricLabel(metric)} around Cal Poly.`)
+    .attr(
+      "aria-label",
+      `${county?.name ?? "County"} ZCTA map showing ${metricLabel(metric)} with university anchors.`
+    )
     .style("display", "block")
     .style("width", "100%")
     .style("height", "auto");
@@ -359,14 +1070,21 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .attr("height", height)
     .attr("fill", "var(--map-water)");
 
-  const projection = d3.geoMercator().fitExtent([[22, 18], [width - 22, height - 74]], displayBase);
+  drawZoomOutButton(svg, activeCountyFips, height);
+
+  const projection = d3.geoMercator().fitExtent([[28, 38], [width - 280, height - 124]], displayBase);
   const path = d3.geoPath(projection);
-  const color = createColorScale(rows, metric);
-  const anchors = rows.map((d) => {
-    const [x, y] = projection([d.longitude, d.latitude]);
-    return {...d, x, y};
-  });
+  const color = createColorScale(allMetrics, metric);
+  const anchors = rows
+    .map((d) => {
+      const point = projection([d.longitude, d.latitude]);
+      return point ? {...d, x: point[0], y: point[1]} : null;
+    })
+    .filter(Boolean);
   const values = allMetrics.map((d) => metricValue(d, metric)).filter((d) => d != null);
+  const highlightedPlaces = highAboveMeanPlaces(rows, metric);
+  const mapLabels = layoutMapLabels(anchors, selected, highlightedPlaces, metric);
+  const labeledPlaces = new Set(mapLabels.map((label) => label.place));
 
   svg
     .append("path")
@@ -390,23 +1108,47 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .selectAll("path")
     .data(displayZctas.features)
     .join("path")
+    .attr("class", (feature) => {
+      const row = rowsByPlace.get(feature.properties.place);
+      const classes = ["zcta-area"];
+      if (row) classes.push("is-clickable");
+      if (row?.place === selected.place) classes.push("is-selected");
+      if (row && highlightedPlaces.has(row.place)) classes.push("is-high");
+      return classes.join(" ");
+    })
     .attr("d", path)
     .attr("fill", (feature) => {
       const value = metricValue(rowsByPlace.get(feature.properties.place), metric);
       return value == null ? "#f5f7f6" : color(value);
     })
-    .attr("fill-opacity", 0.84)
-    .attr("stroke", "none")
-    .attr("tabindex", 0)
-    .attr("role", "button")
+    .attr("fill-opacity", (feature) => rowsByPlace.get(feature.properties.place)?.place === selected.place ? 0.98 : 0.84)
+    .attr("stroke", (feature) => rowsByPlace.has(feature.properties.place) ? "rgba(255,255,255,0.9)" : "none")
+    .attr("stroke-width", (feature) => rowsByPlace.has(feature.properties.place) ? 0.38 : 0)
+    .attr("tabindex", (feature) => rowsByPlace.has(feature.properties.place) ? 0 : null)
+    .attr("role", (feature) => rowsByPlace.has(feature.properties.place) ? "button" : null)
     .attr("aria-label", (feature) => {
       const row = rowsByPlace.get(feature.properties.place);
+      if (!row) return `${feature.properties.name ?? "ZCTA"}; housing data unavailable.`;
       return `Select ${row.place}; home value ${money(row.zhvi)}, ${medianComparison(row, medianValue)}.`;
     })
-    .style("cursor", "pointer")
-    .on("click", (event, feature) => setSelectedPlace(selectedPlaceInput, feature.properties.place))
+    .style("cursor", (feature) => rowsByPlace.has(feature.properties.place) ? "pointer" : "default")
+    .on("mouseenter", function (_event, feature) {
+      if (!rowsByPlace.has(feature.properties.place)) return;
+      d3.select(this).attr("fill-opacity", 0.98).attr("stroke", "#172026").attr("stroke-width", 1.15);
+    })
+    .on("mouseleave", function (_event, feature) {
+      const row = rowsByPlace.get(feature.properties.place);
+      if (!row) return;
+      d3.select(this)
+        .attr("fill-opacity", row.place === selected.place ? 0.98 : 0.84)
+        .attr("stroke", "rgba(255,255,255,0.9)")
+        .attr("stroke-width", 0.38);
+    })
+    .on("click", (event, feature) => {
+      if (rowsByPlace.has(feature.properties.place)) setSelectedPlace(selectedPlaceInput, feature.properties.place);
+    })
     .on("keydown", (event, feature) => {
-      if (event.key === "Enter" || event.key === " ") {
+      if (rowsByPlace.has(feature.properties.place) && (event.key === "Enter" || event.key === " ")) {
         event.preventDefault();
         setSelectedPlace(selectedPlaceInput, feature.properties.place);
       }
@@ -414,6 +1156,7 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
     .append("title")
     .text((feature) => {
       const row = rowsByPlace.get(feature.properties.place);
+      if (!row) return `${feature.properties.name ?? "ZCTA"}\nHousing data unavailable.`;
       const rent = row.latestRent ? `\nLatest blended rent: ${money(row.latestRent)} / mo (${row.latestRentSource})` : "";
       const zori = row.zori ? `\nZillow ZORI: ${money(row.zori)} / mo` : "";
       const hud = row.hudSafmr ? `\nHUD SAFMR average: ${money(row.hudSafmr)} / mo, FY${row.hudFiscalYear}` : "";
@@ -468,15 +1211,20 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
 
   anchorGroup
     .selectAll("circle")
-    .data(anchors)
+    .data(anchors.filter((d) => labeledPlaces.has(d.place)))
     .join("circle")
-    .attr("class", "anchor-dot")
+    .attr("class", (d) => {
+      const classes = ["anchor-dot"];
+      if (d.place === selected.place) classes.push("is-selected");
+      if (highlightedPlaces.has(d.place)) classes.push("is-high");
+      return classes.join(" ");
+    })
     .attr("cx", (d) => d.x)
     .attr("cy", (d) => d.y)
-    .attr("r", (d) => d.place === selected.place ? 3.2 : 2.6)
-    .attr("fill", "#172026")
-    .attr("stroke", "rgba(255,255,255,0.72)")
-    .attr("stroke-width", 0.7)
+    .attr("r", (d) => d.place === selected.place ? 4.2 : highlightedPlaces.has(d.place) ? 3.5 : 3)
+    .attr("fill", (d) => d.place === selected.place ? "var(--selected)" : "#0b3d3a")
+    .attr("stroke", "#ffffff")
+    .attr("stroke-width", 1.3)
     .append("title")
     .text((d) =>
       `${d.place}\nHome value index: ${money(d.zhvi)}\n${medianComparison(d, medianValue)}\nChange since ${dateLabel(baselineDate)}: ${percent(d.change)}`
@@ -484,41 +1232,18 @@ function renderMap(rows, metric, selectedPlace, selectedPlaceInput) {
 
   anchorGroup
     .selectAll("text")
-    .data(anchors.filter((d) => mapPlaceLabel(d)))
+    .data(mapLabels)
     .join("text")
-    .attr("class", "place-label")
-    .attr("x", (d) => d.x + d.label_dx)
-    .attr("y", (d) => d.y + d.label_dy)
-    .attr("text-anchor", (d) => d.label_dx < 0 ? "end" : "start")
-    .text((d) => mapPlaceLabel(d));
+    .attr("class", (d) => d.place === selected.place ? "place-label is-selected" : "place-label")
+    .attr("x", (d) => d.labelX)
+    .attr("y", (d) => d.labelY)
+    .attr("text-anchor", (d) => d.labelAnchor)
+    .text((d) => d.label);
 
-  const campusPoint = projection([campus.longitude, campus.latitude]);
-  const campusGroup = svg.append("g").attr("class", "campus-marker").attr("transform", `translate(${campusPoint})`);
+  if (campuses.length) drawCampusMarkers(svg, projection, campuses);
 
-  campusGroup
-    .append("circle")
-    .attr("r", 22)
-    .attr("fill", "var(--campus)")
-    .attr("opacity", 0.12);
-
-  campusGroup
-    .append("path")
-    .attr("d", "M0,-11 L10,8 L-10,8 Z")
-    .attr("fill", "var(--campus)")
-    .attr("stroke", "#ffffff")
-    .attr("stroke-width", 1.8)
-    .append("title")
-    .text(`${campus.name}\n${campus.housing_status}\nAbout ${percent(campus.housed_share)} of enrolled students housed on campus\n${campus.note}`);
-
-  campusGroup
-    .append("text")
-    .attr("class", "campus-label")
-    .attr("x", 15)
-    .attr("y", -16)
-    .text("Cal Poly");
-
-  drawLegend(svg, color, values, metric, width, height);
-  drawMapNote(svg, metric, height);
+  drawLegend(svg, color, values, metric, width, height, campuses);
+  drawMapNote(svg, metric, height, county?.shortName ?? "this county");
   drawSelectionBadge(svg, selected, medianValue, width);
 
   return svg.node();
@@ -564,10 +1289,11 @@ function drawSelectionBadge(svg, selected, medianValue, width) {
     .text(medianComparison(selected, medianValue));
 }
 
-function drawLegend(svg, color, values, metric, width, height) {
+function drawLegend(svg, color, values, metric, width, height, campuses = []) {
+  if (!values.length) return;
   const legendWidth = 260;
   const legendHeight = 10;
-  const legend = svg.append("g").attr("class", "legend").attr("transform", `translate(32, ${height - 42})`);
+  const legend = svg.append("g").attr("class", "legend").attr("transform", `translate(96, ${height - 68})`);
   const scale = d3.scaleLinear().domain(d3.extent(values)).range([0, legendWidth]);
   const axis = d3.axisBottom(scale).ticks(4).tickSize(4).tickFormat(metricFormat(metric));
   const gradientId = `housing-gradient-${metric}`;
@@ -609,7 +1335,7 @@ function drawLegend(svg, color, values, metric, width, height) {
     .call((g) => g.selectAll("line").attr("stroke", "#6a7478"))
     .call((g) => g.selectAll("text").attr("fill", "#394348").attr("font-size", 11));
 
-  const key = svg.append("g").attr("class", "symbol-key").attr("transform", `translate(${width - 230}, ${height - 60})`);
+  const key = svg.append("g").attr("class", "symbol-key").attr("transform", `translate(${width - 230}, ${height - 72})`);
 
   key.append("path")
     .attr("d", "M0,-9 L8,7 L-8,7 Z")
@@ -624,7 +1350,7 @@ function drawLegend(svg, color, values, metric, width, height) {
     .attr("fill", "#263238")
     .attr("font-size", 12)
     .attr("font-weight", 700)
-    .text("Cal Poly campus anchor");
+    .text(campuses.length > 1 ? "University campus anchors" : "University campus anchor");
 
   key.append("circle")
     .attr("cx", 8)
@@ -643,16 +1369,16 @@ function drawLegend(svg, color, values, metric, width, height) {
     .text("Zillow ZIP centroid");
 }
 
-function drawMapNote(svg, metric, height) {
+function drawMapNote(svg, metric, height, countyName = "this county") {
   const note = metric === "zori"
-    ? "ZCTA fills use blended ZIP rent: HUD 1-4BR SAFMR average, averaged with Zillow ZORI where present."
-    : "ZCTA fills use direct Zillow ZIP home values; unreported county areas are left neutral.";
+    ? `ZCTA fills in ${countyName} use blended ZIP rent: HUD 1-4BR SAFMR average, averaged with Zillow ZORI where present.`
+    : `ZCTA fills in ${countyName} use direct Zillow ZIP home values; unreported areas are left neutral.`;
 
   svg
     .append("text")
     .attr("class", "map-note")
     .attr("x", 32)
-    .attr("y", height - 76)
+    .attr("y", height - 102)
     .text(note);
 }
 
@@ -665,7 +1391,10 @@ function renderTrend(date, selectedPlace) {
     (rows) => ({
       date: rows[0].date,
       dateObject: new Date(`${rows[0].date}T00:00:00Z`),
-      selected: rows.find((d) => d.place === selectedPlace)?.zhvi ?? rows.find((d) => d.place === "93401 San Luis Obispo").zhvi,
+      selected:
+        rows.find((d) => d.place === selectedPlace)?.zhvi ??
+        rows.find((d) => d.place === countyBundle?.meta?.defaultPlace)?.zhvi ??
+        rows[0]?.zhvi,
       median: d3.median(rows, (d) => d.zhvi)
     }),
     (d) => d.date

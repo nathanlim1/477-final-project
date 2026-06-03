@@ -1,0 +1,24 @@
+{
+  "fips": "06007",
+  "name": "Butte County",
+  "defaultPlace": "95914 Bangor",
+  "places": [
+    "95914 Bangor",
+    "95916 Berry Creek",
+    "95917 Biggs",
+    "95926 Chico",
+    "95928 Chico",
+    "95930 Clipper Mills",
+    "95938 Durham",
+    "95941 Forbestown",
+    "95942 Forest Ranch",
+    "95948 Gridley",
+    "95954 Magalia",
+    "95965 Oroville",
+    "95966 Oroville",
+    "95968 Palermo",
+    "95969 Paradise",
+    "95973 Chico",
+    "95978 nan"
+  ]
+}

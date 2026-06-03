@@ -1,0 +1,27 @@
+{
+  "fips": "06023",
+  "name": "Humboldt County",
+  "defaultPlace": "95501 Eureka",
+  "places": [
+    "95501 Eureka",
+    "95503 Eureka",
+    "95519 McKinleyville",
+    "95521 Arcata",
+    "95524 Bayside",
+    "95525 Blue Lake",
+    "95526 Bridgeville",
+    "95528 Carlotta",
+    "95536 Ferndale",
+    "95540 Fortuna",
+    "95542 Redway",
+    "95547 Hydesville",
+    "95549 Kneeland",
+    "95551 Eureka",
+    "95553 Myers Flat",
+    "95560 Redway",
+    "95562 Scotia",
+    "95570 Trinidad",
+    "95573 nan",
+    "95589 Whitethorn"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "fips": "06009",
+  "name": "Calaveras County",
+  "defaultPlace": "95222 Angels Camp",
+  "places": [
+    "95222 Angels Camp",
+    "95223 Avery",
+    "95224 Murphys",
+    "95225 Valley Springs",
+    "95228 Copperopolis",
+    "95232 Glencoe",
+    "95233 Murphys",
+    "95245 Mokelumne Hill",
+    "95246 Mountain Ranch",
+    "95247 Murphys",
+    "95248 Mokelumne Hill",
+    "95249 San Andreas",
+    "95252 Valley Springs",
+    "95254 Wallace",
+    "95255 West Point",
+    "95257 Wilseyville"
+  ]
+}

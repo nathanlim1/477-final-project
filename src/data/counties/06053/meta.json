@@ -1,0 +1,31 @@
+{
+  "fips": "06053",
+  "name": "Monterey County",
+  "defaultPlace": "93426 Bradley",
+  "places": [
+    "93426 Bradley",
+    "93451 San Miguel",
+    "93901 Salinas",
+    "93905 Salinas",
+    "93906 Salinas",
+    "93907 Salinas",
+    "93908 Salinas",
+    "93920 Big Sur",
+    "93923 Carmel-by-the-Sea",
+    "93924 Carmel Valley",
+    "93925 Chualar",
+    "93926 Gonzales",
+    "93927 Greenfield",
+    "93930 King City",
+    "93932 Lockwood",
+    "93933 Marina",
+    "93940 Monterey",
+    "93950 Pacific Grove",
+    "93953 Del Monte Forest",
+    "93955 Seaside",
+    "93960 Soledad",
+    "93962 Salinas",
+    "95012 Moss Landing",
+    "95039 Moss Landing"
+  ]
+}

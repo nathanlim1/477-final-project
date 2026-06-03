@@ -1,0 +1,24 @@
+{
+  "fips": "06093",
+  "name": "Siskiyou County",
+  "defaultPlace": "96023 Dorris",
+  "places": [
+    "96023 Dorris",
+    "96025 Dunsmuir",
+    "96027 Etna",
+    "96032 Fort Jones",
+    "96034 Gazelle",
+    "96037 Etna",
+    "96038 Grenada",
+    "96039 Happy Camp",
+    "96044 Hornbrook",
+    "96050 Klamath River",
+    "96057 nan",
+    "96058 Macdoel",
+    "96064 Montague",
+    "96067 Mount Shasta",
+    "96086 Seiad Valley",
+    "96094 Weed",
+    "96097 Yreka"
+  ]
+}

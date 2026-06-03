@@ -1,0 +1,15 @@
+{
+  "fips": "06055",
+  "name": "Napa County",
+  "defaultPlace": "94503 American Canyon",
+  "places": [
+    "94503 American Canyon",
+    "94508 Angwin",
+    "94515 Calistoga",
+    "94558 Napa",
+    "94559 Napa",
+    "94567 Pope Valley",
+    "94574 Saint Helena",
+    "94599 Yountville"
+  ]
+}

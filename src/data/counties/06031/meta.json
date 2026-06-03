@@ -1,0 +1,13 @@
+{
+  "fips": "06031",
+  "name": "Kings County",
+  "defaultPlace": "93202 Armona",
+  "places": [
+    "93202 Armona",
+    "93204 Avenal",
+    "93212 Corcoran",
+    "93230 Hanford",
+    "93245 Lemoore",
+    "93266 Stratford"
+  ]
+}

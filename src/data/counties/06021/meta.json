@@ -1,0 +1,12 @@
+{
+  "fips": "06021",
+  "name": "Glenn County",
+  "defaultPlace": "95943 Glenn",
+  "places": [
+    "95943 Glenn",
+    "95951 Hamilton City",
+    "95963 Orland",
+    "95970 Princeton",
+    "95988 Willows"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "fips": "06105",
+  "name": "Trinity County",
+  "defaultPlace": "95527 Burnt Ranch",
+  "places": [
+    "95527 Burnt Ranch",
+    "95552 nan",
+    "95563 Salyer",
+    "96024 Douglas City",
+    "96041 Hayfork",
+    "96048 Weaverville",
+    "96052 Lewiston",
+    "96091 Trinity Center",
+    "96093 Weaverville"
+  ]
+}

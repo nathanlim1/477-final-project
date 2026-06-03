@@ -1,0 +1,12 @@
+{
+  "fips": "06027",
+  "name": "Inyo County",
+  "defaultPlace": "93513 nan",
+  "places": [
+    "93513 nan",
+    "93514 Bishop",
+    "93526 Independence",
+    "93527 Inyokern",
+    "93545 Lone Pine"
+  ]
+}

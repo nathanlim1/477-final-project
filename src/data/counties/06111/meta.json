@@ -1,0 +1,31 @@
+{
+  "fips": "06111",
+  "name": "Ventura County",
+  "defaultPlace": "91320 Thousand Oaks",
+  "places": [
+    "91320 Thousand Oaks",
+    "91360 Thousand Oaks",
+    "91361 Westlake Village",
+    "91362 Thousand Oaks",
+    "91377 Oak Park",
+    "93001 Ventura",
+    "93003 Ventura",
+    "93004 Ventura",
+    "93010 Camarillo",
+    "93012 Camarillo",
+    "93015 Fillmore",
+    "93021 Moorpark",
+    "93022 Oak View",
+    "93023 Ojai",
+    "93030 Oxnard",
+    "93033 Oxnard",
+    "93035 Oxnard",
+    "93036 Oxnard",
+    "93040 Piru",
+    "93041 Port Hueneme",
+    "93060 Santa Paula",
+    "93063 Simi Valley",
+    "93065 Simi Valley",
+    "93066 Somis"
+  ]
+}

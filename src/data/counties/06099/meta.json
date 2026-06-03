@@ -1,0 +1,31 @@
+{
+  "fips": "06099",
+  "name": "Stanislaus County",
+  "defaultPlace": "95230 Farmington",
+  "places": [
+    "95230 Farmington",
+    "95307 Ceres",
+    "95313 Crows Landing",
+    "95316 Denair",
+    "95319 Empire",
+    "95323 Hickman",
+    "95326 Hughson",
+    "95328 Keyes",
+    "95329 La Grange",
+    "95350 Modesto",
+    "95351 Modesto",
+    "95354 Modesto",
+    "95355 Modesto",
+    "95356 Modesto",
+    "95357 Modesto",
+    "95358 Modesto",
+    "95360 Newman",
+    "95361 Oakdale",
+    "95363 Patterson",
+    "95367 Riverbank",
+    "95368 Salida",
+    "95380 Turlock",
+    "95382 Turlock",
+    "95386 Waterford"
+  ]
+}

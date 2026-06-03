@@ -1,0 +1,15 @@
+{
+  "fips": "06025",
+  "name": "Imperial County",
+  "defaultPlace": "92004 Borrego Springs",
+  "places": [
+    "92004 Borrego Springs",
+    "92227 Brawley",
+    "92231 Calexico",
+    "92233 Calipatria",
+    "92243 El Centro",
+    "92249 Heber",
+    "92250 Holtville",
+    "92251 Imperial"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "fips": "06069",
+  "name": "San Benito County",
+  "defaultPlace": "95004 Aromas",
+  "places": [
+    "95004 Aromas",
+    "95023 Hollister",
+    "95045 San Juan Bautista"
+  ]
+}

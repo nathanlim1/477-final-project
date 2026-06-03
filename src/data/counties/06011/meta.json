@@ -1,0 +1,12 @@
+{
+  "fips": "06011",
+  "name": "Colusa County",
+  "defaultPlace": "95912 Arbuckle",
+  "places": [
+    "95912 Arbuckle",
+    "95932 Colusa",
+    "95955 Maxwell",
+    "95979 Stonyford",
+    "95987 Williams"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "fips": "06095",
+  "name": "Solano County",
+  "defaultPlace": "94510 Benicia",
+  "places": [
+    "94510 Benicia",
+    "94533 Fairfield",
+    "94534 Fairfield",
+    "94571 Rio Vista",
+    "94585 Suisun City",
+    "94589 Vallejo",
+    "94590 Vallejo",
+    "94591 Vallejo",
+    "94592 Vallejo",
+    "95620 Dixon",
+    "95687 Vacaville",
+    "95688 Vacaville"
+  ]
+}

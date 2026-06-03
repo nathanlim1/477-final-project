@@ -1,0 +1,17 @@
+{
+  "fips": "06005",
+  "name": "Amador County",
+  "defaultPlace": "95601 Amador City",
+  "places": [
+    "95601 Amador City",
+    "95629 Fiddletown",
+    "95640 Ione",
+    "95642 Jackson",
+    "95665 Pine Grove",
+    "95666 Pioneer",
+    "95669 Plymouth",
+    "95675 River Pines",
+    "95685 Sutter Creek",
+    "95689 Volcano"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "fips": "06115",
+  "name": "Yuba County",
+  "defaultPlace": "95692 Wheatland",
+  "places": [
+    "95692 Wheatland",
+    "95901 Marysville",
+    "95918 Browns Valley",
+    "95919 Brownsville",
+    "95922 Camptonville",
+    "95935 Dobbins",
+    "95960 Nevada City",
+    "95961 Olivehurst",
+    "95962 Oregon House"
+  ]
+}

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "observable preview --host 127.0.0.1",
-    "build": "observable build"
+    "build": "observable build && node scripts/copy_county_bundles.js",
+    "data:counties": "python scripts/build_california_counties.py"
   },
   "dependencies": {
     "@observablehq/framework": "^1.13.3",

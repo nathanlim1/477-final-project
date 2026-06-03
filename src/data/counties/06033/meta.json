@@ -1,0 +1,21 @@
+{
+  "fips": "06033",
+  "name": "Lake County",
+  "defaultPlace": "95422 Clearlake",
+  "places": [
+    "95422 Clearlake",
+    "95423 Clearlake Oaks",
+    "95424 Clearlake",
+    "95426 Middletown",
+    "95443 Lucerne",
+    "95451 Kelseyville",
+    "95453 Lakeport",
+    "95457 Lower Lake",
+    "95458 Lucerne",
+    "95461 Middletown",
+    "95464 Upper Lake",
+    "95467 Hidden Valley Lake",
+    "95469 Upper Lake",
+    "95485 Nice"
+  ]
+}

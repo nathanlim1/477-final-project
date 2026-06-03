@@ -1,0 +1,10 @@
+{
+  "fips": "06015",
+  "name": "Del Norte County",
+  "defaultPlace": "95531 Crescent City",
+  "places": [
+    "95531 Crescent City",
+    "95543 Gasquet",
+    "95567 Smith River"
+  ]
+}

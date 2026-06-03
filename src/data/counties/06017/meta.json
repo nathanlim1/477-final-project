@@ -1,0 +1,26 @@
+{
+  "fips": "06017",
+  "name": "El Dorado County",
+  "defaultPlace": "95614 Cool",
+  "places": [
+    "95614 Cool",
+    "95619 Diamond Springs",
+    "95623 El Dorado",
+    "95633 Garden Valley",
+    "95634 Georgetown",
+    "95635 Greenwood",
+    "95636 nan",
+    "95651 Lotus",
+    "95664 Pilot Hill",
+    "95667 Placerville",
+    "95672 Rescue",
+    "95682 Shingle Springs",
+    "95684 Somerset",
+    "95709 Camino",
+    "95720 Kyburz",
+    "95726 Pollock Pines",
+    "95735 Twin Bridges",
+    "95762 El Dorado Hills",
+    "96150 South Lake Tahoe"
+  ]
+}

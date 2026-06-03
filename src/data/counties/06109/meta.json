@@ -1,0 +1,17 @@
+{
+  "fips": "06109",
+  "name": "Tuolumne County",
+  "defaultPlace": "95310 Columbia",
+  "places": [
+    "95310 Columbia",
+    "95321 Groveland",
+    "95327 Jamestown",
+    "95335 nan",
+    "95346 Mi Wuk Village",
+    "95370 Sonora",
+    "95372 Soulsbyville",
+    "95375 Pinecrest",
+    "95379 Tuolumne",
+    "95383 Twain Harte"
+  ]
+}

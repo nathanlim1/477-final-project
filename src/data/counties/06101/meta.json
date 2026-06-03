@@ -1,0 +1,14 @@
+{
+  "fips": "06101",
+  "name": "Sutter County",
+  "defaultPlace": "95659 Nicolaus",
+  "places": [
+    "95659 Nicolaus",
+    "95674 Rio Oso",
+    "95953 Live Oak",
+    "95957 Meridian",
+    "95982 Sutter",
+    "95991 Yuba City",
+    "95993 Yuba City"
+  ]
+}

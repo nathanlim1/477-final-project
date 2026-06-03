@@ -1,0 +1,27 @@
+{
+  "fips": "06075",
+  "name": "San Francisco County",
+  "defaultPlace": "94102 San Francisco",
+  "places": [
+    "94102 San Francisco",
+    "94103 San Francisco",
+    "94107 San Francisco",
+    "94109 San Francisco",
+    "94110 San Francisco",
+    "94112 San Francisco",
+    "94114 San Francisco",
+    "94115 San Francisco",
+    "94116 San Francisco",
+    "94117 San Francisco",
+    "94118 San Francisco",
+    "94121 San Francisco",
+    "94122 San Francisco",
+    "94123 San Francisco",
+    "94124 San Francisco",
+    "94127 San Francisco",
+    "94131 San Francisco",
+    "94132 San Francisco",
+    "94133 San Francisco",
+    "94134 San Francisco"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "fips": "06035",
+  "name": "Lassen County",
+  "defaultPlace": "96006 Adin",
+  "places": [
+    "96006 Adin",
+    "96009 Bieber",
+    "96056 McArthur",
+    "96109 Doyle",
+    "96113 Herlong",
+    "96114 Janesville",
+    "96117 Susanville",
+    "96128 Standish",
+    "96130 Susanville"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "fips": "06113",
+  "name": "Yolo County",
+  "defaultPlace": "95605 West Sacramento",
+  "places": [
+    "95605 West Sacramento",
+    "95607 Capay",
+    "95612 Clarksburg",
+    "95616 Davis",
+    "95618 Davis",
+    "95627 Esparto",
+    "95637 Brooks",
+    "95645 Knights Landing",
+    "95653 Madison",
+    "95691 West Sacramento",
+    "95694 Winters",
+    "95695 Woodland",
+    "95697 Yolo",
+    "95776 Woodland",
+    "95937 Woodland"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "fips": "06087",
+  "name": "Santa Cruz County",
+  "defaultPlace": "95003 Aptos",
+  "places": [
+    "95003 Aptos",
+    "95005 Ben Lomond",
+    "95006 Boulder Creek",
+    "95007 Boulder Creek",
+    "95010 Capitola",
+    "95017 Davenport",
+    "95018 Ben Lomond",
+    "95019 Freedom",
+    "95041 Felton",
+    "95060 Santa Cruz",
+    "95062 Santa Cruz",
+    "95065 Santa Cruz",
+    "95066 Scotts Valley",
+    "95073 Soquel",
+    "95076 Watsonville"
+  ]
+}

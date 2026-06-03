@@ -1,0 +1,14 @@
+{
+  "fips": "06103",
+  "name": "Tehama County",
+  "defaultPlace": "96021 Corning",
+  "places": [
+    "96021 Corning",
+    "96022 Cottonwood",
+    "96035 Gerber",
+    "96055 Los Molinos",
+    "96059 Manton",
+    "96075 nan",
+    "96080 Red Bluff"
+  ]
+}

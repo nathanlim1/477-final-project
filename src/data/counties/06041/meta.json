@@ -1,0 +1,33 @@
+{
+  "fips": "06041",
+  "name": "Marin County",
+  "defaultPlace": "94901 San Rafael",
+  "places": [
+    "94901 San Rafael",
+    "94903 San Rafael",
+    "94904 Kentfield",
+    "94920 Tiburon",
+    "94924 Bolinas",
+    "94925 Corte Madera",
+    "94929 nan",
+    "94930 Fairfax",
+    "94933 Lagunitas",
+    "94937 Point Reyes Station",
+    "94938 Bolinas",
+    "94939 Larkspur",
+    "94940 Marshall",
+    "94941 Mill Valley",
+    "94945 Novato",
+    "94946 Nicasio",
+    "94947 Novato",
+    "94949 Novato",
+    "94956 Point Reyes Station",
+    "94957 Ross",
+    "94960 San Anselmo",
+    "94963 Lagunitas",
+    "94965 Sausalito",
+    "94970 Stinson Beach",
+    "94971 Tomales",
+    "94973 Woodacre"
+  ]
+}

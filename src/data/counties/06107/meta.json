@@ -1,0 +1,32 @@
+{
+  "fips": "06107",
+  "name": "Tulare County",
+  "defaultPlace": "93201 Alpaugh",
+  "places": [
+    "93201 Alpaugh",
+    "93218 Earlimart",
+    "93219 Tulare",
+    "93221 Exeter",
+    "93223 Farmersville",
+    "93227 Visalia",
+    "93235 Ivanhoe",
+    "93244 Lemon Cove",
+    "93247 Lindsay",
+    "93256 Pixley",
+    "93257 Porterville",
+    "93261 Richgrove",
+    "93265 Springville",
+    "93267 Strathmore",
+    "93270 Terra Bella",
+    "93271 Three Rivers",
+    "93272 Tipton",
+    "93274 Tulare",
+    "93277 Visalia",
+    "93286 Woodlake",
+    "93291 Visalia",
+    "93292 Visalia",
+    "93615 Cutler",
+    "93618 Dinuba",
+    "93647 Orosi"
+  ]
+}

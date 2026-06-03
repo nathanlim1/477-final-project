@@ -1,0 +1,24 @@
+{
+  "fips": "06047",
+  "name": "Merced County",
+  "defaultPlace": "93620 Dos Palos",
+  "places": [
+    "93620 Dos Palos",
+    "93635 Los Banos",
+    "93665 Firebaugh",
+    "95301 Atwater",
+    "95303 Ballico",
+    "95315 Delhi",
+    "95322 Gustine",
+    "95324 Hilmar",
+    "95333 Le Grand",
+    "95334 Livingston",
+    "95340 Merced",
+    "95341 Merced",
+    "95348 Merced",
+    "95365 Planada",
+    "95369 Merced",
+    "95374 Stevinson",
+    "95388 Winton"
+  ]
+}

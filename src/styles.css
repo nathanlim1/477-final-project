@@ -147,7 +147,7 @@ input[type="radio"] {
 
 .summary-grid > .observablehq > span {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 10px;
 }
 
@@ -178,8 +178,58 @@ input[type="radio"] {
 
 .map-frame {
   overflow: hidden;
+  display: grid;
   border: 1px solid var(--line);
   background: var(--surface);
+}
+
+.map-frame > .observablehq,
+.map-frame > .observablehq > span {
+  display: grid;
+}
+
+.map-frame svg {
+  width: 100%;
+  height: auto;
+  max-height: min(74vh, 760px);
+}
+
+.map-empty {
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.map-zoom-control {
+  pointer-events: all;
+}
+
+.map-zoom-control rect {
+  transition: fill 140ms ease, stroke 140ms ease;
+}
+
+.map-zoom-control:hover rect,
+.map-zoom-control:focus-visible rect {
+  fill: #ffffff;
+  stroke: var(--campus);
+}
+
+.state-county,
+.zcta-area {
+  transition:
+    fill-opacity 140ms ease,
+    stroke 140ms ease,
+    stroke-width 140ms ease;
+}
+
+.zcta-area.is-clickable:hover,
+.zcta-area.is-clickable:focus-visible {
+  fill-opacity: 0.98;
+  stroke: var(--selected);
+  stroke-width: 1.15;
 }
 
 .details-grid {
@@ -237,12 +287,39 @@ svg text {
   font-size: 9px;
   font-weight: 680;
   fill: #182228;
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.92);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.place-label.is-selected {
+  font-size: 10px;
+  font-weight: 780;
+  fill: var(--selected);
+}
+
+.anchor-dot {
+  filter: drop-shadow(0 1px 1px rgba(23, 32, 38, 0.22));
+}
+
+.anchor-dot.is-high {
+  fill: #0b3d3a;
+}
+
+.anchor-dot.is-selected {
+  fill: var(--selected);
 }
 
 .campus-label {
   font-size: 11px;
   font-weight: 760;
   fill: #0b5f59;
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 3px;
+  stroke-linejoin: round;
 }
 
 .map-note {

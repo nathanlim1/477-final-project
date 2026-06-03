@@ -1,0 +1,19 @@
+{
+  "fips": "06045",
+  "name": "Mendocino County",
+  "defaultPlace": "95410 Albion",
+  "places": [
+    "95410 Albion",
+    "95428 Covelo",
+    "95437 Fort Bragg",
+    "95445 Gualala",
+    "95449 Hopland",
+    "95454 Laytonville",
+    "95456 Little River",
+    "95459 Manchester",
+    "95460 Mendocino",
+    "95470 Redwood Valley",
+    "95482 Ukiah",
+    "95490 Willits"
+  ]
+}

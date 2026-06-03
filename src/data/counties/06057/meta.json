@@ -1,0 +1,14 @@
+{
+  "fips": "06057",
+  "name": "Nevada County",
+  "defaultPlace": "95945 Grass Valley",
+  "places": [
+    "95945 Grass Valley",
+    "95946 Penn Valley",
+    "95949 Grass Valley",
+    "95959 Nevada City",
+    "95975 Rough and Ready",
+    "95977 Smartsville",
+    "96161 Truckee"
+  ]
+}
