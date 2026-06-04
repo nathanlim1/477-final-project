@@ -16,16 +16,21 @@ const countyHousingRows = await FileAttachment("data/ca-county-housing.csv").csv
 const allCampuses = await FileAttachment("data/ca-campuses.csv").csv({typed: true});
 
 async function loadCountyBundle(fips) {
-  const basePath = `/_file/data/counties/${fips}`;
+  const basePath = new URL(`./_file/data/counties/${fips}/`, window.location.href);
+  const bundleUrls = ["bg.geojson", "zctas.geojson", "zip-housing.csv", "meta.json"]
+    .map((file) => new URL(file, basePath));
   const responses = await Promise.all([
-    fetch(`${basePath}/bg.geojson`),
-    fetch(`${basePath}/zctas.geojson`),
-    fetch(`${basePath}/zip-housing.csv`),
-    fetch(`${basePath}/meta.json`)
+    fetch(bundleUrls[0]),
+    fetch(bundleUrls[1]),
+    fetch(bundleUrls[2]),
+    fetch(bundleUrls[3])
   ]);
 
-  if (responses.some((response) => !response.ok)) {
-    throw new Error(`County bundle for ${fips} is not available.`);
+  const missing = responses
+    .map((response, index) => response.ok ? null : `${response.status} ${bundleUrls[index].href}`)
+    .filter(Boolean);
+  if (missing.length) {
+    throw new Error(`County bundle for ${fips} is not available: ${missing.join(", ")}`);
   }
 
   const [base, zctaBoundaries, housingCsv, meta] = await Promise.all(
