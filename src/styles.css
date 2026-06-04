@@ -222,13 +222,18 @@ svg text {
 .state-county,
 .zcta-area {
   transition:
-    fill-opacity 140ms ease,
-    stroke 140ms ease,
-    stroke-width 140ms ease;
+    fill 420ms ease,
+    fill-opacity 520ms ease,
+    stroke 420ms ease,
+    stroke-width 420ms ease;
 }
 
 .state-county-context {
   opacity: 0.7;
+  transition:
+    fill 520ms ease,
+    stroke 520ms ease,
+    stroke-width 520ms ease;
 }
 
 .state-county:hover,

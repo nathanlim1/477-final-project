@@ -56,6 +56,7 @@ export class HousingStoryMap {
     this.height = 0;
     this.isTransitioning = false;
     this.transitionId = 0;
+    this.stateHousingLayerVisible = null;
     this.loadingMessage = "";
     this.resizeTimer = null;
     this.zoomBehavior = null;
@@ -669,7 +670,7 @@ export class HousingStoryMap {
 
     this.countyLayer
       .selectAll("path")
-      .data(showHousingLayer ? this.activeCountyFeatures : [], (feature) => feature.properties.GEOID)
+      .data(this.activeCountyFeatures, (feature) => feature.properties.GEOID)
       .join(
         (enter) => enter.append("path").attr("class", "state-county"),
         (update) => update,
@@ -693,9 +694,10 @@ export class HousingStoryMap {
         return 0.55;
       })
       .attr("vector-effect", "non-scaling-stroke")
-      .attr("tabindex", this.isInteractive() ? 0 : null)
-      .attr("role", this.isInteractive() ? "button" : null)
-      .style("cursor", this.isInteractive() ? "pointer" : "default")
+      .attr("pointer-events", showHousingLayer ? null : "none")
+      .attr("tabindex", showHousingLayer && this.isInteractive() ? 0 : null)
+      .attr("role", showHousingLayer && this.isInteractive() ? "button" : null)
+      .style("cursor", showHousingLayer && this.isInteractive() ? "pointer" : "default")
       .on("pointermove", (event, feature) => this.showCountyTooltip(event, feature))
       .on("pointerleave", () => this.hideTooltip())
       .on("click", (_event, feature) => {
@@ -750,6 +752,31 @@ export class HousingStoryMap {
       .text((campus) => this.storyCountyFips.has(campus.county_fips) ? campus.short_label : "");
 
     this.drawStateLegend(color, showHousingLayer ? values : []);
+    this.syncStateHousingLayer(showHousingLayer);
+  }
+
+  syncStateHousingLayer(showHousingLayer) {
+    const targetOpacity = showHousingLayer ? 1 : 0;
+    const wasVisible = this.stateHousingLayerVisible;
+    if (wasVisible === showHousingLayer) return;
+
+    this.stateHousingLayerVisible = showHousingLayer;
+
+    const layers = [this.countyLayer, this.legendLayer];
+    for (const layer of layers) {
+      layer.interrupt("state-housing-layer");
+
+      if (wasVisible == null) {
+        layer.style("opacity", targetOpacity);
+        continue;
+      }
+
+      layer
+        .transition("state-housing-layer")
+        .duration(this.mode === "story" ? 900 : 260)
+        .ease(d3.easeCubicOut)
+        .style("opacity", targetOpacity);
+    }
   }
 
   renderCountyMap() {
