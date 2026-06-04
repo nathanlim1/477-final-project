@@ -60,6 +60,7 @@ export class HousingStoryMap {
     this.resizeTimer = null;
     this.zoomBehavior = null;
     this.zoomTransform = d3.zoomIdentity;
+    this.explorerInterfaceVisible = true;
 
     this.handleResize = () => {
       window.clearTimeout(this.resizeTimer);
@@ -271,6 +272,7 @@ export class HousingStoryMap {
 
     this.controls = this.createControls();
     this.zoomControls = this.mode === "explore" ? this.createZoomControls() : null;
+    this.visibilityToggle = this.mode === "explore" ? this.createVisibilityToggle() : null;
 
     this.timelineShell = document.createElement("div");
     this.timelineShell.className = "timeline-shell";
@@ -306,6 +308,7 @@ export class HousingStoryMap {
       this.searchShell
     );
     if (this.zoomControls) this.stage.append(this.zoomControls);
+    if (this.visibilityToggle) this.stage.append(this.visibilityToggle);
     this.container.append(this.stage, this.detailStrip);
   }
 
@@ -393,6 +396,26 @@ export class HousingStoryMap {
 
     controls.append(this.zoomInButton, this.zoomOutButton, this.zoomResetButton);
     return controls;
+  }
+
+  createVisibilityToggle() {
+    const label = document.createElement("label");
+    label.className = "explorer-visibility-toggle";
+
+    this.visibilityCheckbox = document.createElement("input");
+    this.visibilityCheckbox.type = "checkbox";
+    this.visibilityCheckbox.checked = this.explorerInterfaceVisible;
+    this.visibilityCheckbox.addEventListener("change", () => {
+      this.explorerInterfaceVisible = this.visibilityCheckbox.checked;
+      if (!this.explorerInterfaceVisible) this.hideTooltip();
+      this.syncControls();
+    });
+
+    const text = document.createElement("span");
+    text.textContent = "Show map overlays";
+
+    label.append(this.visibilityCheckbox, text);
+    return label;
   }
 
   setupZoom() {
@@ -486,11 +509,16 @@ export class HousingStoryMap {
   syncControls() {
     this.container.classList.toggle("is-state-view", this.state.view === "state");
     this.container.classList.toggle("is-county-view", this.state.view === "county");
+    this.container.classList.toggle("is-map-only", this.mode === "explore" && !this.explorerInterfaceVisible);
     this.container.classList.toggle("is-controls-visible", this.mode === "explore" || this.ui.has("controls"));
     this.container.classList.toggle("is-timeline-visible", this.mode === "explore" || this.ui.has("timeline"));
     this.container.classList.toggle("is-search-visible", this.mode === "explore" || this.ui.has("search"));
     this.container.classList.toggle("is-place-visible", this.mode === "explore" || this.ui.has("place"));
     this.container.classList.toggle("is-details-visible", this.mode === "explore" || this.ui.has("details"));
+
+    if (this.visibilityCheckbox) {
+      this.visibilityCheckbox.checked = this.explorerInterfaceVisible;
+    }
 
     for (const [metric, button] of this.metricButtons) {
       button.classList.toggle("is-active", metric === this.state.metric);
@@ -609,9 +637,12 @@ export class HousingStoryMap {
   }
 
   renderStateMap() {
-    const metricRows = this.countyIndex.counties
-      .map((county) => ({...county, value: this.countyMetricValue(county.fips)}))
-      .filter((county) => county.value != null);
+    const showHousingLayer = this.shouldShowStateHousingLayer();
+    const metricRows = showHousingLayer
+      ? this.countyIndex.counties
+        .map((county) => ({...county, value: this.countyMetricValue(county.fips)}))
+        .filter((county) => county.value != null)
+      : [];
     const values = metricRows.map((county) => county.value);
     const color = values.length
       ? d3.scaleSequential(d3.extent(values), d3.interpolateYlGnBu)
@@ -626,9 +657,9 @@ export class HousingStoryMap {
         (exit) => exit.remove()
       )
       .attr("d", this.path)
-      .attr("fill", "#edf2f0")
-      .attr("stroke", "#d4dfdc")
-      .attr("stroke-width", 0.42)
+      .attr("fill", showHousingLayer ? "#edf2f0" : "transparent")
+      .attr("stroke", showHousingLayer ? "#d4dfdc" : "#a8bbb6")
+      .attr("stroke-width", showHousingLayer ? 0.42 : 0.68)
       .attr("vector-effect", "non-scaling-stroke")
       .attr("pointer-events", "none");
     this.zctaLayer.selectAll("*").remove();
@@ -638,7 +669,7 @@ export class HousingStoryMap {
 
     this.countyLayer
       .selectAll("path")
-      .data(this.activeCountyFeatures, (feature) => feature.properties.GEOID)
+      .data(showHousingLayer ? this.activeCountyFeatures : [], (feature) => feature.properties.GEOID)
       .join(
         (enter) => enter.append("path").attr("class", "state-county"),
         (update) => update,
@@ -687,15 +718,16 @@ export class HousingStoryMap {
         return point ? {...campus, x: point[0], y: point[1]} : null;
       })
       .filter(Boolean);
+    const campusLabels = layoutCampusLabels(campusPoints, {view: "state"});
 
     const campusGroups = this.campusLayer
       .selectAll("g")
-      .data(campusPoints, (campus) => `${campus.county_fips}-${campus.short_label}`)
+      .data(campusLabels, (campus) => `${campus.county_fips}-${campus.short_label}`)
       .join(
         (enter) => {
           const group = enter.append("g").attr("class", "campus-marker");
           group.append("path").attr("d", "M0,-8 L8,7 L-8,7 Z");
-          group.append("text").attr("class", "campus-label").attr("x", 11).attr("y", -10);
+          group.append("text").attr("class", "campus-label");
           return group;
         },
         (update) => update,
@@ -712,9 +744,12 @@ export class HousingStoryMap {
 
     campusGroups
       .select("text")
+      .attr("x", (campus) => campus.labelDx)
+      .attr("y", (campus) => campus.labelDy)
+      .attr("text-anchor", (campus) => campus.labelAnchor)
       .text((campus) => this.storyCountyFips.has(campus.county_fips) ? campus.short_label : "");
 
-    this.drawStateLegend(color, values);
+    this.drawStateLegend(color, showHousingLayer ? values : []);
   }
 
   renderCountyMap() {
@@ -811,8 +846,10 @@ export class HousingStoryMap {
       })
       .filter(Boolean);
     const highlighted = highAboveMeanPlaces(rows, this.state.metric);
-    const labels = layoutMapLabels(anchors, selected, highlighted, this.state.metric);
+    const suppressedPlaces = campusAdjacentSelectedPlaces(anchors, selected, this.countyCampusesForCurrentView());
+    const labels = layoutMapLabels(anchors, selected, highlighted, {suppressedPlaces});
     const labeledPlaces = new Set(labels.map((label) => label.place));
+    if (selected?.place) labeledPlaces.add(selected.place);
 
     this.labelLayer
       .selectAll("circle")
@@ -845,23 +882,24 @@ export class HousingStoryMap {
   }
 
   renderCountyCampuses() {
-    const campuses = this.campuses.filter((campus) => campus.county_fips === this.state.countyFips);
+    const campuses = this.countyCampusesForCurrentView();
     const campusPoints = campuses
       .map((campus) => {
         const point = this.projection([campus.longitude, campus.latitude]);
         return point ? {...campus, x: point[0], y: point[1]} : null;
       })
       .filter(Boolean);
+    const campusLabels = layoutCampusLabels(campusPoints, {view: "county", countyFips: this.state.countyFips});
 
     const campusGroups = this.campusLayer
       .selectAll("g")
-      .data(campusPoints, (campus) => `${campus.county_fips}-${campus.short_label}`)
+      .data(campusLabels, (campus) => `${campus.county_fips}-${campus.short_label}`)
       .join(
         (enter) => {
           const group = enter.append("g").attr("class", "campus-marker is-story-campus");
           group.append("circle").attr("class", "campus-halo");
           group.append("path").attr("d", "M0,-11 L10,8 L-10,8 Z");
-          group.append("text").attr("class", "campus-label").attr("x", 15).attr("y", -15);
+          group.append("text").attr("class", "campus-label");
           return group;
         },
         (update) => update,
@@ -883,6 +921,9 @@ export class HousingStoryMap {
 
     campusGroups
       .select("text")
+      .attr("x", (campus) => campus.labelDx)
+      .attr("y", (campus) => campus.labelDy)
+      .attr("text-anchor", (campus) => campus.labelAnchor)
       .text((campus) => campus.short_label);
   }
 
@@ -924,7 +965,9 @@ export class HousingStoryMap {
       .map((county) => ({...county, value: this.countyMetricValue(county.fips)}))
       .filter((county) => county.value != null)
       .sort((a, b) => d3.descending(a.value, b.value));
-    const storyCounties = this.countyIndex.counties.filter((county) => this.storyCountyFips.has(county.fips));
+    const storyCounties = Array.from(this.storyCountyFips)
+      .map((fips) => this.countyByFips.get(fips))
+      .filter(Boolean);
     const top = ranked[0];
 
     this.summaryPanel.innerHTML = `
@@ -1330,6 +1373,17 @@ export class HousingStoryMap {
     return this.campuses.filter((campus) => this.storyCountyFips.has(campus.county_fips));
   }
 
+  countyCampusesForCurrentView() {
+    return this.campuses.filter((campus) => campus.county_fips === this.state.countyFips);
+  }
+
+  shouldShowStateHousingLayer() {
+    if (this.mode !== "story") return true;
+    if (this.state.view !== "state") return true;
+    if (!this.activeStep) return false;
+    return this.activeStep.showHousingLayer !== false;
+  }
+
   isInteractive() {
     return this.mode === "explore" || this.ui.has("search");
   }
@@ -1340,6 +1394,10 @@ export class HousingStoryMap {
 
   defaultStatusDetail() {
     if (this.state.view === "state") {
+      if (!this.shouldShowStateHousingLayer()) {
+        return "Campus markers locate the four examples before the housing-price layer is introduced.";
+      }
+
       return "County colors use Zillow home value index values; campus counties are shown as context, not a causal claim.";
     }
 
@@ -1522,8 +1580,9 @@ function highAboveMeanPlaces(rows, metric) {
   return new Set(rows.filter((row) => metricValue(row, metric) >= cutoff).map((row) => row.place));
 }
 
-function layoutMapLabels(anchors, selected, highlightedPlaces) {
+function layoutMapLabels(anchors, selected, highlightedPlaces, options = {}) {
   const selectedPlace = selected?.place;
+  const suppressedPlaces = options.suppressedPlaces || new Set();
   const chosen = [];
   const usedLabels = new Set();
   const boxes = [];
@@ -1542,6 +1601,7 @@ function layoutMapLabels(anchors, selected, highlightedPlaces) {
       box.x0 < existing.x1 && box.x1 > existing.x0 && box.y0 < existing.y1 && box.y1 > existing.y0
     );
   const add = (anchor, force = false) => {
+    if (suppressedPlaces.has(anchor.place)) return;
     const label = mapPlaceLabel(anchor.place);
     if (!label || (usedLabels.has(label) && anchor.place !== selectedPlace)) return;
     for (const [dx, dy] of offsets) {
@@ -1573,6 +1633,95 @@ function layoutMapLabels(anchors, selected, highlightedPlaces) {
   }
 
   return chosen;
+}
+
+function layoutCampusLabels(campuses, options = {}) {
+  const view = options.view || "state";
+  const boxes = [];
+  const defaultOffsets = view === "state"
+    ? [
+      [12, -12, "start"],
+      [12, 18, "start"],
+      [-12, -12, "end"],
+      [-12, 18, "end"],
+      [0, -24, "middle"],
+      [0, 28, "middle"]
+    ]
+    : [
+      [15, -16, "start"],
+      [15, 20, "start"],
+      [-15, -16, "end"],
+      [-15, 20, "end"],
+      [0, -28, "middle"],
+      [0, 32, "middle"]
+    ];
+  const overlaps = (box) =>
+    boxes.some((existing) =>
+      box.x0 < existing.x1 && box.x1 > existing.x0 && box.y0 < existing.y1 && box.y1 > existing.y0
+    );
+
+  return campuses.map((campus) => {
+    const label = campus.short_label || "";
+    const offsets = [...campusLabelOffsets(campus, view), ...defaultOffsets];
+    let fallback = null;
+
+    for (const [dx, dy, anchor = "start"] of offsets) {
+      const box = textLabelBox(campus.x + dx, campus.y + dy, label, anchor, view === "state" ? 6.3 : 6.6);
+      if (!fallback) fallback = {dx, dy, anchor};
+      if (!overlaps(box)) {
+        boxes.push(box);
+        return {...campus, labelDx: dx, labelDy: dy, labelAnchor: anchor};
+      }
+    }
+
+    const [dx, dy, anchor = "start"] = fallback ? [fallback.dx, fallback.dy, fallback.anchor] : defaultOffsets[0];
+    boxes.push(textLabelBox(campus.x + dx, campus.y + dy, label, anchor, view === "state" ? 6.3 : 6.6));
+    return {...campus, labelDx: dx, labelDy: dy, labelAnchor: anchor};
+  });
+}
+
+function campusLabelOffsets(campus, view) {
+  if (view === "state") {
+    const stateOffsets = new Map([
+      ["06013:St. Mary's", [[10, 24, "start"], [0, 34, "middle"], [12, -16, "start"]]],
+      ["06001:UC Berkeley", [[-12, 18, "end"], [-12, -14, "end"]]],
+      ["06079:Cal Poly", [[12, -14, "start"], [12, 18, "start"]]],
+      ["06113:UC Davis", [[12, 18, "start"], [12, -14, "start"]]]
+    ]);
+    return stateOffsets.get(campusLabelKey(campus)) || [];
+  }
+
+  const countyOffsets = new Map([
+    ["06013:St. Mary's", [[12, -22, "start"], [14, 24, "start"]]],
+    ["06079:Cal Poly", [[16, -22, "start"], [18, 24, "start"]]]
+  ]);
+  return countyOffsets.get(campusLabelKey(campus)) || [];
+}
+
+function campusLabelKey(campus) {
+  return `${campus.county_fips}:${campus.short_label}`;
+}
+
+function textLabelBox(x, y, label, anchor, characterWidth) {
+  const width = Math.max(36, String(label).length * characterWidth);
+  const height = 15;
+  if (anchor === "end") return {x0: x - width, x1: x, y0: y - height + 3, y1: y + 4};
+  if (anchor === "middle") return {x0: x - width / 2, x1: x + width / 2, y0: y - height + 3, y1: y + 4};
+  return {x0: x, x1: x + width, y0: y - height + 3, y1: y + 4};
+}
+
+function campusAdjacentSelectedPlaces(anchors, selected, campuses) {
+  const suppressed = new Set();
+  const selectedAnchor = anchors.find((anchor) => anchor.place === selected?.place);
+  if (!selectedAnchor) return suppressed;
+
+  const isNearCampus = campuses.some((campus) => {
+    const distance = Math.hypot(selectedAnchor.longitude - campus.longitude, selectedAnchor.latitude - campus.latitude);
+    return distance < 0.07;
+  });
+
+  if (isNearCampus) suppressed.add(selectedAnchor.place);
+  return suppressed;
 }
 
 function rewindFeatureCollection(collection) {

@@ -1,6 +1,6 @@
-# California college-town housing stories
+# Housing Prices Around California Campuses
 
-<p class="lede">A statewide housing map sets the context, then four college-town examples zoom into ZIP/ZCTA markets around major campuses. The patterns are descriptive: campuses are important anchors, but prices also reflect supply, incomes, commuting, rates, and broader regional demand.</p>
+<p class="lede">We'll take a look at how housing prices in California counties differ around California colleges.</p>
 
 ```js
 import * as d3 from "npm:d3";
@@ -47,84 +47,85 @@ const storySteps = [
   {
     id: "overview",
     kicker: "Overview",
-    title: "Where do California college-town housing pressures show up?",
-    body: "Start with the whole state. County colors show the latest county-level Zillow home value index, while campus markers locate the four places used in the story.",
-    keyMessage: "The map is a guide to where to look next, not evidence that a campus by itself caused a price pattern.",
+    title: "Housing Prices Around California Campuses",
+    body: "We'll take a look at individual counties to try to find patterns. We'll start with the counties with these following campuses: St. Mary's, San Luis Obispo, Davis, and Berkeley.",
+    keyMessage: "Scroll down to continue.",
     view: "state",
     controls: [],
+    showHousingLayer: false,
     mapTitle: "California housing context",
-    mapDetail: "County colors use Zillow home value index values. The highlighted anchors are the four college-town examples below."
+    mapDetail: "No housing-price layer yet: the first view only locates the four campus-area anchors before introducing county values."
   },
   {
     id: "statewide-pattern",
     kicker: "Statewide Pattern",
-    title: "High values cluster along the coast and Bay Area, but college towns vary.",
-    body: "San Luis Obispo, Davis, Berkeley, and Santa Cruz sit in very different regional housing markets. Seeing them together keeps the local stories in statewide context.",
-    keyMessage: "The statewide layer is county-level only, so it stays light on initial load before ZIP geometry is needed.",
+    title: "Where do campus-area housing pressures appear?",
+    body: "Let's briefly take a look at housing patterns across campus-anchor counties across the state. Only counties with campus anchors are shown with color.",
+    keyMessage: "Scroll down to continue.",
     view: "state",
     controls: ["details"],
     mapTitle: "County-level home values",
-    mapDetail: "Campus-anchor counties are active in the statewide layer; the four story counties are outlined for orientation."
+    mapDetail: "Campus-anchor counties are active in this statewide map. The four story counties are outlined for orientation."
+  },
+  {
+    id: "st-marys",
+    kicker: "Example 1",
+    title: "St. Mary's",
+    body: "Saint Mary's College sits in Moraga within Contra Costa County, where the campus is part of a broader East Bay housing market with sharp ZIP-level differences.",
+    keyMessage: "Scroll down to continue.",
+    view: "county",
+    countyFips: "06013",
+    focusPlace: "94556 Moraga",
+    metric: "zhvi",
+    controls: ["controls", "details"],
+    mapTitle: "St. Mary's",
+    mapDetail: "Try hovering over different ZIPs to see details."
   },
   {
     id: "slo",
-    kicker: "Example 1",
-    title: "San Luis Obispo: Cal Poly sits inside a high-value Central Coast market.",
-    body: "The story starts in San Luis Obispo County because the city ZIPs near Cal Poly are explicit focus markets rather than whatever county metadata happens to list first.",
-    keyMessage: "Compare San Luis Obispo ZIPs with the rest of the county before drawing conclusions about campus proximity.",
+    kicker: "Example 2",
+    title: "Cal Poly",
+    body: "Overall San Luis Obispo’s rental prices have increased dramatically. There are some areas with higher housing prices but non-correlating rental prices. Around Cal Poly is the opposite, with higher housing prices but it is difficult to come to a strong conclusion because of the overall high housing prices in the whole region. ",
+    keyMessage: "Scroll down to continue.",
     view: "county",
     countyFips: "06079",
     focusPlace: "93401 San Luis Obispo",
     metric: "zhvi",
-    controls: ["details"],
-    mapTitle: "San Luis Obispo County ZIP variation",
-    mapDetail: "The selected focus is 93401 San Luis Obispo, near Cal Poly. ZCTA fills show ZIP-level home values."
+    controls: ["controls", "timeline", "details"],
+    mapTitle: "San Luis Obispo",
+    mapDetail: "Try using the timeline to see how prices changed over time."
   },
   {
     id: "davis",
-    kicker: "Example 2",
-    title: "Davis: timeline context matters in a smaller county market.",
-    body: "Yolo County puts Davis next to Sacramento-region commute markets and agricultural communities. The timeline shows how the selected ZIP moves relative to the local median.",
-    keyMessage: "Growth comparisons are within-county comparisons for the same month, not a causal estimate of UC Davis demand.",
+    kicker: "Example 3",
+    title: "UC Davis",
+    body: "Renting wasn't as popular in this region, but has a longer history around UC Davis. Only more recently has rent been much higher. This seems to correlate with our hypothesis that rent around college campuses doesn't fit the norm of housing patterns.",
+    keyMessage: "Scroll down to continue.",
     view: "county",
     countyFips: "06113",
     focusPlace: "95616 Davis",
     metric: "zhvi",
-    controls: ["timeline", "details"],
-    mapTitle: "Davis and Yolo County over time",
-    mapDetail: "The timeline is introduced here so the selected Davis ZIP can be compared with the county's ZIP median."
+    controls: ["controls", "place", "timeline", "details"],
+    mapTitle: "Davis",
+    mapDetail: "Individual ZIP selection is now enabled. Try clicking on different ZIPs to see how housing prices differ."
   },
   {
     id: "berkeley",
-    kicker: "Example 3",
-    title: "Berkeley: ZIP selection reveals nearby market differences.",
-    body: "Alameda County contains Berkeley, Oakland, Fremont, and other very different markets. Selecting a ZIP helps compare the campus area with other local places.",
-    keyMessage: "A single county value hides the spread between Berkeley ZIPs and the broader East Bay.",
+    kicker: "Example 4",
+    title: "UC Berkeley",
+    body: "There is a clear hotspot of housing prices and rental prices around Berkeley. It is hard to determine if these are correlated because of UC Berkeley or just the area. We would need more information on where students primarily live around the school because there are hotspots that don’t match the housing prices. ",
+    keyMessage: "Scroll down to continue to the final exploration.",
     view: "county",
     countyFips: "06001",
     focusPlace: "94704 Berkeley",
-    metric: "zhvi",
-    controls: ["place", "timeline", "details"],
-    mapTitle: "Berkeley inside Alameda County",
-    mapDetail: "ZIP selection is now enabled. The focus begins at 94704 Berkeley near UC Berkeley."
-  },
-  {
-    id: "santa-cruz",
-    kicker: "Example 4",
-    title: "Santa Cruz: switch from home values to rents.",
-    body: "Santa Cruz County is a coastal housing market with UC Santa Cruz as one anchor among many. Switching the layer to blended rents changes which places stand out.",
-    keyMessage: "Rent and home-value layers answer related but different housing questions.",
-    view: "county",
-    countyFips: "06087",
-    focusPlace: "95060 Santa Cruz",
     metric: "zori",
     controls: ["controls", "place", "timeline", "details"],
-    mapTitle: "Santa Cruz rent and value contrast",
-    mapDetail: "The map layer is switched to blended monthly rent for 95060 Santa Cruz and nearby ZIP/ZCTA markets."
+    mapTitle: "Berkeley",
+    mapDetail: "The map layer is switched to blended monthly rent for 94704 Berkeley and nearby ZIP/ZCTA markets."
   }
 ];
 
-const storyCountyFips = ["06079", "06113", "06001", "06087"];
+const storyCountyFips = ["06013", "06079", "06113", "06001"];
 ```
 
 ```js
@@ -154,7 +155,7 @@ const storyMap = new HousingStoryMap(scrolly.querySelector("[data-map]"), {
   countyHousingRows,
   campuses: allCampuses,
   storyCountyFips,
-  defaultCountyFips: "06079",
+  defaultCountyFips: "06013",
   loadCountyBundle
 });
 

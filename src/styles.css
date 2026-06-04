@@ -282,6 +282,7 @@ svg text {
 
 .housing-map-status,
 .housing-controls,
+.explorer-visibility-toggle,
 .timeline-shell,
 .search-shell,
 .housing-tooltip {
@@ -297,6 +298,41 @@ svg text {
   padding: 14px 16px;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--line);
+}
+
+.housing-map.is-story:not([data-step]) .housing-map-status,
+.housing-map.is-story[data-step="overview"] .housing-map-status {
+  display: none;
+}
+
+.explorer-visibility-toggle {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  z-index: 7;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  max-width: calc(100% - 32px);
+  padding: 7px 11px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px rgba(23, 32, 38, 0.12);
+  color: var(--campus-dark);
+  font-size: 0.8rem;
+  font-weight: 780;
+  line-height: 1.15;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.explorer-visibility-toggle input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--campus);
 }
 
 .housing-map-status p {
@@ -446,6 +482,14 @@ svg text {
   font-size: 0.84rem;
   letter-spacing: 0;
   text-transform: none;
+}
+
+.county-control {
+  display: none;
+}
+
+.housing-map.is-explore .county-control {
+  display: grid;
 }
 
 .place-control {
@@ -717,6 +761,16 @@ svg text {
   display: grid;
 }
 
+.housing-map.is-explore.is-map-only .housing-map-status,
+.housing-map.is-explore.is-map-only .housing-controls,
+.housing-map.is-explore.is-map-only .timeline-shell,
+.housing-map.is-explore.is-map-only .search-shell,
+.housing-map.is-explore.is-map-only .zoom-controls,
+.housing-map.is-explore.is-map-only .housing-tooltip,
+.housing-map.is-explore.is-map-only .legend-layer {
+  display: none !important;
+}
+
 .housing-map.is-story .housing-detail-strip {
   max-height: 228px;
   overflow: hidden;
@@ -969,6 +1023,17 @@ tr:last-child td {
     font-size: 0.9rem;
   }
 
+  .explorer-visibility-toggle {
+    top: 10px;
+    left: 10px;
+    max-width: calc(100% - 20px);
+    transform: none;
+  }
+
+  .housing-map.is-explore .housing-map-status {
+    top: 56px;
+  }
+
   .zoom-controls {
     top: 122px;
     left: 10px;
@@ -977,6 +1042,10 @@ tr:last-child td {
 
   .zoom-controls .zoom-reset {
     grid-column: auto;
+  }
+
+  .housing-map.is-explore .zoom-controls {
+    top: 178px;
   }
 
   .housing-controls {
