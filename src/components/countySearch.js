@@ -143,12 +143,13 @@ export function createCountySearch(container, options) {
 }
 
 function buildCountyResults(counties, countyIndex) {
+  const featureByFips = new Map((counties.features || []).map((feature) => [feature.properties.GEOID, feature]));
   const metadataByFips = new Map((countyIndex?.counties || []).map((county) => [county.fips, county]));
 
-  return (counties.features || []).map((feature) => {
-    const fips = feature.properties.GEOID;
-    const metadata = metadataByFips.get(fips);
-    const name = feature.properties.NAME || metadata?.name || fips;
+  return (countyIndex?.counties || []).map((metadata) => {
+    const fips = metadata.fips;
+    const feature = featureByFips.get(fips);
+    const name = metadata.name || feature?.properties?.NAME || fips;
     const shortName = metadata?.shortName || name.replace(/ County$/, "");
 
     return decorateCandidate({
@@ -158,9 +159,9 @@ function buildCountyResults(counties, countyIndex) {
       name: shortName,
       label: name,
       detail: metadata?.campusLabel ? `${metadata.campusLabel}; ${metadata.zipCount || 0} ZIP markets` : `${metadata?.zipCount || 0} ZIP markets`,
-      geometry: feature.geometry
+      geometry: feature?.geometry
     });
-  });
+  }).filter((candidate) => candidate.geometry);
 }
 
 function decorateCandidate(candidate) {

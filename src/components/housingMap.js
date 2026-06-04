@@ -23,21 +23,31 @@ export class HousingStoryMap {
     this.countyHousingByFips = d3.group(this.countyHousingRows, (row) => row.fips);
     this.stateDates = Array.from(new Set(this.countyHousingRows.map((row) => row.date))).sort();
     this.stateDate = this.stateDates.at(-1) || null;
+    this.campusCountyFips = new Set(this.campuses.map((campus) => campus.county_fips));
     this.countyIndex = normalizeCountyIndex({
       index: options.countyIndex,
       counties: this.counties,
       campuses: this.campuses,
-      countyHousingByFips: this.countyHousingByFips
+      countyHousingByFips: this.countyHousingByFips,
+      includedFips: this.campusCountyFips
     });
     this.countyByFips = new Map(this.countyIndex.counties.map((county) => [county.fips, county]));
+    this.activeCountyFips = new Set(this.countyIndex.counties.map((county) => county.fips));
+    this.activeCountyFeatures = this.counties.features.filter((feature) =>
+      this.activeCountyFips.has(feature.properties.GEOID)
+    );
     this.bundleCache = new Map();
     this.bundle = null;
     this.bundleRequestId = 0;
     this.activeStep = null;
     this.ui = new Set(this.mode === "explore" ? ["controls", "timeline", "search", "place", "details"] : []);
+    const requestedDefault = options.defaultCountyFips || this.countyIndex.defaultFips || "06079";
+    const defaultCountyFips = this.countyByFips.has(requestedDefault)
+      ? requestedDefault
+      : this.countyIndex.counties[0]?.fips || "06079";
     this.state = {
       view: "state",
-      countyFips: options.defaultCountyFips || this.countyIndex.defaultFips || "06079",
+      countyFips: defaultCountyFips,
       metric: "zhvi",
       selectedDate: this.stateDate,
       selectedPlace: null
@@ -48,6 +58,8 @@ export class HousingStoryMap {
     this.transitionId = 0;
     this.loadingMessage = "";
     this.resizeTimer = null;
+    this.zoomBehavior = null;
+    this.zoomTransform = d3.zoomIdentity;
 
     this.handleResize = () => {
       window.clearTimeout(this.resizeTimer);
@@ -55,6 +67,7 @@ export class HousingStoryMap {
     };
 
     this.createDom();
+    this.setupZoom();
     this.projection = createCaliforniaProjection(this.counties, 640, 720, 42);
     this.path = d3.geoPath(this.projection);
 
@@ -69,6 +82,8 @@ export class HousingStoryMap {
 
   destroy() {
     d3.select(this.container).interrupt("projection");
+    this.svg?.interrupt("zoom-control");
+    this.svg?.on(".zoom", null);
     this.resizeObserver?.disconnect();
     window.clearTimeout(this.resizeTimer);
     this.timeline?.destroy();
@@ -89,6 +104,8 @@ export class HousingStoryMap {
     this.background
       .attr("width", this.width)
       .attr("height", this.height);
+
+    this.updateZoomExtent();
 
     const feature = this.getProjectionFeature();
     const fitted = fitProjectionState(feature, this.width, this.height, this.getPadding());
@@ -125,11 +142,19 @@ export class HousingStoryMap {
   }
 
   setStateView(options = {}) {
+    this.bundleRequestId += 1;
     this.state.view = "state";
     this.state.metric = "zhvi";
-    this.state.countyFips = options.countyFips || this.state.countyFips;
+    const countyFips = options.countyFips || this.state.countyFips;
+    this.state.countyFips = this.countyByFips.has(countyFips)
+      ? countyFips
+      : this.countyIndex.counties[0]?.fips || this.state.countyFips;
     this.state.selectedDate = this.stateDate;
+    this.state.selectedPlace = null;
+    this.bundle = null;
     this.loadingMessage = "";
+    this.search?.clear({notify: false});
+    this.resetZoom({duration: options.transition === false ? 0 : 180});
     this.syncControls();
 
     if (options.transition === false) {
@@ -143,7 +168,7 @@ export class HousingStoryMap {
 
   async focusCounty(fips, options = {}) {
     const countyFips = normalizeFips(fips);
-    if (!this.countyByFips.has(countyFips) && !this.countyFeaturesByFips.has(countyFips)) return;
+    if (!this.countyByFips.has(countyFips)) return;
 
     const requestId = this.bundleRequestId + 1;
     this.bundleRequestId = requestId;
@@ -153,6 +178,7 @@ export class HousingStoryMap {
     this.state.countyFips = countyFips;
     this.state.metric = options.metric || this.state.metric || "zhvi";
     this.loadingMessage = isSameCounty ? "" : `Loading ${this.countyByFips.get(countyFips)?.shortName || "county"} ZIP data...`;
+    this.resetZoom({duration: options.transition === false ? 0 : 180});
 
     if (!isSameCounty) {
       this.bundle = null;
@@ -226,12 +252,13 @@ export class HousingStoryMap {
       .attr("aria-label", "California housing map around college-town counties");
 
     this.background = this.svg.append("rect").attr("class", "map-background");
-    this.baseLayer = this.svg.append("g").attr("class", "base-layer");
-    this.countyLayer = this.svg.append("g").attr("class", "county-layer");
-    this.zctaLayer = this.svg.append("g").attr("class", "zcta-layer");
-    this.highlightLayer = this.svg.append("g").attr("class", "highlight-layer");
-    this.campusLayer = this.svg.append("g").attr("class", "campus-layer");
-    this.labelLayer = this.svg.append("g").attr("class", "label-layer");
+    this.mapLayer = this.svg.append("g").attr("class", "map-layer");
+    this.baseLayer = this.mapLayer.append("g").attr("class", "base-layer");
+    this.countyLayer = this.mapLayer.append("g").attr("class", "county-layer");
+    this.zctaLayer = this.mapLayer.append("g").attr("class", "zcta-layer");
+    this.highlightLayer = this.mapLayer.append("g").attr("class", "highlight-layer");
+    this.campusLayer = this.mapLayer.append("g").attr("class", "campus-layer");
+    this.labelLayer = this.mapLayer.append("g").attr("class", "label-layer");
     this.legendLayer = this.svg.append("g").attr("class", "legend-layer");
 
     this.tooltip = document.createElement("div");
@@ -243,6 +270,7 @@ export class HousingStoryMap {
     this.status.className = "housing-map-status";
 
     this.controls = this.createControls();
+    this.zoomControls = this.mode === "explore" ? this.createZoomControls() : null;
 
     this.timelineShell = document.createElement("div");
     this.timelineShell.className = "timeline-shell";
@@ -270,7 +298,14 @@ export class HousingStoryMap {
     this.tablePanel.className = "detail-panel table-panel";
     this.detailStrip.append(this.summaryPanel, this.trendPanel, this.tablePanel);
 
-    this.stage.append(this.tooltip, this.status, this.controls, this.timelineShell, this.searchShell);
+    this.stage.append(
+      this.tooltip,
+      this.status,
+      this.controls,
+      this.timelineShell,
+      this.searchShell
+    );
+    if (this.zoomControls) this.stage.append(this.zoomControls);
     this.container.append(this.stage, this.detailStrip);
   }
 
@@ -292,6 +327,12 @@ export class HousingStoryMap {
       metricGroup.append(button);
       this.metricButtons.set(metric, button);
     }
+
+    this.stateResetButton = document.createElement("button");
+    this.stateResetButton.type = "button";
+    this.stateResetButton.className = "state-reset-button";
+    this.stateResetButton.textContent = "Statewide map";
+    this.stateResetButton.addEventListener("click", () => this.setStateView({transition: true}));
 
     this.countySelect = document.createElement("select");
     this.countySelect.setAttribute("aria-label", "County");
@@ -319,8 +360,127 @@ export class HousingStoryMap {
     placeLabel.innerHTML = "<span>ZIP market</span>";
     placeLabel.append(this.placeSelect);
 
-    controls.append(metricGroup, countyLabel, placeLabel);
+    controls.append(this.stateResetButton, metricGroup, countyLabel, placeLabel);
     return controls;
+  }
+
+  createZoomControls() {
+    const controls = document.createElement("div");
+    controls.className = "zoom-controls";
+    controls.setAttribute("aria-label", "Map zoom controls");
+
+    this.zoomInButton = document.createElement("button");
+    this.zoomInButton.type = "button";
+    this.zoomInButton.textContent = "+";
+    this.zoomInButton.setAttribute("aria-label", "Zoom in");
+    this.zoomInButton.title = "Zoom in";
+    this.zoomInButton.addEventListener("click", () => this.zoomBy(1.35));
+
+    this.zoomOutButton = document.createElement("button");
+    this.zoomOutButton.type = "button";
+    this.zoomOutButton.textContent = "-";
+    this.zoomOutButton.setAttribute("aria-label", "Zoom out");
+    this.zoomOutButton.title = "Zoom out";
+    this.zoomOutButton.addEventListener("click", () => this.zoomBy(1 / 1.35));
+
+    this.zoomResetButton = document.createElement("button");
+    this.zoomResetButton.type = "button";
+    this.zoomResetButton.className = "zoom-reset";
+    this.zoomResetButton.textContent = "Reset";
+    this.zoomResetButton.setAttribute("aria-label", "Reset map zoom and pan");
+    this.zoomResetButton.title = "Reset map zoom and pan";
+    this.zoomResetButton.addEventListener("click", () => this.resetZoom({duration: 220}));
+
+    controls.append(this.zoomInButton, this.zoomOutButton, this.zoomResetButton);
+    return controls;
+  }
+
+  setupZoom() {
+    if (this.mode !== "explore") return;
+
+    this.zoomBehavior = d3.zoom()
+      .scaleExtent([1, 8])
+      .filter((event) => {
+        if (event.button && event.button !== 0) return false;
+        if (event.target.closest?.(".legend-layer")) return false;
+        return true;
+      })
+      .on("start", () => {
+        this.hideTooltip();
+        this.container.classList.add("is-panning");
+      })
+      .on("zoom", (event) => {
+        this.zoomTransform = event.transform;
+        this.applyZoomTransform();
+      })
+      .on("end", () => {
+        this.container.classList.remove("is-panning");
+      });
+
+    this.svg.call(this.zoomBehavior);
+    this.svg.on("dblclick.zoom", null);
+    this.updateZoomExtent();
+    this.applyZoomTransform();
+  }
+
+  updateZoomExtent() {
+    if (!this.zoomBehavior) return;
+
+    this.zoomBehavior
+      .extent([[0, 0], [this.width, this.height]])
+      .translateExtent([
+        [-this.width * 2, -this.height * 2],
+        [this.width * 3, this.height * 3]
+      ]);
+  }
+
+  zoomBy(factor) {
+    if (!this.zoomBehavior) return;
+    this.hideTooltip();
+    this.svg
+      .interrupt("zoom-control")
+      .transition("zoom-control")
+      .duration(180)
+      .ease(d3.easeCubicOut)
+      .call(this.zoomBehavior.scaleBy, factor);
+  }
+
+  resetZoom({duration = 0} = {}) {
+    this.zoomTransform = d3.zoomIdentity;
+    if (!this.zoomBehavior) {
+      this.applyZoomTransform();
+      return;
+    }
+
+    this.hideTooltip();
+    this.svg.interrupt("zoom-control");
+    if (!duration) {
+      this.svg.call(this.zoomBehavior.transform, d3.zoomIdentity);
+      return;
+    }
+
+    this.svg
+      .transition("zoom-control")
+      .duration(duration)
+      .ease(d3.easeCubicOut)
+      .call(this.zoomBehavior.transform, d3.zoomIdentity);
+  }
+
+  applyZoomTransform() {
+    this.mapLayer?.attr("transform", this.zoomTransform);
+    this.syncZoomControls();
+  }
+
+  syncZoomControls() {
+    if (!this.zoomControls) return;
+
+    const isZoomed = Math.abs(this.zoomTransform.k - 1) > 0.001
+      || Math.abs(this.zoomTransform.x) > 0.5
+      || Math.abs(this.zoomTransform.y) > 0.5;
+
+    this.zoomControls.classList.toggle("is-zoomed", isZoomed);
+    this.zoomOutButton.disabled = this.zoomTransform.k <= 1.001;
+    this.zoomResetButton.disabled = !isZoomed;
   }
 
   syncControls() {
@@ -335,6 +495,10 @@ export class HousingStoryMap {
     for (const [metric, button] of this.metricButtons) {
       button.classList.toggle("is-active", metric === this.state.metric);
       button.disabled = this.state.view === "state" && metric === "zori";
+    }
+
+    if (this.stateResetButton) {
+      this.stateResetButton.hidden = !(this.mode === "explore" && this.state.view === "county");
     }
 
     this.countySelect.value = this.state.countyFips;
@@ -453,7 +617,20 @@ export class HousingStoryMap {
       ? d3.scaleSequential(d3.extent(values), d3.interpolateYlGnBu)
       : () => "#d9e6e3";
 
-    this.baseLayer.selectAll("*").remove();
+    this.baseLayer
+      .selectAll("path")
+      .data(this.counties.features, (feature) => feature.properties.GEOID)
+      .join(
+        (enter) => enter.append("path").attr("class", "state-county-context"),
+        (update) => update,
+        (exit) => exit.remove()
+      )
+      .attr("d", this.path)
+      .attr("fill", "#edf2f0")
+      .attr("stroke", "#d4dfdc")
+      .attr("stroke-width", 0.42)
+      .attr("vector-effect", "non-scaling-stroke")
+      .attr("pointer-events", "none");
     this.zctaLayer.selectAll("*").remove();
     this.highlightLayer.selectAll("*").remove();
     this.labelLayer.selectAll("*").remove();
@@ -461,7 +638,7 @@ export class HousingStoryMap {
 
     this.countyLayer
       .selectAll("path")
-      .data(this.counties.features, (feature) => feature.properties.GEOID)
+      .data(this.activeCountyFeatures, (feature) => feature.properties.GEOID)
       .join(
         (enter) => enter.append("path").attr("class", "state-county"),
         (update) => update,
@@ -1218,7 +1395,7 @@ function normalizeBundle(bundle, fips) {
   };
 }
 
-function normalizeCountyIndex({index, counties, campuses, countyHousingByFips}) {
+function normalizeCountyIndex({index, counties, campuses, countyHousingByFips, includedFips}) {
   const existingByFips = new Map((index?.counties || []).map((county) => [county.fips, county]));
   const campusLabels = d3.rollups(
     campuses,
@@ -1227,6 +1404,7 @@ function normalizeCountyIndex({index, counties, campuses, countyHousingByFips}) 
   );
   const campusLabelByFips = new Map(campusLabels);
   const entries = counties.features
+    .filter((feature) => !includedFips || includedFips.has(feature.properties.GEOID))
     .map((feature) => {
       const fips = feature.properties.GEOID;
       const existing = existingByFips.get(fips);

@@ -200,6 +200,15 @@ a:focus-visible {
   height: 100%;
 }
 
+.housing-map.is-explore .housing-map-svg {
+  cursor: grab;
+  touch-action: none;
+}
+
+.housing-map.is-explore.is-panning .housing-map-svg {
+  cursor: grabbing;
+}
+
 .map-background {
   fill: var(--map-water);
 }
@@ -216,6 +225,10 @@ svg text {
     fill-opacity 140ms ease,
     stroke 140ms ease,
     stroke-width 140ms ease;
+}
+
+.state-county-context {
+  opacity: 0.7;
 }
 
 .state-county:hover,
@@ -346,6 +359,72 @@ svg text {
   cursor: not-allowed;
 }
 
+.state-reset-button {
+  min-height: 34px;
+  border: 1px solid #b8d5d0;
+  background: #eef8f5;
+  color: var(--campus-dark);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 780;
+  cursor: pointer;
+}
+
+.state-reset-button:hover,
+.state-reset-button:focus-visible {
+  border-color: var(--campus);
+  background: #ffffff;
+  outline: none;
+}
+
+.zoom-controls {
+  position: absolute;
+  top: 132px;
+  left: 16px;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(2, 34px);
+  gap: 6px;
+  padding: 7px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 24px rgba(23, 32, 38, 0.12);
+}
+
+.zoom-controls button {
+  min-width: 0;
+  min-height: 34px;
+  padding: 0;
+  border: 1px solid var(--soft-line);
+  background: #ffffff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 820;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.zoom-controls .zoom-reset {
+  grid-column: 1 / -1;
+  padding: 0 9px;
+  color: var(--campus-dark);
+  font-size: 0.78rem;
+}
+
+.zoom-controls button:hover,
+.zoom-controls button:focus-visible {
+  border-color: var(--campus);
+  background: #eef8f5;
+  outline: none;
+}
+
+.zoom-controls button:disabled {
+  color: #9ca6aa;
+  background: #f2f5f4;
+  cursor: not-allowed;
+}
+
 .select-control {
   display: grid;
   gap: 5px;
@@ -392,6 +471,10 @@ svg text {
   right: 16px;
   z-index: 4;
   width: 300px;
+}
+
+.housing-map.is-explore.is-county-view .search-shell {
+  top: 268px;
 }
 
 .housing-controls,
@@ -884,6 +967,16 @@ tr:last-child td {
 
   .housing-map-status h3 {
     font-size: 0.9rem;
+  }
+
+  .zoom-controls {
+    top: 122px;
+    left: 10px;
+    grid-template-columns: repeat(3, 34px);
+  }
+
+  .zoom-controls .zoom-reset {
+    grid-column: auto;
   }
 
   .housing-controls {

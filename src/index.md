@@ -64,7 +64,7 @@ const storySteps = [
     view: "state",
     controls: ["details"],
     mapTitle: "County-level home values",
-    mapDetail: "All 58 California counties are visible; the four story counties are outlined for orientation."
+    mapDetail: "Campus-anchor counties are active in the statewide layer; the four story counties are outlined for orientation."
   },
   {
     id: "slo",
@@ -121,17 +121,6 @@ const storySteps = [
     controls: ["controls", "place", "timeline", "details"],
     mapTitle: "Santa Cruz rent and value contrast",
     mapDetail: "The map layer is switched to blended monthly rent for 95060 Santa Cruz and nearby ZIP/ZCTA markets."
-  },
-  {
-    id: "explore",
-    kicker: "Final View",
-    title: "Open the full California explorer.",
-    body: "The final mode exposes the full set of controls: county search, county clicks, ZIP selection, timeline, metric switching, tooltips, trend chart, and comparison table.",
-    keyMessage: "County bundles are still loaded lazily, so the explorer can cover all 58 counties without fetching every ZIP geometry up front.",
-    view: "state",
-    controls: ["controls", "timeline", "search", "place", "details"],
-    mapTitle: "Free exploration mode",
-    mapDetail: "Search or click a county to load its ZIP-level bundle on demand. The larger explorer below keeps the same interactions available."
   }
 ];
 
@@ -173,7 +162,6 @@ const stepById = new Map(storySteps.map((step) => [step.id, step]));
 
 function updateStoryStep(stepId) {
   const step = stepById.get(stepId) || storySteps[0];
-  scrolly.classList.toggle("is-final-step", step.id === "explore");
   storyMap.setStep(step);
 }
 
@@ -183,8 +171,8 @@ const stopObserving = observeSteps(scrolly.querySelectorAll(".step"), updateStor
 <section id="explore-all" class="explorer-section">
   <div class="section-heading">
     <p class="step-kicker">Explore</p>
-    <h2>California housing explorer</h2>
-    <p>Use the full map to move beyond the four examples. County clicks and search load one county bundle at a time, then the ZIP map, timeline, metric toggle, selected-ZIP trend, comparison table, and tooltips update together.</p>
+    <h2>Campus-county housing explorer</h2>
+    <p>Use the map to move beyond the four examples. County clicks and search load one campus-county bundle at a time, then the ZIP map, timeline, metric toggle, selected-ZIP trend, comparison table, and tooltips update together.</p>
   </div>
   <div data-explorer class="explorer-map"></div>
 </section>

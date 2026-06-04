@@ -250,9 +250,12 @@ def build_county_index(
         .apply(lambda labels: ", ".join(labels.head(2)))
         .to_dict()
     )
+    campus_counties = set(campus_labels)
     entries = []
     for feature in sorted(counties_geojson["features"], key=lambda item: item["properties"]["NAME"]):
         fips = feature["properties"]["GEOID"]
+        if fips not in campus_counties:
+            continue
         name = feature["properties"]["NAME"]
         region_id = str(int(fips))
         latest = latest_by_region.loc[region_id]["value"] if region_id in latest_by_region.index else None
