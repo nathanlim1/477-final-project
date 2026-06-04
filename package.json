@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@observablehq/framework": "^1.13.3",
+    "all": "^0.0.0",
     "arquero": "^8.0.3",
     "d3": "^7.9.0",
     "vega-lite": "^5.23.0"
-  },
-  "devDependencies": {}
+  }
 }

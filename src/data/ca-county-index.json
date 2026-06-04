@@ -4,87 +4,263 @@
       "fips": "06001",
       "name": "Alameda County",
       "shortName": "Alameda",
-      "latestZhvi": null,
+      "latestZhvi": 1169485,
       "zipCount": 47,
       "campusLabel": "UC Berkeley"
+    },
+    {
+      "fips": "06003",
+      "name": "Alpine County",
+      "shortName": "Alpine",
+      "latestZhvi": 587570,
+      "zipCount": 1,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06005",
+      "name": "Amador County",
+      "shortName": "Amador",
+      "latestZhvi": 419440,
+      "zipCount": 10,
+      "campusLabel": ""
     },
     {
       "fips": "06007",
       "name": "Butte County",
       "shortName": "Butte",
-      "latestZhvi": null,
+      "latestZhvi": 406669,
       "zipCount": 17,
       "campusLabel": "CSU Chico"
+    },
+    {
+      "fips": "06009",
+      "name": "Calaveras County",
+      "shortName": "Calaveras",
+      "latestZhvi": 438196,
+      "zipCount": 16,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06011",
+      "name": "Colusa County",
+      "shortName": "Colusa",
+      "latestZhvi": 371281,
+      "zipCount": 5,
+      "campusLabel": ""
     },
     {
       "fips": "06013",
       "name": "Contra Costa County",
       "shortName": "Contra Costa",
-      "latestZhvi": null,
+      "latestZhvi": 830183,
       "zipCount": 39,
       "campusLabel": "St. Mary's"
+    },
+    {
+      "fips": "06015",
+      "name": "Del Norte County",
+      "shortName": "Del Norte",
+      "latestZhvi": 364731,
+      "zipCount": 3,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06017",
+      "name": "El Dorado County",
+      "shortName": "El Dorado",
+      "latestZhvi": 659816,
+      "zipCount": 19,
+      "campusLabel": ""
     },
     {
       "fips": "06019",
       "name": "Fresno County",
       "shortName": "Fresno",
-      "latestZhvi": null,
+      "latestZhvi": 417341,
       "zipCount": 48,
       "campusLabel": "Fresno State"
+    },
+    {
+      "fips": "06021",
+      "name": "Glenn County",
+      "shortName": "Glenn",
+      "latestZhvi": 363164,
+      "zipCount": 5,
+      "campusLabel": ""
     },
     {
       "fips": "06023",
       "name": "Humboldt County",
       "shortName": "Humboldt",
-      "latestZhvi": null,
+      "latestZhvi": 428104,
       "zipCount": 20,
       "campusLabel": "Cal Poly Humboldt"
+    },
+    {
+      "fips": "06025",
+      "name": "Imperial County",
+      "shortName": "Imperial",
+      "latestZhvi": 382907,
+      "zipCount": 8,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06027",
+      "name": "Inyo County",
+      "shortName": "Inyo",
+      "latestZhvi": 529136,
+      "zipCount": 5,
+      "campusLabel": ""
     },
     {
       "fips": "06029",
       "name": "Kern County",
       "shortName": "Kern",
-      "latestZhvi": null,
+      "latestZhvi": 365975,
       "zipCount": 40,
       "campusLabel": "CSU Bakersfield"
+    },
+    {
+      "fips": "06031",
+      "name": "Kings County",
+      "shortName": "Kings",
+      "latestZhvi": 364680,
+      "zipCount": 6,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06033",
+      "name": "Lake County",
+      "shortName": "Lake",
+      "latestZhvi": 308470,
+      "zipCount": 14,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06035",
+      "name": "Lassen County",
+      "shortName": "Lassen",
+      "latestZhvi": 230731,
+      "zipCount": 9,
+      "campusLabel": ""
     },
     {
       "fips": "06037",
       "name": "Los Angeles County",
       "shortName": "Los Angeles",
-      "latestZhvi": null,
+      "latestZhvi": 933348,
       "zipCount": 268,
       "campusLabel": "UCLA, USC"
+    },
+    {
+      "fips": "06039",
+      "name": "Madera County",
+      "shortName": "Madera",
+      "latestZhvi": 425570,
+      "zipCount": 12,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06041",
+      "name": "Marin County",
+      "shortName": "Marin",
+      "latestZhvi": 1639674,
+      "zipCount": 26,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06043",
+      "name": "Mariposa County",
+      "shortName": "Mariposa",
+      "latestZhvi": 398118,
+      "zipCount": 6,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06045",
+      "name": "Mendocino County",
+      "shortName": "Mendocino",
+      "latestZhvi": 505048,
+      "zipCount": 12,
+      "campusLabel": ""
     },
     {
       "fips": "06047",
       "name": "Merced County",
       "shortName": "Merced",
-      "latestZhvi": null,
+      "latestZhvi": 419091,
       "zipCount": 17,
       "campusLabel": "UC Merced"
+    },
+    {
+      "fips": "06049",
+      "name": "Modoc County",
+      "shortName": "Modoc",
+      "latestZhvi": 190973,
+      "zipCount": 4,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06051",
+      "name": "Mono County",
+      "shortName": "Mono",
+      "latestZhvi": 850410,
+      "zipCount": 5,
+      "campusLabel": ""
     },
     {
       "fips": "06053",
       "name": "Monterey County",
       "shortName": "Monterey",
-      "latestZhvi": null,
+      "latestZhvi": 866481,
       "zipCount": 24,
       "campusLabel": "CSU Monterey Bay"
+    },
+    {
+      "fips": "06055",
+      "name": "Napa County",
+      "shortName": "Napa",
+      "latestZhvi": 912020,
+      "zipCount": 8,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06057",
+      "name": "Nevada County",
+      "shortName": "Nevada",
+      "latestZhvi": 615965,
+      "zipCount": 7,
+      "campusLabel": ""
     },
     {
       "fips": "06059",
       "name": "Orange County",
       "shortName": "Orange",
-      "latestZhvi": null,
+      "latestZhvi": 1304816,
       "zipCount": 86,
       "campusLabel": "UC Irvine"
+    },
+    {
+      "fips": "06061",
+      "name": "Placer County",
+      "shortName": "Placer",
+      "latestZhvi": 698903,
+      "zipCount": 30,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06063",
+      "name": "Plumas County",
+      "shortName": "Plumas",
+      "latestZhvi": 362899,
+      "zipCount": 14,
+      "campusLabel": ""
     },
     {
       "fips": "06065",
       "name": "Riverside County",
       "shortName": "Riverside",
-      "latestZhvi": null,
+      "latestZhvi": 623561,
       "zipCount": 68,
       "campusLabel": "UCR"
     },
@@ -92,15 +268,23 @@
       "fips": "06067",
       "name": "Sacramento County",
       "shortName": "Sacramento",
-      "latestZhvi": null,
+      "latestZhvi": 540729,
       "zipCount": 51,
       "campusLabel": "Sac State"
+    },
+    {
+      "fips": "06069",
+      "name": "San Benito County",
+      "shortName": "San Benito",
+      "latestZhvi": 771616,
+      "zipCount": 3,
+      "campusLabel": ""
     },
     {
       "fips": "06071",
       "name": "San Bernardino County",
       "shortName": "San Bernardino",
-      "latestZhvi": null,
+      "latestZhvi": 557278,
       "zipCount": 78,
       "campusLabel": "CSUSB"
     },
@@ -108,7 +292,7 @@
       "fips": "06073",
       "name": "San Diego County",
       "shortName": "San Diego",
-      "latestZhvi": null,
+      "latestZhvi": 1009339,
       "zipCount": 94,
       "campusLabel": "UC San Diego, SDSU"
     },
@@ -116,7 +300,7 @@
       "fips": "06075",
       "name": "San Francisco County",
       "shortName": "San Francisco",
-      "latestZhvi": null,
+      "latestZhvi": 1536805,
       "zipCount": 20,
       "campusLabel": "SF State"
     },
@@ -124,7 +308,7 @@
       "fips": "06077",
       "name": "San Joaquin County",
       "shortName": "San Joaquin",
-      "latestZhvi": null,
+      "latestZhvi": 539116,
       "zipCount": 29,
       "campusLabel": "UOP"
     },
@@ -132,15 +316,23 @@
       "fips": "06079",
       "name": "San Luis Obispo County",
       "shortName": "San Luis Obispo",
-      "latestZhvi": null,
-      "zipCount": 18,
+      "latestZhvi": 934458,
+      "zipCount": 19,
       "campusLabel": "Cal Poly"
+    },
+    {
+      "fips": "06081",
+      "name": "San Mateo County",
+      "shortName": "San Mateo",
+      "latestZhvi": 1768827,
+      "zipCount": 28,
+      "campusLabel": ""
     },
     {
       "fips": "06083",
       "name": "Santa Barbara County",
       "shortName": "Santa Barbara",
-      "latestZhvi": null,
+      "latestZhvi": 1067292,
       "zipCount": 21,
       "campusLabel": "UCSB"
     },
@@ -148,7 +340,7 @@
       "fips": "06085",
       "name": "Santa Clara County",
       "shortName": "Santa Clara",
-      "latestZhvi": null,
+      "latestZhvi": 1838933,
       "zipCount": 55,
       "campusLabel": "Stanford, SJSU"
     },
@@ -156,15 +348,39 @@
       "fips": "06087",
       "name": "Santa Cruz County",
       "shortName": "Santa Cruz",
-      "latestZhvi": null,
+      "latestZhvi": 1205119,
       "zipCount": 15,
       "campusLabel": "UC Santa Cruz"
+    },
+    {
+      "fips": "06089",
+      "name": "Shasta County",
+      "shortName": "Shasta",
+      "latestZhvi": 375251,
+      "zipCount": 20,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06091",
+      "name": "Sierra County",
+      "shortName": "Sierra",
+      "latestZhvi": 331852,
+      "zipCount": 6,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06093",
+      "name": "Siskiyou County",
+      "shortName": "Siskiyou",
+      "latestZhvi": 282797,
+      "zipCount": 17,
+      "campusLabel": ""
     },
     {
       "fips": "06095",
       "name": "Solano County",
       "shortName": "Solano",
-      "latestZhvi": null,
+      "latestZhvi": 585879,
       "zipCount": 12,
       "campusLabel": "Cal Maritime"
     },
@@ -172,7 +388,7 @@
       "fips": "06097",
       "name": "Sonoma County",
       "shortName": "Sonoma",
-      "latestZhvi": null,
+      "latestZhvi": 822929,
       "zipCount": 32,
       "campusLabel": "Sonoma State"
     },
@@ -180,15 +396,55 @@
       "fips": "06099",
       "name": "Stanislaus County",
       "shortName": "Stanislaus",
-      "latestZhvi": null,
+      "latestZhvi": 470808,
       "zipCount": 24,
       "campusLabel": "Stan State"
+    },
+    {
+      "fips": "06101",
+      "name": "Sutter County",
+      "shortName": "Sutter",
+      "latestZhvi": 441821,
+      "zipCount": 7,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06103",
+      "name": "Tehama County",
+      "shortName": "Tehama",
+      "latestZhvi": 322554,
+      "zipCount": 7,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06105",
+      "name": "Trinity County",
+      "shortName": "Trinity",
+      "latestZhvi": 254539,
+      "zipCount": 9,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06107",
+      "name": "Tulare County",
+      "shortName": "Tulare",
+      "latestZhvi": 363386,
+      "zipCount": 25,
+      "campusLabel": ""
+    },
+    {
+      "fips": "06109",
+      "name": "Tuolumne County",
+      "shortName": "Tuolumne",
+      "latestZhvi": 393845,
+      "zipCount": 10,
+      "campusLabel": ""
     },
     {
       "fips": "06111",
       "name": "Ventura County",
       "shortName": "Ventura",
-      "latestZhvi": null,
+      "latestZhvi": 922204,
       "zipCount": 24,
       "campusLabel": "CSUCI"
     },
@@ -196,9 +452,17 @@
       "fips": "06113",
       "name": "Yolo County",
       "shortName": "Yolo",
-      "latestZhvi": null,
+      "latestZhvi": 632080,
       "zipCount": 15,
       "campusLabel": "UC Davis"
+    },
+    {
+      "fips": "06115",
+      "name": "Yuba County",
+      "shortName": "Yuba",
+      "latestZhvi": 421172,
+      "zipCount": 9,
+      "campusLabel": ""
     }
   ],
   "defaultFips": "06079"
